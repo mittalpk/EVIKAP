@@ -127,6 +127,20 @@ Response flows back through Backend → Nginx → Browser
 
 ---
 
+## Security Threat Model & Design Decisions
+
+### 1. Trust Boundary Isolation
+A core architectural constraint is the **strict isolation of Layer 3 (Agent) from Layer 1 (Data Sources)**. The LangGraph agent has no direct network access, SDKs, or credentials to query GitHub, Azure Blob, or internal databases. Instead, it must interact with Layer 2 (Knowledge API) via a read-only REST contract. This design prevents:
+* **Prompt Injection Escalation**: If the agent's LLM is manipulated by hostile inputs, it cannot construct unauthorized operations (e.g. executing arbitrary git commits, database writes, or blob deletions) since the API layer only exposes safe read-only queries.
+* **Credential Proliferation**: Credentials for data sources are concentrated solely in the Layer 2 backend.
+
+### 2. Defensive Security Architecture
+- **Timing Attack Mitigation**: All authentication comparisons (for user JWTs and the service-to-service key `X-Internal-API-Key`) utilize `hmac.compare_digest` to ensure constant-time verification.
+- **Insecure Configuration Guardrails**: Rather than shipping plaintext secret strings in the codebase to block known compromised keys, the bootstrap validation uses SHA-256 hashes to check incoming settings. If the hash of `INTERNAL_API_KEY`, `SECRET_KEY`, or `ADMIN_PASSWORD` matches a known default or compromised key, the container immediately triggers a fail-closed crash-loop at startup.
+- **CORS Allowlisting**: The middleware enforces explicit origin lists (`settings.allowed_origins`) in place of wildcard allowlists, preventing cross-origin token harvesting.
+
+---
+
 ## Infrastructure (`terraform/`)
 
 Managed via **Terraform** (Infrastructure-as-Code) targeting **Microsoft Azure**.

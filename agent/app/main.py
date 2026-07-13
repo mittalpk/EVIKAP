@@ -1,6 +1,4 @@
-"""Agent service API — exposes the LangGraph graph as a REST endpoint.
-# Triggering full rebuild and deploy for secret standardization verify.
-"""
+"""Agent service API — exposes the LangGraph graph as a REST endpoint."""
 from __future__ import annotations
 import logging
 import uvicorn
@@ -89,5 +87,4 @@ async def run_task(body: TaskRequest, credentials: str = Depends(verify_internal
         "answer": result.get("final_answer"), 
         "steps": steps_out
     }
-# Deployment Trigger: Fri Mar 27 00:28:33 CET 2026
-# Retry Trigger: Fri Mar 27 01:04:32 CET 2026
+

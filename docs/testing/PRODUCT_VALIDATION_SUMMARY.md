@@ -21,8 +21,7 @@ This document summarizes the results of the systemic validation suite performed 
 > **Level 3 & 5 Observations**: In scenarios such as "Database Architecture Compliance" (3.2), "Blast Radius Assessment" (5.1) and "Secret Management Audit" (5.3), the system correctly reports zero findings or empty schemas when no real resources match. This confirms that the Agent is performing **grounded reasoning** and not fabricating mock data, adhering to the security remediation plan. Local-file fallbacks for Confluence (Simulated) are gated behind `DEMO_MODE=true` and disabled by default.
 
 ## 🛠️ Evidence & Artifacts
-- **Raw Execution Log**: [nexus_validation_raw.log](file:///home/pkmittal/MyProjects/SecureAgentRuntime/OmegaNexus/Testing/nexus_validation_raw.log)
-- **Validation Suite Definition**: [Querydocument.md](file:///home/pkmittal/MyProjects/SecureAgentRuntime/OmegaNexus/Querydocument.md)
+- **Validation Suite Definition**: [Querydocument.md](./Querydocument.md)
 
 ## 🚀 Conclusion
 The Omega Nexus platform is **Production Ready**. It correctly enforces the **4-layer architectural boundary**, maintains **data traceability** across cloud providers, and provides a **stateful reasoning layer** that is both exhaustive and grounded in the provided truth sources.

@@ -1,6 +1,4 @@
-"""Omega Backend — FastAPI entry-point.
-# Triggering full rebuild and deploy for secret standardization verify.
-"""
+"""Omega Backend — FastAPI entry-point."""
 from __future__ import annotations
 
 import logging

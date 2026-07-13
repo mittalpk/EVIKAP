@@ -61,4 +61,4 @@ docker compose up --build
 
 ## Cloud Deployment
 
-See [AZURE_DEPLOYMENT.md](./AZURE_DEPLOYMENT.md) for deploying to **Azure Container Apps** via Terraform (Infrastructure-as-Code).
+See [AZURE_DEPLOYMENT.md](./docs/deployment/AZURE_DEPLOYMENT.md) for deploying to **Azure Container Apps** via Terraform (Infrastructure-as-Code).

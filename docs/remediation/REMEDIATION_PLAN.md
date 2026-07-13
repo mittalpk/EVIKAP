@@ -2,7 +2,7 @@
 
 **Document Control**
 * Version: 1.0 | Date: 2026-07-13 | Status: Active | Author: Portfolio Strategy / Code Audit
-* Predecessor: this plan operationalizes the findings in the code-level audit summarized in [../../PORTFOLIO_STRATEGY.md](../../PORTFOLIO_STRATEGY.md) §0e. Read that section first for why this project moved from `Partial/` to `InProgress/`.
+* Predecessor: this plan operationalizes the findings in the code-level audit summarized in [../../../../PORTFOLIO_STRATEGY.md](../../../../PORTFOLIO_STRATEGY.md) §0e. Read that section first for why this project moved from `Partial/` to `InProgress/`.
 * Scope: this plan covers only the 14 items already triaged (Critical/High/Nice-to-have). It does not re-litigate whether OmegaNexus stays in the portfolio — that decision is made (§0e: yes, standalone, differentiated from BLAG).
 
 ## How to use this document
@@ -271,7 +271,7 @@ All five items above complete, verified by: (a) a fresh `git log -p --all | grep
 | **2 — High** | H6–H11 (H9 sequenced after H6; C5's second pass sequenced after H6/H9) | Needed before claiming "production-grade RAG/agent system" in interviews. Est. 12–19 days. |
 | **3 — Nice-to-have** | N12–N14 | Polish; do opportunistically, don't block Phase 2 completion on these. Est. 3–4 days. |
 
-Total estimated effort: **~3 days (Critical) + ~2.5–4 weeks (High) + ~3–4 days (Nice-to-have)**, roughly 4–5 weeks of focused part-time work to take OmegaNexus from its current state to a genuinely defensible Senior AI Engineer / AI Solutions Architect portfolio piece — consistent with the "finish, don't rebuild" framing in [PORTFOLIO_STRATEGY.md](../../PORTFOLIO_STRATEGY.md) §0b, but only once Phase 1 is done first.
+Total estimated effort: **~3 days (Critical) + ~2.5–4 weeks (High) + ~3–4 days (Nice-to-have)**, roughly 4–5 weeks of focused part-time work to take OmegaNexus from its current state to a genuinely defensible Senior AI Engineer / AI Solutions Architect portfolio piece — consistent with the "finish, don't rebuild" framing in [PORTFOLIO_STRATEGY.md](../../../../PORTFOLIO_STRATEGY.md) §0b, but only once Phase 1 is done first.
 
 ## Exit back to the portfolio
 

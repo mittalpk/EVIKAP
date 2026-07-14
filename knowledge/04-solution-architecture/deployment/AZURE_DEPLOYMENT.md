@@ -133,7 +133,7 @@ export CLIENT_ID="<your-client-id>"
 ## Phase 3 — Provision Infrastructure with Terraform
 
 ```bash
-cd /home/pkmittal/MyProjects/SecureAgentRuntime/OmegaNexus/terraform
+cd /path/to/OmegaNexus/terraform
 
 # Initialize Terraform providers
 terraform init
@@ -183,7 +183,7 @@ echo "Backend: $BACKEND_URL"
 ## Phase 4 — Build and Push to GitHub Container Registry (GHCR)
 
 ```bash
-cd /home/pkmittal/MyProjects/SecureAgentRuntime/OmegaNexus
+cd /path/to/OmegaNexus
 
 # 4.1 Create a GitHub PAT (Classic recommended)
 # GitHub Fine-grained tokens currently have limited support for GHCR before the first push.
@@ -198,7 +198,7 @@ cd /home/pkmittal/MyProjects/SecureAgentRuntime/OmegaNexus
 echo <your-github-pat> | docker login ghcr.io -u <your-github-username> --password-stdin
 
 # 4.3 Build and Push
-# Replace <owner> with your GitHub username (e.g. pkmittal)
+# Replace <owner> with your GitHub username
 
 # --- Backend ---
 docker build -t ghcr.io/<owner>/omega-nexus-backend:latest ./backend
@@ -315,7 +315,7 @@ If you see errors like **"already exists - to be managed via Terraform this reso
 
 ```bash
 # Set your Subscription ID
-SUB_ID="ecc63471-f21a-46af-a01f-2db799285343"
+SUB_ID="<your-azure-subscription-id>"
 
 # Import the existing apps into Terraform State
 terraform import azurerm_container_app.backend /subscriptions/$SUB_ID/resourceGroups/rg-omega-nexus/providers/Microsoft.App/containerApps/ca-omega-backend

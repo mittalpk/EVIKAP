@@ -69,7 +69,7 @@ jobs:
           pip install -r backend/requirements.txt
           pip install pytest
       - name: Run backend tests
-        run: pytest backend/tests -v
+        run: python -m pytest backend/tests -v
 
   agent-test:
     needs: filter
@@ -89,7 +89,7 @@ jobs:
           pip install -r agent/requirements.txt
           pip install pytest
       - name: Run agent tests
-        run: pytest agent/tests -v
+        run: python -m pytest agent/tests -v
 
   frontend-validate:
     needs: filter

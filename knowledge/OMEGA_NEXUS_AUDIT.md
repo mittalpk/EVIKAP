@@ -162,7 +162,7 @@ Prioritized by what closes the AI-engineering credibility gap fastest.
 ### Nice-to-have — differentiators (separate "solid" from "flagship")
 
 - **Knowledge graph layer** (Neo4j) for relationship-aware retrieval across code/docs/wiki — a strong differentiator against every candidate who only built vector RAG.
-- **MCP server** exposing the Knowledge API as a standard Model Context Protocol tool, so any MCP-compatible agent (Claude, others) can consume it — directly relevant to how the industry is standardizing tool access in 2026.
+- **MCP server** exposing the Knowledge API as a standard Model Context Protocol tool, so any MCP-compatible agent can consume it — directly relevant to how the industry is standardizing tool access in 2026.
 - **Human-in-the-loop approval** for any agent action with side effects, with a review queue UI.
 - **Multi-tenancy** with per-tenant data isolation and usage metering.
 

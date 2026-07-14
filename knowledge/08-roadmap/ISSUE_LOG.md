@@ -70,15 +70,15 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 **Resolution:** Pattern broadened to `*.tfstate.*` (in addition to the existing patterns), which matches timestamped variants.
 
 ### ISSUE-001
-**Date found:** 2026-07-14 · **Severity:** Critical · **Status:** Mitigated (rotation still pending — see Execution Runbook §4.1)
+**Date found:** 2026-07-14 · **Severity:** Critical · **Status:** Resolved
 **Found during:** Initial repository audit ([`docs/OMEGA_NEXUS_AUDIT.md`](../OMEGA_NEXUS_AUDIT.md))
 **Description:** `terraform/terraform.tfstate.1774373141.backup` was committed to git and contained real, non-placeholder values for the Gemini API key and GitHub PAT (captured via `azurerm_key_vault_secret` resources in the state file). The file had already been pushed to the public `origin/main` remote.
-**Resolution:** History rewritten with `git-filter-repo --path terraform/terraform.tfstate.1774373141.backup --invert-paths`; `.gitignore` fixed (ISSUE-002); force-pushed to `origin/main` with explicit user confirmation. **Still open:** the actual Gemini API key and GitHub PAT must be rotated in their respective consoles — a history rewrite does not undo exposure that already happened, and this action requires human access to external systems an agent cannot reach.
+**Resolution:** History rewritten with `git-filter-repo --path terraform/terraform.tfstate.1774373141.backup --invert-paths`; `.gitignore` fixed (ISSUE-002); force-pushed to `origin/main` with explicit user confirmation. Gemini API key and GitHub PAT subsequently rotated in their respective consoles (2026-07-14) — fully closed.
 
 ## 4. Summary by status
 
 | Status | Count |
 |---|---|
 | Fixed | 8 |
-| Mitigated (partial — human action still required) | 1 |
+| Resolved | 1 |
 | Open | 1 |

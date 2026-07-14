@@ -15,6 +15,12 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 
 ## 3. Log
 
+### ISSUE-013
+**Date found:** 2026-07-15 · **Severity:** Low (self-inflicted, caught immediately) · **Status:** Fixed
+**Found during:** Migrating the self-hosted runner to a dedicated `gha-runner` user ([ADR-0003](../07-governance-risk/adr/0003-dedicated-runner-user.md))
+**Description:** Moved the existing runner installation from `/home/pkm/actions-runner` to `/home/gha-runner/actions-runner` via `mv` + `chown -R`, intending to preserve the warm Python/pip/npm caches. Two things broke: (1) Python's `pip` script has an absolute path baked into its shebang line at install time (`#!/home/pkm/actions-runner/.../python`); moving the directory left it pointing at a path that no longer existed, failing every job with `bad interpreter: Permission denied`. (2) `svc.sh install gha-runner` captured the *invoking* user's (`pkm`, via `sudo`) `PATH` into a `.path` file regardless of which user the service actually runs as, leaking `/home/pkm/...` paths that `gha-runner` can't read into every job's environment (`EACCES` errors on `git` and other tools).
+**Resolution:** Wiped `_work` entirely (forcing a fresh Python 3.12 re-download and re-checkout under the correct new path) and manually reset `.path` to a plain system `PATH` (`/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`). Verified with a clean `workflow_dispatch` run — all jobs passed. **Lesson recorded in ADR-0003:** never `mv` an existing runner installation to change its owning user; either do a clean `config.sh`/`svc.sh install` under the target user, or immediately wipe `_work` and reset `.path` after any such move.
+
 ### ISSUE-012
 **Date found:** 2026-07-14 · **Severity:** Medium · **Status:** Fixed
 **Found during:** First real CI runs on the self-hosted runner (post PR #1 merge)
@@ -91,6 +97,6 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 
 | Status | Count |
 |---|---|
-| Fixed | 10 |
+| Fixed | 11 |
 | Resolved | 1 |
 | Open | 1 |

@@ -41,4 +41,4 @@ This mirrors the same "start cheap, define the trigger, don't guess" pattern alr
 
 ## Related
 
-[ADR-0001](0001-adopt-adrs-and-branch-protected-workflow.md) · [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) · [`ENGINEERING_STANDARDS.md` §7](../ENGINEERING_STANDARDS.md#7-cicd)
+[ADR-0001](0001-adopt-adrs-and-branch-protected-workflow.md) · [ADR-0003](0003-dedicated-runner-user.md) (follow-on hardening — dedicated OS user for the runner) · [`.github/workflows/ci.yml`](../../../.github/workflows/ci.yml) · [`ENGINEERING_STANDARDS.md` §7](../ENGINEERING_STANDARDS.md#7-cicd)

@@ -9,6 +9,23 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+# Self-hosted runner trust boundary: jobs below run on a self-hosted runner with
+# access to this machine, so they must never execute untrusted code. Each job's
+# `if:` repeats the same guard — true for push events, and for pull_request
+# events only when the PR's head repository is this same repository (not a
+# fork). A workflow run triggered by a fork PR shows these jobs as skipped,
+# not run unsafely. (GitHub Actions job-level `if:` cannot reference a
+# workflow-level `env:`, so the expression is duplicated per job rather than
+# defined once — a known limitation, not an oversight.)
+
 jobs:
   filter:
     runs-on: ubuntu-latest
@@ -36,8 +53,8 @@ jobs:
 
   backend-test:
     needs: filter
-    if: needs.filter.outputs.backend == 'true'
-    runs-on: ubuntu-latest
+    if: needs.filter.outputs.backend == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: [self-hosted, linux, x64]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -52,12 +69,12 @@ jobs:
           pip install -r backend/requirements.txt
           pip install pytest
       - name: Run backend tests
-        run: pytest backend/tests -v
+        run: python -m pytest backend/tests -v
 
   agent-test:
     needs: filter
-    if: needs.filter.outputs.agent == 'true'
-    runs-on: ubuntu-latest
+    if: needs.filter.outputs.agent == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: [self-hosted, linux, x64]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -72,12 +89,12 @@ jobs:
           pip install -r agent/requirements.txt
           pip install pytest
       - name: Run agent tests
-        run: pytest agent/tests -v
+        run: python -m pytest agent/tests -v
 
   frontend-validate:
     needs: filter
-    if: needs.filter.outputs.frontend == 'true'
-    runs-on: ubuntu-latest
+    if: needs.filter.outputs.frontend == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: [self-hosted, linux, x64]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4

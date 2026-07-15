@@ -1,6 +1,6 @@
 # ADR-0004: Remove the self-hosted CI runner, return to GitHub-hosted
 
-**Status:** Accepted (this ADR's own decision — removing self-hosting from the WSL *daily-driver* machine specifically — remains valid; see [ADR-0005](0005-macos-self-hosted-runner.md) for the follow-up decision to self-host again, this time on a genuinely dedicated machine, which changes `ci.yml` again but does not undo the reasoning here)
+**Status:** Accepted (this ADR's own decision — removing self-hosting from the WSL *daily-driver* machine specifically — remains valid; see [ADR-0005](0005-linux-mint-self-hosted-runner.md) for the follow-up decision to self-host again, this time on a genuinely dedicated machine, which changes `ci.yml` again but does not undo the reasoning here)
 **Date:** 2026-07-15
 **Deciders:** Repository owner
 **Supersedes:** [ADR-0002](0002-self-hosted-ci-runner.md), [ADR-0003](0003-dedicated-runner-user.md)

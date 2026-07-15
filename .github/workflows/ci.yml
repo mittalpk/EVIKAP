@@ -17,22 +17,35 @@ permissions:
   contents: read
   pull-requests: read
 
-# Self-hosted runner trust boundary: jobs below run on a dedicated MacBook
+# Self-hosted runner trust boundary: jobs below run on a dedicated Linux Mint
 # self-hosted runner (see ADR-0005), so they must never execute untrusted
-# code. Each job's `if:` repeats the same guard — true for push events, and
+# code. Each job's `if:` repeats the same guard - true for push events, and
 # for pull_request events only when the PR's head repository is this same
 # repository (not a fork). A workflow run triggered by a fork PR shows these
 # jobs as skipped, not run unsafely. (GitHub Actions job-level `if:` cannot
 # reference a workflow-level `env:`, so the expression is duplicated per job
 # rather than defined once - a known limitation, not an oversight.)
 #
-# Why no actions/cache here: this runner is a persistent dedicated machine,
-# not an ephemeral GitHub-hosted VM. pip's and npm's own local caches
-# already survive between jobs on its disk without GitHub's remote
-# actions/cache upload/download round-trip - that round-trip was previously
-# found to hang indefinitely when pointed at a machine-wide cache directory
-# (ISSUE-012). Removed proactively here rather than rediscovering the same
-# failure on a second machine.
+# Why no actions/setup-python or actions/setup-node: both match the runner's
+# reported OS against a versions-manifest.json of prebuilt binaries. Linux
+# Mint isn't in that manifest under its own name, even though it's ABI-
+# compatible with the Ubuntu release it's based on, so both actions fail
+# outright on this runner ("The version 'X.Y' ... was not found for
+# <Distro> <Version>"). Python 3.12 and Node 20 are installed system-wide on
+# the runner host instead (see ADR-0005) and referenced directly below.
+#
+# Why every Python step uses a venv: a bare `pip install` without one still
+# sees the distro's own /usr/lib/python3/dist-packages on its import path.
+# For a compiled-extension package (cryptography, pulled in transitively via
+# pyjwt) built against a different Python ABI than the one actually running,
+# that surfaces as a hard crash on import, not an install-time error. A venv
+# excludes system site-packages by default, avoiding the mismatch entirely.
+#
+# Why no actions/cache: this runner is a persistent dedicated machine, not
+# an ephemeral GitHub-hosted VM - pip's and npm's own local caches already
+# survive between jobs on its disk without GitHub's remote actions/cache
+# round-trip (moot here anyway, since that input belongs to the two actions
+# removed above).
 
 jobs:
   filter:
@@ -62,53 +75,40 @@ jobs:
   backend-test:
     needs: filter
     if: needs.filter.outputs.backend == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: [self-hosted, omeganexus-macbook]
+    runs-on: [self-hosted, omeganexus-mint]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          # No cache: input here - see note near the top of this file.
       - name: Install dependencies
         run: |
-          pip install -r backend/requirements.txt
-          pip install pytest
+          python3.12 -m venv .venv
+          .venv/bin/pip install -r backend/requirements.txt
+          .venv/bin/pip install pytest
       - name: Run backend tests
-        run: python -m pytest backend/tests -v
+        run: .venv/bin/python -m pytest backend/tests -v
 
   agent-test:
     needs: filter
     if: needs.filter.outputs.agent == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: [self-hosted, omeganexus-macbook]
+    runs-on: [self-hosted, omeganexus-mint]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          # No cache: input here - see note near the top of this file.
       - name: Install dependencies
         run: |
-          pip install -r agent/requirements.txt
-          pip install pytest
+          python3.12 -m venv .venv
+          .venv/bin/pip install -r agent/requirements.txt
+          .venv/bin/pip install pytest
       - name: Run agent tests
-        run: python -m pytest agent/tests -v
+        run: .venv/bin/python -m pytest agent/tests -v
 
   frontend-validate:
     needs: filter
     if: needs.filter.outputs.frontend == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: [self-hosted, omeganexus-macbook]
+    runs-on: [self-hosted, omeganexus-mint]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          # No cache: input here - see note near the top of this file.
       - name: Install dependencies
         working-directory: frontend
         run: npm ci

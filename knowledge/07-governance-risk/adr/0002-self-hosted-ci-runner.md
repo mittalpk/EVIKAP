@@ -1,6 +1,6 @@
 # ADR-0002: Move CI job execution to a self-hosted runner
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-0004](0004-remove-self-hosted-runner.md)
 **Date:** 2026-07-14
 **Deciders:** Repository owner
 

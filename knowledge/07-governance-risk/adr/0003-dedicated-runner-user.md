@@ -1,6 +1,6 @@
 # ADR-0003: Run the self-hosted runner as a dedicated, unprivileged system user
 
-**Status:** Accepted
+**Status:** Superseded by [ADR-0004](0004-remove-self-hosted-runner.md)
 **Date:** 2026-07-15
 **Deciders:** Repository owner
 

@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 import pytest
 
-from app.services.source_connectivity_validator import (
+from backend.app.services.source_connectivity_validator import (
     PilotBUCharter,
     SensitivityLevel,
     SourceConnectivityValidator,

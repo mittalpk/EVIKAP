@@ -54,13 +54,13 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 ### ISSUE-005
 **Date found:** 2026-07-14 · **Severity:** Medium · **Status:** Fixed
 **Found during:** Same review as ISSUE-008
-**Description:** `docs/deployment/AZURE_DEPLOYMENT.md` contained real local filesystem paths (`/home/pkmittal/MyProjects/SecureAgentRuntime/Evikap/...`) that leaked both a real username and the name of a different, private/unreleased project (`SecureAgentRuntime`) this codebase originated from.
-**Resolution:** Paths replaced with generic `/path/to/Evikap`.
+**Description:** `docs/deployment/AZURE_DEPLOYMENT.md` contained real local filesystem paths (`/home/pkmittal/MyProjects/SecureAgentRuntime/VigilRAG/...`) that leaked both a real username and the name of a different, private/unreleased project (`SecureAgentRuntime`) this codebase originated from.
+**Resolution:** Paths replaced with generic `/path/to/VigilRAG`.
 
 ### ISSUE-004
 **Date found:** 2026-07-14 · **Severity:** Medium · **Status:** Fixed
 **Found during:** Same review as ISSUE-008
-**Description:** A real Azure subscription ID (`ecc63471-f21a-46af-a01f-2db799285343`) was hardcoded across four files: `.github/workflows/deploy.yml`, `terraform/fix_state.sh`, `terraform/import_secrets.sh`, `docs/deployment/AZURE_DEPLOYMENT.md`. Not a credential, but real infrastructure-reconnaissance information (also reveals the Key Vault naming pattern `kv-evikap-ecc63471`).
+**Description:** A real Azure subscription ID (`ecc63471-f21a-46af-a01f-2db799285343`) was hardcoded across four files: `.github/workflows/deploy.yml`, `terraform/fix_state.sh`, `terraform/import_secrets.sh`, `docs/deployment/AZURE_DEPLOYMENT.md`. Not a credential, but real infrastructure-reconnaissance information (also reveals the Key Vault naming pattern `kv-vigilrag-ecc63471`).
 **Resolution:** Workflow parameterized via `secrets.AZURE_SUBSCRIPTION_ID` and `secrets.KEY_VAULT_NAME`; shell scripts changed to require the value as an environment variable (`${SUB_ID:?...}`) instead of hardcoding it; doc changed to a placeholder.
 
 ### ISSUE-003
@@ -77,7 +77,7 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 
 ### ISSUE-001
 **Date found:** 2026-07-14 · **Severity:** Critical · **Status:** Resolved
-**Found during:** Initial repository audit ([`docs/EVIKAP_AUDIT.md`](../EVIKAP_AUDIT.md))
+**Found during:** Initial repository audit ([`docs/VigilRAG_AUDIT.md`](../VigilRAG_AUDIT.md))
 **Description:** `terraform/terraform.tfstate.1774373141.backup` was committed to git and contained real, non-placeholder values for the Gemini API key and GitHub PAT (captured via `azurerm_key_vault_secret` resources in the state file). The file had already been pushed to the public `origin/main` remote.
 **Resolution:** History rewritten with `git-filter-repo --path terraform/terraform.tfstate.1774373141.backup --invert-paths`; `.gitignore` fixed (ISSUE-002); force-pushed to `origin/main` with explicit user confirmation. Gemini API key and GitHub PAT subsequently rotated in their respective consoles (2026-07-14) — fully closed.
 

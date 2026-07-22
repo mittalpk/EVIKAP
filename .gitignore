@@ -25,8 +25,8 @@ frontend/build/
 .eslintcache
 
 # --- Project Specific ---
-evikap.db
-backend/app/evikap.db
+vigilrag.db
+backend/app/vigilrag.db
 
 # --- Terraform ---
 *.tfstate

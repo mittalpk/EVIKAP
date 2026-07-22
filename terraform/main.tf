@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "nexus" {
 
 # User-Assigned Managed Identity for Container Apps to access Key Vault
 resource "azurerm_user_assigned_identity" "nexus_identity" {
-  name                = "id-evikap"
+  name                = "id-vigilrag"
   location            = azurerm_resource_group.nexus.location
   resource_group_name = azurerm_resource_group.nexus.name
 }
@@ -93,7 +93,7 @@ data "azurerm_container_app_environment" "nexus_env" {
 
 # ── Key Vault for Secrets ─────────────────────────────────────────────────────
 resource "azurerm_key_vault" "nexus_kv" {
-  name                        = "kv-evikap-${substr(data.azurerm_client_config.current.subscription_id, 0, 8)}"
+  name                        = "kv-vigilrag-${substr(data.azurerm_client_config.current.subscription_id, 0, 8)}"
   location                    = azurerm_resource_group.nexus.location
   resource_group_name         = azurerm_resource_group.nexus.name
   enabled_for_disk_encryption = true
@@ -129,12 +129,12 @@ resource "azurerm_key_vault" "nexus_kv" {
 # ── Key Vault Secrets ──────────────────────────────────────────────────────
 # Production secrets - use ignore_changes to avoid overwriting manually-set values
 # Before applying, set secrets in Azure:
-#   az keyvault secret set --vault-name kv-evikap-XXXXX --name internal-api-key --value "<secure-value>"
-#   az keyvault secret set --vault-name kv-evikap-XXXXX --name github-pat --value "<token>"
-#   az keyvault secret set --vault-name kv-evikap-XXXXX --name azure-storage-connection-string --value "<connection>"
-#   az keyvault secret set --vault-name kv-evikap-XXXXX --name admin-username --value "<username>"
-#   az keyvault secret set --vault-name kv-evikap-XXXXX --name admin-password --value "<password>"
-#   az keyvault secret set --vault-name kv-evikap-XXXXX --name gemini-api-key --value "<key>"
+#   az keyvault secret set --vault-name kv-vigilrag-XXXXX --name internal-api-key --value "<secure-value>"
+#   az keyvault secret set --vault-name kv-vigilrag-XXXXX --name github-pat --value "<token>"
+#   az keyvault secret set --vault-name kv-vigilrag-XXXXX --name azure-storage-connection-string --value "<connection>"
+#   az keyvault secret set --vault-name kv-vigilrag-XXXXX --name admin-username --value "<username>"
+#   az keyvault secret set --vault-name kv-vigilrag-XXXXX --name admin-password --value "<password>"
+#   az keyvault secret set --vault-name kv-vigilrag-XXXXX --name gemini-api-key --value "<key>"
 
 resource "azurerm_key_vault_secret" "internal_api_key" {
   name         = "internal-api-key"
@@ -210,7 +210,7 @@ resource "azurerm_key_vault_secret" "gemini_api_key" {
 
 # ── Container App: Backend ──────────────────────────────────────────────────
 resource "azurerm_container_app" "backend" {
-  name                         = "ca-evikap-backend"
+  name                         = "ca-vigilrag-backend"
   container_app_environment_id = data.azurerm_container_app_environment.nexus_env.id
   resource_group_name          = azurerm_resource_group.nexus.name
   revision_mode                = "Single"
@@ -261,12 +261,12 @@ resource "azurerm_container_app" "backend" {
 
       env {
         name  = "AGENT_SERVICE_URL"
-        value = "http://ca-evikap-agent:8000"
+        value = "http://ca-vigilrag-agent:8000"
       }
 
       env {
         name  = "AGENT_FQDN"
-        value = "https://ca-evikap-agent.${data.azurerm_container_app_environment.nexus_env.default_domain}"
+        value = "https://ca-vigilrag-agent.${data.azurerm_container_app_environment.nexus_env.default_domain}"
       }
 
       readiness_probe {
@@ -339,7 +339,7 @@ resource "azurerm_container_app" "backend" {
 
 # ── Container App: Agent ────────────────────────────────────────────────────
 resource "azurerm_container_app" "agent" {
-  name                         = "ca-evikap-agent"
+  name                         = "ca-vigilrag-agent"
   container_app_environment_id = data.azurerm_container_app_environment.nexus_env.id
   resource_group_name          = azurerm_resource_group.nexus.name
   revision_mode                = "Single"
@@ -367,7 +367,7 @@ resource "azurerm_container_app" "agent" {
 
       env {
         name  = "BACKEND_URL"
-        value = "https://ca-evikap-backend.${data.azurerm_container_app_environment.nexus_env.default_domain}"
+        value = "https://ca-vigilrag-backend.${data.azurerm_container_app_environment.nexus_env.default_domain}"
       }
 
       readiness_probe {
@@ -427,7 +427,7 @@ resource "azurerm_container_app" "agent" {
 
 # ── Container App: Frontend ─────────────────────────────────────────────────
 resource "azurerm_container_app" "frontend" {
-  name                         = "ca-evikap-frontend"
+  name                         = "ca-vigilrag-frontend"
   container_app_environment_id = data.azurerm_container_app_environment.nexus_env.id
   resource_group_name          = azurerm_resource_group.nexus.name
   revision_mode                = "Single"

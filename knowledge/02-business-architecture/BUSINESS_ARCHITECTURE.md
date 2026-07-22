@@ -8,14 +8,14 @@
 
 ## 1. Purpose
 
-Defines the business capabilities, value streams, and organizational functions EVIKAP must support, independent of any technology choice. This is the bridge between the business problem and the solution/technology architecture phases.
+Defines the business capabilities, value streams, and organizational functions VigilRAG must support, independent of any technology choice. This is the bridge between the business problem and the solution/technology architecture phases.
 
 ## 2. Business capability model
 
 | Capability | Description | Currently exists? | Owned by (post-delivery) |
 |---|---|---|---|
 | Knowledge source registration | Onboard a new source system (repo, wiki space, database schema) for indexing | No | Platform team |
-| Cross-source semantic retrieval | Find relevant evidence across all registered sources for a natural-language query | No (keyword/substring only today — see [audit](../EVIKAP_AUDIT.md)) | Platform team |
+| Cross-source semantic retrieval | Find relevant evidence across all registered sources for a natural-language query | No (keyword/substring only today — see [audit](../VigilRAG_AUDIT.md)) | Platform team |
 | Governed AI reasoning | Decompose a question, gather evidence iteratively, synthesize a cited answer | Partially — single-pass only today | Platform team |
 | Permission-aware access enforcement | Ensure retrieval respects each source system's existing access control | Partially — trust boundary exists between agent and backend, but no RBAC | Security engineering |
 | Answer provenance & audit | Record what was asked, by whom, and which evidence contributed to the answer | No | Platform team / Compliance |
@@ -69,11 +69,11 @@ This value stream does not exist today in any form — there is no source-regist
 | Security engineering | New responsibility: certify each source connector's permission-propagation correctness before it goes live |
 | Source system owners (repo admins, wiki admins, DBAs) | New light-touch responsibility: classify their system's content sensitivity and approve indexing scope |
 | Compliance | Gains a new auditable system to include in AI-governance review; loses the current blind spot of ungoverned AI-to-data access |
-| End users | Behavior change: default to asking EVIKAP before searching individual systems or interrupting colleagues — requires an adoption/change-management motion, not just a technical rollout |
+| End users | Behavior change: default to asking VigilRAG before searching individual systems or interrupting colleagues — requires an adoption/change-management motion, not just a technical rollout |
 
 ## 5. Business process alignment
 
-EVIKAP does not replace any existing business process; it inserts itself as a new step ahead of the informal "guess the system, search, ask a colleague" process described in [Problem Statement §3.2](../PRODUCT_PROBLEM_STATEMENT.md#32-current-business-processes). Success is measured by the degree to which that informal process is displaced (see adoption metrics in [Problem Statement §12.4](../PRODUCT_PROBLEM_STATEMENT.md#124-user-adoption-metrics)).
+VigilRAG does not replace any existing business process; it inserts itself as a new step ahead of the informal "guess the system, search, ask a colleague" process described in [Problem Statement §3.2](../PRODUCT_PROBLEM_STATEMENT.md#32-current-business-processes). Success is measured by the degree to which that informal process is displaced (see adoption metrics in [Problem Statement §12.4](../PRODUCT_PROBLEM_STATEMENT.md#124-user-adoption-metrics)).
 
 ## 6. Relationship to data, application, and technology architecture
 

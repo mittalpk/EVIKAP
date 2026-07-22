@@ -1,6 +1,6 @@
-# Evikap Deployment Plan: Netlify, Koyeb, and Supabase
+# VigilRAG Deployment Plan: Netlify, Koyeb, and Supabase
 
-This document outlines the detailed step-by-step implementation plan for hosting Evikap using the free tier of Netlify, Koyeb, and Supabase.
+This document outlines the detailed step-by-step implementation plan for hosting VigilRAG using the free tier of Netlify, Koyeb, and Supabase.
 
 ---
 
@@ -14,20 +14,20 @@ This document outlines the detailed step-by-step implementation plan for hosting
                              ▼ HTTPS
 ┌──────────────────────────────────────────────────────────┐
 │        Frontend: Netlify (Static React Hosting)          │
-│               [evikap.yourdomain.com]                │
+│               [vigilrag.yourdomain.com]                │
 └────────────────────────────┬─────────────────────────────┘
                              │
                              ▼ REST / WebSockets (HTTPS)
 ┌──────────────────────────────────────────────────────────┐
 │      FastAPI Backend: Koyeb (Containerized Service)      │
-│             [api-evikap.yourdomain.com]              │
+│             [api-vigilrag.yourdomain.com]              │
 └──────────────┬────────────────────────────┬──────────────┘
                │                            │
                │ Internal / Public          │ SQL / Postgres
                ▼                            ▼
 ┌──────────────────────────────┐    ┌──────────────────────┐
 │  LangGraph Agent: Koyeb      │    │ Database: Supabase   │
-│  [agent-evikap...]       │    │ [db.supabase.co]     │
+│  [agent-vigilrag...]       │    │ [db.supabase.co]     │
 └──────────────────────────────┘    └──────────────────────┘
 ```
 
@@ -37,20 +37,20 @@ This document outlines the detailed step-by-step implementation plan for hosting
 
 ### Database (Supabase)
 1. Sign up on [Supabase](https://supabase.com/).
-2. Create a new project named `evikap`.
+2. Create a new project named `vigilrag`.
 3. Locate the **Database Connection String** in `Project Settings -> Database`. 
 4. Select the **URI** connection type (e.g. `postgresql://postgres:[YOUR-PASSWORD]@db.[REF].supabase.co:5432/postgres`) and save it.
 
 ### Frontend (Netlify)
 1. Sign up on [Netlify](https://netlify.com/) and connect your GitHub account.
-2. Select `Import from Git` and choose the `mittalpk/EVIKAP` repository.
+2. Select `Import from Git` and choose the `mittalpk/VigilRAG` repository.
 3. Configure the build settings:
    - **Base directory**: `frontend`
    - **Build command**: `npm run build`
    - **Publish directory**: `frontend/dist`
 4. Set up Environment Variables:
-   - `VITE_BACKEND_URL`: URL of the Koyeb Backend API (e.g., `https://api-evikap.yourdomain.com`).
-   - `VITE_AGENT_URL`: URL of the Koyeb Agent Service (e.g., `https://agent-evikap.yourdomain.com`).
+   - `VITE_BACKEND_URL`: URL of the Koyeb Backend API (e.g., `https://api-vigilrag.yourdomain.com`).
+   - `VITE_AGENT_URL`: URL of the Koyeb Agent Service (e.g., `https://agent-vigilrag.yourdomain.com`).
 
 ### Backend & Agent (Koyeb)
 Because Koyeb provides one free Nano instance (512MB RAM) per account, you have two deployment pathways for running both the Backend and the Agent:
@@ -59,28 +59,28 @@ Because Koyeb provides one free Nano instance (512MB RAM) per account, you have 
 
 For the standard multi-service layout (Option A), configure the following in Koyeb:
 
-#### Service 1: `evikap-backend`
-- **Source**: GitHub repository `mittalpk/EVIKAP`
+#### Service 1: `vigilrag-backend`
+- **Source**: GitHub repository `mittalpk/VigilRAG`
 - **Builder**: Dockerfile (Path: `backend/Dockerfile`)
 - **Port**: `8000`
 - **Environment Variables**:
   - `DATABASE_URL`: Your Supabase connection string.
   - `AGENT_SERVICE_URL`: URL of the Koyeb Agent Service.
-  - `ALLOWED_ORIGINS`: `["https://evikap.yourdomain.com", "http://localhost:5173"]`
+  - `ALLOWED_ORIGINS`: `["https://vigilrag.yourdomain.com", "http://localhost:5173"]`
   - `INTERNAL_API_KEY`: A secure 32-byte API key.
   - `SECRET_KEY`: A secure 32-byte JWT signing key.
   - `ADMIN_USERNAME`: `admin`
   - `ADMIN_PASSWORD`: A secure admin password.
 
-#### Service 2: `evikap-agent`
-- **Source**: GitHub repository `mittalpk/EVIKAP`
+#### Service 2: `vigilrag-agent`
+- **Source**: GitHub repository `mittalpk/VigilRAG`
 - **Builder**: Dockerfile (Path: `agent/Dockerfile`)
 - **Port**: `8000` (mapped externally as needed)
 - **Environment Variables**:
   - `INTERNAL_API_KEY`: Must match the backend's `INTERNAL_API_KEY`.
   - `BACKEND_URL`: URL of the Koyeb Backend Service.
   - `GEMINI_API_KEY`: Your Google Gemini API Key.
-  - `ALLOWED_ORIGINS`: `["https://evikap.yourdomain.com", "http://localhost:5173"]`
+  - `ALLOWED_ORIGINS`: `["https://vigilrag.yourdomain.com", "http://localhost:5173"]`
 
 ---
 
@@ -90,9 +90,9 @@ Configure the following CNAME/A records in your DNS provider:
 
 | Host / Subdomain | Type | Target / Value | Purpose |
 | :--- | :--- | :--- | :--- |
-| `evikap` | CNAME | `[your-netlify-app-name].netlify.app` | React Frontend Entry Point |
-| `api-evikap` | CNAME | `[your-koyeb-backend-app-name].koyeb.app` | Backend API Layer |
-| `agent-evikap` | CNAME | `[your-koyeb-agent-app-name].koyeb.app` | LangGraph Agent Gateway |
+| `vigilrag` | CNAME | `[your-netlify-app-name].netlify.app` | React Frontend Entry Point |
+| `api-vigilrag` | CNAME | `[your-koyeb-backend-app-name].koyeb.app` | Backend API Layer |
+| `agent-vigilrag` | CNAME | `[your-koyeb-agent-app-name].koyeb.app` | LangGraph Agent Gateway |
 
 ---
 
@@ -109,11 +109,11 @@ Run a test script or check backend logs to verify that SQLAlchemy can connect to
 Execute a curl request simulating a preflight check from the Netlify domain:
 ```bash
 curl -I -X OPTIONS \
-  -H "Origin: https://evikap.yourdomain.com" \
+  -H "Origin: https://vigilrag.yourdomain.com" \
   -H "Access-Control-Request-Method: POST" \
-  https://api-evikap.yourdomain.com/api/v1/knowledge/query
+  https://api-vigilrag.yourdomain.com/api/v1/knowledge/query
 ```
-**Expected Response**: `HTTP/1.1 200 OK` with header `Access-Control-Allow-Origin: https://evikap.yourdomain.com`.
+**Expected Response**: `HTTP/1.1 200 OK` with header `Access-Control-Allow-Origin: https://vigilrag.yourdomain.com`.
 
 ### 3. Startup Verification
 Verify that both Koyeb services start up successfully without triggering the startup security guards. If the environment variables are not correctly configured, Koyeb logs will show:

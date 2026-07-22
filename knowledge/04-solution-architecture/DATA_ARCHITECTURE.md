@@ -8,26 +8,26 @@
 
 ## 1. Purpose
 
-Defines what data EVIKAP holds, where source data lives, how it flows, and how it is classified and governed — independent of the specific database/vector-store product chosen.
+Defines what data VigilRAG holds, where source data lives, how it flows, and how it is classified and governed — independent of the specific database/vector-store product chosen.
 
 ## 2. Data domains
 
-| Domain | Description | System of record | Owned by EVIKAP? |
+| Domain | Description | System of record | Owned by VigilRAG? |
 |---|---|---|---|
 | Source content (code, docs, wiki pages, schema DDL) | The actual enterprise knowledge being indexed | External source systems (repo host, wiki, database) | No — indexed, not owned |
-| Retrieval index (embeddings, chunk metadata, keyword index) | Derived representation enabling semantic + keyword search | EVIKAP | Yes |
-| Query and session data | User/agent queries, decomposition plans, retrieved evidence per request | EVIKAP | Yes |
-| Audit and provenance log | Who asked what, what evidence was used, what was answered | EVIKAP | Yes |
-| Source registry and classification | Registered sources, their sensitivity classification, refresh cadence | EVIKAP | Yes |
-| Identity and permission cache | Mapping of requester identity to source-system permissions, used to enforce FR-006 | EVIKAP (cache), source IdP (authoritative) | Cache only |
-| Evaluation dataset | Golden query/answer pairs used to gate quality (NFR-010, NFR-011) | EVIKAP | Yes |
-| Evaluation results | Per-run RAGAS/DeepEval scores (faithfulness, context-precision, context-recall) per pipeline version | EVIKAP | Yes |
-| Model/System Cards | Published metadata per pipeline version: purpose, limitations, eval scores, last-updated (FR-013) | EVIKAP | Yes |
-| Knowledge graph (roadmap — see §5.1) | Entities and relationships extracted from source content, for relational queries vector similarity can't answer | EVIKAP (derived, Phase 4+ / FEAT-13) | Yes, once built |
+| Retrieval index (embeddings, chunk metadata, keyword index) | Derived representation enabling semantic + keyword search | VigilRAG | Yes |
+| Query and session data | User/agent queries, decomposition plans, retrieved evidence per request | VigilRAG | Yes |
+| Audit and provenance log | Who asked what, what evidence was used, what was answered | VigilRAG | Yes |
+| Source registry and classification | Registered sources, their sensitivity classification, refresh cadence | VigilRAG | Yes |
+| Identity and permission cache | Mapping of requester identity to source-system permissions, used to enforce FR-006 | VigilRAG (cache), source IdP (authoritative) | Cache only |
+| Evaluation dataset | Golden query/answer pairs used to gate quality (NFR-010, NFR-011) | VigilRAG | Yes |
+| Evaluation results | Per-run RAGAS/DeepEval scores (faithfulness, context-precision, context-recall) per pipeline version | VigilRAG | Yes |
+| Model/System Cards | Published metadata per pipeline version: purpose, limitations, eval scores, last-updated (FR-013) | VigilRAG | Yes |
+| Knowledge graph (roadmap — see §5.1) | Entities and relationships extracted from source content, for relational queries vector similarity can't answer | VigilRAG (derived, Phase 4+ / FEAT-13) | Yes, once built |
 
 ## 3. Current-state gap (from audit)
 
-The existing implementation has **no data layer of its own** for the "database" source type — `DatabaseSubsystem.query_schemas()` performs a GitHub filename search rather than querying an actual database, despite the architecture being advertised as including SQL databases as a first-class source (see [audit §5](../EVIKAP_AUDIT.md)). This data architecture supersedes that gap: Section 5 below specifies the real database requirement.
+The existing implementation has **no data layer of its own** for the "database" source type — `DatabaseSubsystem.query_schemas()` performs a GitHub filename search rather than querying an actual database, despite the architecture being advertised as including SQL databases as a first-class source (see [audit §5](../VigilRAG_AUDIT.md)). This data architecture supersedes that gap: Section 5 below specifies the real database requirement.
 
 ## 4. Conceptual data flow
 

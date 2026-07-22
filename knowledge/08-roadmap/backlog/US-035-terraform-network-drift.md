@@ -10,7 +10,7 @@
 
 ## Description
 
-The [EVIKAP audit](../../EVIKAP_AUDIT.md) and [Risk Register RISK-008](../../07-governance-risk/RISK_REGISTER.md) identified infrastructure drift: the VNet and NSGs provisioned by `terraform/main.tf` are not attached to the Container Apps environment actually running the services (which uses a pre-existing `nexvocab-env-prod` environment from a different project). This story either: (a) wires the new VNet/NSG to the actual Container Apps environment, or (b) removes the unused VNet/NSG resources from Terraform and documents the actual network architecture honestly. The choice between (a) and (b) is a decision for the Architecture Review Board.
+The [VigilRAG audit](../../VigilRAG_AUDIT.md) and [Risk Register RISK-008](../../07-governance-risk/RISK_REGISTER.md) identified infrastructure drift: the VNet and NSGs provisioned by `terraform/main.tf` are not attached to the Container Apps environment actually running the services (which uses a pre-existing `nexvocab-env-prod` environment from a different project). This story either: (a) wires the new VNet/NSG to the actual Container Apps environment, or (b) removes the unused VNet/NSG resources from Terraform and documents the actual network architecture honestly. The choice between (a) and (b) is a decision for the Architecture Review Board.
 
 ---
 

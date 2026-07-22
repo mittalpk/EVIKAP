@@ -3,7 +3,7 @@
 ## User Story
 
 **As a** Knowledge Worker (pilot user),  
-**I want to** type a natural-language question into the EVIKAP web interface and receive a synthesised answer with clearly displayed source citations,  
+**I want to** type a natural-language question into the VigilRAG web interface and receive a synthesised answer with clearly displayed source citations,  
 **So that** I can get a trustworthy, traceable answer without navigating multiple disconnected systems.
 
 ---

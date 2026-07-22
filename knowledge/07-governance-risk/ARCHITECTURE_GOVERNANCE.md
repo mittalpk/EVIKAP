@@ -7,7 +7,7 @@
 
 ## 1. Purpose
 
-Defines who has authority to approve architecture decisions and changes for EVIKAP, and how ongoing compliance with the baselined architecture (this knowledge base) is checked.
+Defines who has authority to approve architecture decisions and changes for VigilRAG, and how ongoing compliance with the baselined architecture (this knowledge base) is checked.
 
 ## 2. Governance body
 
@@ -45,7 +45,7 @@ Every feature in the [Program Backlog](../06-agile-delivery/PROGRAM_BACKLOG.md) 
 6. No retrieved content reaches the synthesis model without passing guardrail prompt-injection screening, and no synthesized output is delivered without passing guardrail output validation (FR-012).
 7. No production pipeline version ships without a current Model/System Card whose published scores match the evaluation harness's own record for that version (FR-013, NFR-012).
 
-A feature that violates any of these is **not compliant regardless of functional correctness** and is blocked from production release until remediated — this is the same discipline that caught and remediated the fabricated-database-fallback issue documented in the current-state [audit](../EVIKAP_AUDIT.md), applied prospectively rather than retrospectively.
+A feature that violates any of these is **not compliant regardless of functional correctness** and is blocked from production release until remediated — this is the same discipline that caught and remediated the fabricated-database-fallback issue documented in the current-state [audit](../VigilRAG_AUDIT.md), applied prospectively rather than retrospectively.
 
 ## 5. Change control for architecture decisions
 

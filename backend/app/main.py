@@ -1,4 +1,4 @@
-"""EVIKAP Backend — FastAPI entry-point."""
+"""VigilRAG Backend — FastAPI entry-point."""
 from __future__ import annotations
 
 import logging
@@ -59,7 +59,7 @@ async def get_current_user(
 
 # ── Application ───────────────────────────────────────────────────────────────
 app = FastAPI(
-    title="EVIKAP Knowledge & Agent API",
+    title="VigilRAG Knowledge & Agent API",
     description="Unified knowledge API with LLM-enabled Q&A and multi-agent orchestration.",
     version="1.0.0",
 )

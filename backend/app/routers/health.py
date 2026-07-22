@@ -10,7 +10,7 @@ async def health():
     # Simple, safe health check reporting liveness
     return {
         "status": "healthy",
-        "service": "evikap-backend",
+        "service": "vigilrag-backend",
         "configured": settings.internal_api_key.get_secret_value() not in ("", "change-me-in-production")
     }
 

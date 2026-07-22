@@ -77,7 +77,7 @@ const AgentAnimation = () => (
 
 export default function App() {
   useEffect(() => {
-    console.log('🚀 EVIKAP Production UI loaded correctly. Version: 1.0.1 (Final)');
+    console.log('🚀 VigilRAG Production UI loaded correctly. Version: 1.0.1 (Final)');
   }, [])
   const [activeTab, setActiveTab] = useState<'knowledge' | 'agent' | 'documentation'>('knowledge')
 
@@ -166,7 +166,7 @@ export default function App() {
         <div className="login-card fade-in">
           <div className="logo mb-24">
             <div className="logo-icon">Ω</div>
-            <div className="logo-title">EVIKAP</div>
+            <div className="logo-title">VigilRAG</div>
           </div>
           <h2 className="card-title">Secured Access</h2>
           <p className="card-hint">Please enter your administrative credentials to continue.</p>
@@ -211,7 +211,7 @@ export default function App() {
       <header className="app-header">
         <div className="logo">
           <div className="logo-icon">Ω</div>
-          <div className="logo-title">EVIKAP</div>
+          <div className="logo-title">VigilRAG</div>
         </div>
         <div className="header-status">
           <button className="btn-link logout-btn" onClick={handleLogout}>Logout</button>
@@ -476,7 +476,7 @@ export default function App() {
           <div className="card fade-in">
             <h2 className="card-title">System Architecture & FAQ</h2>
             <p className="card-hint">
-              Detailed knowledgebase covering how EVIKAP operates, its current retrieval mechanisms, and future scalability.
+              Detailed knowledgebase covering how VigilRAG operates, its current retrieval mechanisms, and future scalability.
             </p>
 
             <div className="faq-container mt-16">

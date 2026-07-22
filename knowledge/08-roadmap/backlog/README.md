@@ -1,4 +1,4 @@
-# EVIKAP User Stories Backlog
+# VigilRAG User Stories Backlog
 
 **Status:** Active · **Version:** 1.0 · 2026-07-20  
 **Branch:** `feature/user-stories-backlog`  
@@ -8,7 +8,7 @@
 
 ## Overview
 
-This folder contains the full decomposed user story backlog for EVIKAP — one `.md` file per story. Stories are derived from the [Functional Requirements Specification](../../03-business-analysis/FUNCTIONAL_REQUIREMENTS_SPECIFICATION.md), [Non-Functional Requirements Specification](../../03-business-analysis/NONFUNCTIONAL_REQUIREMENTS_SPECIFICATION.md), and the [Program Backlog](../../06-agile-delivery/PROGRAM_BACKLOG.md), and are sequenced across PI-0 through PI-3.
+This folder contains the full decomposed user story backlog for VigilRAG — one `.md` file per story. Stories are derived from the [Functional Requirements Specification](../../03-business-analysis/FUNCTIONAL_REQUIREMENTS_SPECIFICATION.md), [Non-Functional Requirements Specification](../../03-business-analysis/NONFUNCTIONAL_REQUIREMENTS_SPECIFICATION.md), and the [Program Backlog](../../06-agile-delivery/PROGRAM_BACKLOG.md), and are sequenced across PI-0 through PI-3.
 
 Each story follows a consistent 16-section template:
 **Title · User Story · Description · Business Value · Acceptance Criteria · Functional Requirements · Non-Functional Requirements · Dependencies · Assumptions · Edge Cases · Technical Notes · Definition of Done · Priority · Estimated Effort · Related Epics/Features**
@@ -21,7 +21,7 @@ Each story follows a consistent 16-section template:
 
 | ID | File | Title | Priority | Effort |
 |---|---|---|---|---|
-| US-001 | [US-001-pilot-bu-identification.md](US-001-pilot-bu-identification.md) | Pilot Business Unit Identification & Source-System Access Confirmation | High | M |
+| US-001 | [US-001-pilot-bu-identification.md](US-001-pilot-bu-identification.md) | Pilot Business Unit Identification & Source-System Access Confirmation | Completed | M |
 | US-002 | [US-002-time-motion-survey.md](US-002-time-motion-survey.md) | Time-Motion Survey & Knowledge Fragmentation Baseline | High | M |
 | US-003 | [US-003-concierge-prototype-validation.md](US-003-concierge-prototype-validation.md) | Concierge Prototype Validation Run | High | M |
 | US-004 | [US-004-security-architecture-design-spike.md](US-004-security-architecture-design-spike.md) | Security Architecture Design Spike — Permission Enforcement | High | M |

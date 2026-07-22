@@ -4,7 +4,7 @@
 
 **As a** Compliance Officer,  
 **I want to** enforce automated data retention on audit records, export audit logs in compliance-grade formats (CSV/PDF) for regulatory submissions, and receive scheduled audit digest reports,  
-**So that** EVIKAP's audit log is sufficient for regulated-data source onboarding and any applicable external regulatory inquiry — not just internal pilot review.
+**So that** VigilRAG's audit log is sufficient for regulated-data source onboarding and any applicable external regulatory inquiry — not just internal pilot review.
 
 ---
 

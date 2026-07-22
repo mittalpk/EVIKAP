@@ -10,7 +10,7 @@
 
 ## Description
 
-Citations are the primary trust mechanism in EVIKAP. This story ensures that the UI renders citations in a format that is clear, scannable, and directly actionable — each citation links to the original source, identifies the source type, and shows a brief excerpt from the retrieved chunk. This is what differentiates EVIKAP from a black-box LLM response: every claim is traceable.
+Citations are the primary trust mechanism in VigilRAG. This story ensures that the UI renders citations in a format that is clear, scannable, and directly actionable — each citation links to the original source, identifies the source type, and shows a brief excerpt from the retrieved chunk. This is what differentiates VigilRAG from a black-box LLM response: every claim is traceable.
 
 Note: this story focuses on the UI rendering. The citation data structure is assembled by the agent tier (US-011) and carried in the API response. This story does not change the backend.
 
@@ -19,7 +19,7 @@ Note: this story focuses on the UI rendering. The citation data structure is ass
 ## Business Value
 
 - Trust cannot be validated in the MVP without visible citations — this is explicitly named as non-negotiable in [MVP Definition §3](../../05-lean-product/MVP_DEFINITION.md#3-in-scope-for-mvp).
-- Directly addresses the EVIKAP audit finding: "citation discipline not enforced" in the current system.
+- Directly addresses the VigilRAG audit finding: "citation discipline not enforced" in the current system.
 
 ---
 

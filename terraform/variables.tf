@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "Name of the Azure Resource Group"
   type        = string
-  default     = "rg-evikap"
+  default     = "rg-vigilrag"
 }
 
 variable "location" {
@@ -13,7 +13,7 @@ variable "location" {
 variable "vnet_name" {
   description = "Name of the Virtual Network"
   type        = string
-  default     = "vnet-evikap"
+  default     = "vnet-vigilrag"
 }
 
 variable "snet_aci_name" {

@@ -19,7 +19,7 @@ The [Migration and Implementation Roadmap](MIGRATION_IMPLEMENTATION_ROADMAP.md) 
 
 Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [Problem/Solution Fit](../05-lean-product/PROBLEM_SOLUTION_FIT.md). No production code changes in this phase — a throwaway prototype only.
 
-- [ ] **3.1 Identify the pilot business unit and confirm source-system access.** Entry criterion per [Problem/Solution Fit §4](../05-lean-product/PROBLEM_SOLUTION_FIT.md#4-validation-sequencing-and-gates); blocks everything else in Phase 0.
+- [x] **3.1 Identify the pilot business unit and confirm source-system access.** Entry criterion per [Problem/Solution Fit §4](../05-lean-product/PROBLEM_SOLUTION_FIT.md#4-validation-sequencing-and-gates); blocks everything else in Phase 0. Completed 2026-07-22 (Pilot BU: Digital Services & Engineering, Charter: `artifacts/US-001-pilot-bu-charter.json`, validator module: `backend/app/services/source_connectivity_validator.py`).
 - [ ] **3.2 Run the time-motion survey / interviews.** Per [Problem/Solution Fit §2](../05-lean-product/PROBLEM_SOLUTION_FIT.md#2-problem-validation-is-the-problem-real-here-at-this-magnitude). Done-check: baseline time-to-answer and fragmentation-cost numbers published, replacing the directional industry benchmarks in [Problem Statement §2.3](../PRODUCT_PROBLEM_STATEMENT.md#23-quantifying-the-business-impact).
 - [ ] **3.3 Build and run the concierge-style prototype.** Manual/throwaway retrieval + LLM synthesis over a small real question set, per [Problem/Solution Fit §3](../05-lean-product/PROBLEM_SOLUTION_FIT.md#3-solution-validation-does-this-specific-solution-fit-the-validated-problem). Done-check: trust/usefulness ratings collected from sampled users.
 - [ ] **3.4 Security architecture design spike + review.** Permission-enforcement design for code + wiki source types, reviewed by the Architecture Review Board per [Architecture Governance §3](../07-governance-risk/ARCHITECTURE_GOVERNANCE.md#3-phase-gate-approvals). Done-check: no unresolved high-severity finding.
@@ -27,7 +27,7 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 
 ## 4. Phase 1 — Foundation & MVP
 
-Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [MVP Definition](../05-lean-product/MVP_DEFINITION.md). Status below reflects the actual state of the `Evikap` repository as of this document's last update — some hardening tasks were completed ahead of the rest of Phase 1 because they were zero-risk, high-severity fixes that didn't need to wait for feature work.
+Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [MVP Definition](../05-lean-product/MVP_DEFINITION.md). Status below reflects the actual state of the `VigilRAG` repository as of this document's last update — some hardening tasks were completed ahead of the rest of Phase 1 because they were zero-risk, high-severity fixes that didn't need to wait for feature work.
 
 ### 4.1 Security & repo hygiene (done ahead of schedule)
 

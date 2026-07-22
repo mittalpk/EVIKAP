@@ -16,7 +16,7 @@ This story implements FR-013: a CI-triggered process that, on merge to `main`, g
 ## Business Value
 
 - Satisfies NFR-012 (Governance and transparency): every production pipeline version has a published card whose scores match the evaluation record.
-- Makes EVIKAP's AI governance claims verifiable by non-engineers — a requirement for any regulated pilot or enterprise sign-off.
+- Makes VigilRAG's AI governance claims verifiable by non-engineers — a requirement for any regulated pilot or enterprise sign-off.
 - The `EvaluationRun` history seeded in US-021/US-022 makes this story possible; the schema was designed to support it from day one.
 
 ---
@@ -78,7 +78,7 @@ This story implements FR-013: a CI-triggered process that, on merge to `main`, g
     if: github.ref == 'refs/heads/main'
     run: |
       python scripts/publish_model_card.py --version ${{ github.sha }}
-      git config user.name "EVIKAP CI"
+      git config user.name "VigilRAG CI"
       git add knowledge/model-cards/
       git commit -m "ci: publish model card for ${{ github.sha }}"
       git push

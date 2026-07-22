@@ -68,7 +68,7 @@ def test_health_check_safe():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "evikap-backend"
+    assert data["service"] == "vigilrag-backend"
     assert "diagnosis" not in data
     res_str = response.text
     assert base64.b64decode("TXVtYmFpU3BhaW4xMjM=").decode() not in res_str

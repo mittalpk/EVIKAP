@@ -4,7 +4,7 @@
 
 **As a** Compliance Officer,  
 **I want to** retrieve a complete audit record for any past query — including who asked it, when, what evidence was retrieved, and what answer was given — without engineering assistance,  
-**So that** EVIKAP's AI activity is auditable for internal compliance review and any applicable regulatory inquiry.
+**So that** VigilRAG's AI activity is auditable for internal compliance review and any applicable regulatory inquiry.
 
 ---
 

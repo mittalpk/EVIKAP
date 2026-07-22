@@ -80,9 +80,9 @@ Note: reranking (US-033 / FEAT-18) is a PI-2 addition that slots in after step 4
 
 ## Edge Cases
 
-- **No chunks in database (empty corpus):** Return `{"evidence": [], "trace_id": "..."}` with a `X-EVIKAP-Warning: corpus-empty` header.
+- **No chunks in database (empty corpus):** Return `{"evidence": [], "trace_id": "..."}` with a `X-VigilRAG-Warning: corpus-empty` header.
 - **Embedding model API call fails:** Return HTTP 503 with a structured error; do not fall back silently to keyword-only (would break FR-002 acceptance check without signaling the degradation).
-- **Permission filter removes all results:** Return `{"evidence": [], "trace_id": "..."}` with `X-EVIKAP-Info: all-results-filtered-by-permission`. Do not expose that results exist but were filtered.
+- **Permission filter removes all results:** Return `{"evidence": [], "trace_id": "..."}` with `X-VigilRAG-Info: all-results-filtered-by-permission`. Do not expose that results exist but were filtered.
 - **`top_k` > actual number of eligible chunks:** Return all eligible chunks; do not error.
 - **Query embedding identical to a known prompt-injection payload:** Handled upstream by Guardrails (US-024); the retrieval endpoint itself does not do injection detection.
 

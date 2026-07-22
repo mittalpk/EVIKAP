@@ -9,11 +9,11 @@
 ## EPIC-01: Enterprise Knowledge Intelligence Platform
 
 ### Epic name
-EVIKAP — Enterprise Vigilant Knowledge & Agentic Platform
+VigilRAG — Governance-Gated Enterprise Agentic RAG Platform
 
 ### Business outcome hypothesis
 
-> **For** knowledge workers and internal AI agents in [pilot business unit], **who** currently cannot efficiently or safely find authoritative answers across fragmented internal systems, **the** EVIKAP platform **is a** governed, cited, multi-source knowledge retrieval and reasoning layer **that** reduces time-to-answer and provides an auditable trust boundary for AI-mediated knowledge access, **unlike** per-system search or ungoverned direct AI access to raw systems, **our solution** enforces source permissions at retrieval time, cites every claim to its source, and evaluates its own answer quality continuously in production.
+> **For** knowledge workers and internal AI agents in [pilot business unit], **who** currently cannot efficiently or safely find authoritative answers across fragmented internal systems, **the** VigilRAG platform **is a** governed, cited, multi-source knowledge retrieval and reasoning layer **that** reduces time-to-answer and provides an auditable trust boundary for AI-mediated knowledge access, **unlike** per-system search or ungoverned direct AI access to raw systems, **our solution** enforces source permissions at retrieval time, cites every claim to its source, and evaluates its own answer quality continuously in production.
 
 ### Leading indicators (validated before full funding — see Problem/Solution Fit)
 

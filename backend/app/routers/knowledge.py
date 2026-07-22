@@ -1,5 +1,5 @@
 """
-EVIKAP Unified Knowledge API Router
+VigilRAG Unified Knowledge API Router
 Consolidates GitHub and Azure Blob Storage truth sources.
 Supports Smart Hybrid Search (GitHub Code + Azure Wiki).
 """
@@ -35,7 +35,7 @@ AZURE_STORAGE_CONNECTION_STRING = os.environ.get("AZURE_STORAGE_CONNECTION_STRIN
 if AZURE_STORAGE_CONNECTION_STRING:
     AZURE_STORAGE_CONNECTION_STRING = AZURE_STORAGE_CONNECTION_STRING.strip('"').strip("'")
 
-AZURE_WIKI_CONTAINER = os.environ.get("AZURE_WIKI_CONTAINER") or os.environ.get("azure-wiki-container") or "evikap-wiki"
+AZURE_WIKI_CONTAINER = os.environ.get("AZURE_WIKI_CONTAINER") or os.environ.get("azure-wiki-container") or "vigilrag-wiki"
 if AZURE_WIKI_CONTAINER:
     AZURE_WIKI_CONTAINER = AZURE_WIKI_CONTAINER.strip('"').strip("'")
 
@@ -53,7 +53,7 @@ class GitHubSearchSubsystem:
         if not GITHUB_PAT:
             return []
         
-        headers = {"Authorization": f"token {GITHUB_PAT}", "Accept": "application/vnd.github.v3+json", "User-Agent": "EVIKAP-System"}
+        headers = {"Authorization": f"token {GITHUB_PAT}", "Accept": "application/vnd.github.v3+json", "User-Agent": "VigilRAG-System"}
         client = http_client.get_client()
         try:
             # 1. Search API
@@ -82,7 +82,7 @@ class GitHubSearchSubsystem:
     @staticmethod
     async def get_file_content(path: str) -> str:
         if not GITHUB_PAT: return ""
-        headers = {"Authorization": f"token {GITHUB_PAT}", "User-Agent": "EVIKAP-System"}
+        headers = {"Authorization": f"token {GITHUB_PAT}", "User-Agent": "VigilRAG-System"}
         client = http_client.get_client()
         try:
             resp = await client.get(f"https://api.github.com/repos/{GITHUB_REPO}/contents/{path}", headers=headers)
@@ -148,7 +148,7 @@ class AzureWikiSubsystem:
                                 results.append({
                                     "content": content,
                                     "id": f"CONF-{filename}",
-                                    "url": f"https://evikap.wiki/{filename}",
+                                    "url": f"https://vigilrag.wiki/{filename}",
                                     "source": "Confluence (Simulated)"
                                 })
         return results
@@ -157,7 +157,7 @@ class DatabaseSubsystem:
     @staticmethod
     async def query_schemas(query: str) -> List[dict]:
         """Searches for SQL schemas and data models in the repositories."""
-        headers = {"Authorization": f"token {GITHUB_PAT}", "User-Agent": "EVIKAP-System"} if GITHUB_PAT else {}
+        headers = {"Authorization": f"token {GITHUB_PAT}", "User-Agent": "VigilRAG-System"} if GITHUB_PAT else {}
         results = []
         client = http_client.get_client()
         try:

@@ -34,14 +34,14 @@ class Settings(BaseSettings):
     # Databases / Integrations
     confluence_base_url: str = ""
     confluence_api_token: SecretStr = SecretStr("")
-    database_url: str = "sqlite:///./evikap.db"
+    database_url: str = "sqlite:///./vigilrag.db"
     
     # GitHub Integration
     github_pat: SecretStr = Field(default=SecretStr(""), alias="GITHUB_PAT")
     
     # Azure Storage Integration
     azure_storage_connection_string: SecretStr = Field(default=SecretStr(""), alias="AZURE_STORAGE_CONNECTION_STRING")
-    azure_wiki_container: str = Field(default="evikap-wiki", alias="AZURE_WIKI_CONTAINER")
+    azure_wiki_container: str = Field(default="vigilrag-wiki", alias="AZURE_WIKI_CONTAINER")
 
     # Internal Security
     internal_api_key: SecretStr = Field(

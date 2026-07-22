@@ -1,6 +1,6 @@
-# EVIKAP — Enterprise Knowledge Base
+# VigilRAG — Enterprise Knowledge Base
 
-This folder is the single source of truth for EVIKAP's business and solution architecture rationale. It is organized around four complementary methodologies, each covering the questions the others don't:
+This folder is the single source of truth for VigilRAG's business and solution architecture rationale. It is organized around four complementary methodologies, each covering the questions the others don't:
 
 - **TOGAF** — why the architecture exists and how it's governed (`01-architecture-vision`, `02-business-architecture`, `04-solution-architecture`, `07-governance-risk`, `08-roadmap`)
 - **BABOK** — what the requirements actually are and how they were elicited (`03-business-analysis`)
@@ -12,7 +12,7 @@ This folder is the single source of truth for EVIKAP's business and solution arc
 | # | Document | Answers |
 |---|---|---|
 | — | [PRODUCT_PROBLEM_STATEMENT.md](PRODUCT_PROBLEM_STATEMENT.md) | Why does this need to exist at all? |
-| — | [EVIKAP_AUDIT.md](EVIKAP_AUDIT.md) | What does the system actually do today, as opposed to what it claims to do? Read this before §1 — it's the as-is baseline everything else in this folder is measured against. |
+| — | [VigilRAG_AUDIT.md](VigilRAG_AUDIT.md) | What does the system actually do today, as opposed to what it claims to do? Read this before §1 — it's the as-is baseline everything else in this folder is measured against. |
 | 1 | [01-architecture-vision/ARCHITECTURE_VISION.md](01-architecture-vision/ARCHITECTURE_VISION.md) | What is the target architecture state and why (TOGAF Phase A)? |
 | 2 | [02-business-architecture/BUSINESS_ARCHITECTURE.md](02-business-architecture/BUSINESS_ARCHITECTURE.md) | What capabilities and value streams does the business need (TOGAF Phase B)? |
 | 2 | [02-business-architecture/STAKEHOLDER_ANALYSIS.md](02-business-architecture/STAKEHOLDER_ANALYSIS.md) | Who cares, and what does each group need to see to say yes? |
@@ -43,7 +43,7 @@ This folder is the single source of truth for EVIKAP's business and solution arc
 
 Most of this folder describes a **target** state — what the architecture, requirements, and delivery plan should become. Two documents instead describe **as-is** reality and anchor everything else against it:
 
-- [EVIKAP_AUDIT.md](EVIKAP_AUDIT.md) — the technical audit of what the system actually does today; the risk baseline for `07-governance-risk` and the gap baseline for `08-roadmap`.
+- [VigilRAG_AUDIT.md](VigilRAG_AUDIT.md) — the technical audit of what the system actually does today; the risk baseline for `07-governance-risk` and the gap baseline for `08-roadmap`.
 - [04-solution-architecture/ARCHITECTURE.md](04-solution-architecture/ARCHITECTURE.md) — the as-built system architecture description, a companion to (not a replacement for) the target-state `DATA_ARCHITECTURE.md`/`APPLICATION_ARCHITECTURE.md`/`TECHNOLOGY_ARCHITECTURE.md` in the same folder.
 
 Everything in this knowledge base, including these two, lives under `knowledge/` — there is no separate `docs/` folder; superseded material that nothing here references lives outside version control in the untracked `.doc/` archive instead of being deleted outright.

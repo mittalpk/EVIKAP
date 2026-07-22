@@ -1,5 +1,5 @@
 """
-EVIKAP Agent Service — LangGraph StateGraph Workflow.
+VigilRAG Agent Service — LangGraph StateGraph Workflow.
 Provides a multi-agent graph: Planner → Executor → Evaluator → Responder.
 """
 from __future__ import annotations
@@ -72,7 +72,7 @@ def build_graph() -> Any:
         start_time = time.time()
         logger.info("Generating execution plan (Flash)...")
         system = SystemMessage(content=(
-            "You are an expert EVIKAP AI engineer. Break the user's task into a concrete, "
+            "You are an expert VigilRAG AI engineer. Break the user's task into a concrete, "
             "ordered plan of tool calls using the tools available to you. "
             "Call all relevant tools needed to answer the user's task."
         ))

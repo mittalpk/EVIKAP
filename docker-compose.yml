@@ -2,7 +2,7 @@ services:
   # ─── FastAPI Backend ───────────────────────────────────────────────────────
   backend:
     build: ./backend
-    container_name: evikap-backend
+    container_name: vigilrag-backend
     ports:
       - "8000:8000"
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
@@ -13,14 +13,14 @@ services:
       "github-pat": ${github-pat:-}
       AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING:-${azure-storage-connection-string:-}}
       "azure-storage-connection-string": ${azure-storage-connection-string:-}
-      AZURE_WIKI_CONTAINER: ${AZURE_WIKI_CONTAINER:-${azure-wiki-container:-"evikap-wiki"}}
-      "azure-wiki-container": ${azure-wiki-container:-"evikap-wiki"}
+      AZURE_WIKI_CONTAINER: ${AZURE_WIKI_CONTAINER:-${azure-wiki-container:-"vigilrag-wiki"}}
+      "azure-wiki-container": ${azure-wiki-container:-"vigilrag-wiki"}
       AGENT_SERVICE_URL: http://agent:8000
     volumes:
       - ./backend/app:/app/app  # live-reload in dev
       - ./mock_data:/app/mock_data
     networks:
-      - evikap-net
+      - vigilrag-net
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
@@ -31,7 +31,7 @@ services:
   # ─── LangGraph Agent Service ────────────────────────────────────────────────
   agent:
     build: ./agent
-    container_name: evikap-agent
+    container_name: vigilrag-agent
     ports:
       - "8001:8000"
     environment:
@@ -44,7 +44,7 @@ services:
       - ./agent/app:/app/app
       - ./mock_data:/app/mock_data
     networks:
-      - evikap-net
+      - vigilrag-net
     depends_on:
       backend:
         condition: service_healthy
@@ -58,16 +58,16 @@ services:
   # ─── React/TypeScript Frontend ─────────────────────────────────────────────
   frontend:
     build: ./frontend
-    container_name: evikap-frontend
+    container_name: vigilrag-frontend
     ports:
       - "5173:80"
     networks:
-      - evikap-net
+      - vigilrag-net
     depends_on:
       - backend
       - agent
     restart: unless-stopped
 
 networks:
-  evikap-net:
+  vigilrag-net:
     driver: bridge

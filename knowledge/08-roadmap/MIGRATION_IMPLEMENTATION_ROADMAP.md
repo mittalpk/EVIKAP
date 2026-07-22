@@ -2,7 +2,7 @@
 
 **TOGAF ADM Phases E & F — Opportunities & Solutions, Migration Planning**
 **Status:** Draft · **Version:** 1.0 · 2026-07-14
-**Related:** [../06-agile-delivery/PI_PLANNING_OBJECTIVES.md](../06-agile-delivery/PI_PLANNING_OBJECTIVES.md) · [../EVIKAP_AUDIT.md](../EVIKAP_AUDIT.md) · [EXECUTION_RUNBOOK.md](EXECUTION_RUNBOOK.md) (task-level detail for Phase 0/1) · [ISSUE_LOG.md](ISSUE_LOG.md) (issues found while executing)
+**Related:** [../06-agile-delivery/PI_PLANNING_OBJECTIVES.md](../06-agile-delivery/PI_PLANNING_OBJECTIVES.md) · [../VigilRAG_AUDIT.md](../VigilRAG_AUDIT.md) · [EXECUTION_RUNBOOK.md](EXECUTION_RUNBOOK.md) (task-level detail for Phase 0/1) · [ISSUE_LOG.md](ISSUE_LOG.md) (issues found while executing)
 
 ---
 
@@ -12,7 +12,7 @@ Bridges the target architecture (Phases A–D, this knowledge base's `01`–`04`
 
 ## 2. Baseline architecture (as-is)
 
-Per [`EVIKAP_AUDIT.md`](../EVIKAP_AUDIT.md): a three-service split with a genuinely correct trust boundary, keyword/substring retrieval branded as semantic search, a single-pass agent loop branded as iterative multi-agent reasoning, no real database layer, no CI test gate, and infrastructure drift between provisioned network resources and the actually-running Container Apps.
+Per [`VigilRAG_AUDIT.md`](../VigilRAG_AUDIT.md): a three-service split with a genuinely correct trust boundary, keyword/substring retrieval branded as semantic search, a single-pass agent loop branded as iterative multi-agent reasoning, no real database layer, no CI test gate, and infrastructure drift between provisioned network resources and the actually-running Container Apps.
 
 ## 3. Gap summary (as-is → target)
 

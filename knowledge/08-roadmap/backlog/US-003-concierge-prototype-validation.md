@@ -107,6 +107,6 @@ Per [MVP Definition §6](../../05-lean-product/MVP_DEFINITION.md#6-mvp-as-an-arc
 
 ## Related Epics / Features
 
-- EPIC-01 (EVIKAP platform delivery)
+- EPIC-01 (VigilRAG platform delivery)
 - Execution Runbook §3.3
 - [Problem/Solution Fit §3](../../05-lean-product/PROBLEM_SOLUTION_FIT.md#3-solution-validation-does-this-specific-solution-fit-the-validated-problem)

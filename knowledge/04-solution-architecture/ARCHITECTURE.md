@@ -1,6 +1,6 @@
-# EVIKAP Architecture
+# VigilRAG Architecture
 
-EVIKAP is a **cloud-native knowledge retrieval platform** built on a strict 4-layer separation of concerns. Each layer has a well-defined role, a clear trust boundary, and can be independently scaled or replaced.
+VigilRAG is a **cloud-native knowledge retrieval platform** built on a strict 4-layer separation of concerns. Each layer has a well-defined role, a clear trust boundary, and can be independently scaled or replaced.
 
 ---
 
@@ -22,7 +22,7 @@ EVIKAP is a **cloud-native knowledge retrieval platform** built on a strict 4-la
 
 ## Layer 1 — Data Sources
 
-The raw enterprise data layer. EVIKAP is designed for extensibility — new sources can be added without changing higher layers.
+The raw enterprise data layer. VigilRAG is designed for extensibility — new sources can be added without changing higher layers.
 
 | Source | Content Type | Access Method |
 |---|---|---|
@@ -147,7 +147,7 @@ Managed via **Terraform** (Infrastructure-as-Code) targeting **Microsoft Azure**
 
 | Resource | Purpose |
 |---|---|
-| Azure Container Registry (ACR) | Private Docker image registry (`evikapregistry`) |
+| Azure Container Registry (ACR) | Private Docker image registry (`vigilragregistry`) |
 | Azure Container Apps (ACA) | Serverless runtime for backend and agent services |
 | Virtual Network + NSGs | Virtual network for container isolation (planned/partial) |
 | Log Analytics Workspace | Centralized observability |

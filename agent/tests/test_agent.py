@@ -42,7 +42,7 @@ def test_health_check():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "evikap-agent"
+    assert data["service"] == "vigilrag-agent"
 
 def test_run_task_auth_success():
     """Accessing /run with valid internal API key should succeed (or invoke graph)."""

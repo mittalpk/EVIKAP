@@ -2,7 +2,7 @@
 
 **TOGAF ADM Phase C — Information Systems Architecture (Application)**
 **Status:** Draft · **Version:** 1.0 · 2026-07-14
-**Related:** [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) · [TECHNOLOGY_ARCHITECTURE.md](TECHNOLOGY_ARCHITECTURE.md) · [../EVIKAP_AUDIT.md](../EVIKAP_AUDIT.md)
+**Related:** [DATA_ARCHITECTURE.md](DATA_ARCHITECTURE.md) · [TECHNOLOGY_ARCHITECTURE.md](TECHNOLOGY_ARCHITECTURE.md) · [../VigilRAG_AUDIT.md](../VigilRAG_AUDIT.md)
 
 ---
 

@@ -16,7 +16,7 @@ This is the "answer-out" guardrail checkpoint described in FR-012 and the [Appli
 
 ## Business Value
 
-- Ensures EVIKAP never delivers malformed or harmful output, protecting user trust and the platform's reputation.
+- Ensures VigilRAG never delivers malformed or harmful output, protecting user trust and the platform's reputation.
 - Satisfies FR-012's "answer-out" acceptance check: "a fixture producing a malformed or unsafe output is rejected before delivery."
 
 ---

@@ -7,7 +7,7 @@
 
 ## 1. Purpose
 
-Defines how requirements are identified, approved, changed, prioritized, and traced through delivery for EVIKAP, and provides the master traceability matrix linking business objectives to requirements to delivery features.
+Defines how requirements are identified, approved, changed, prioritized, and traced through delivery for VigilRAG, and provides the master traceability matrix linking business objectives to requirements to delivery features.
 
 ## 2. Requirements identification scheme
 

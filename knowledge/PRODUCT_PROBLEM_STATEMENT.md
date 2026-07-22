@@ -1,4 +1,4 @@
-# EVIKAP — Product Problem Statement
+# VigilRAG — Product Problem Statement
 
 **Document type:** Product Problem Statement (Enterprise Requirements Foundation)
 **Prepared by:** Office of the AI Solutions Architect
@@ -13,9 +13,9 @@
 
 Enterprise organizations do not suffer from a shortage of information. They suffer from an inability to locate, trust, and act on the information they already own. Institutional knowledge — architecture decisions, policy documents, operational runbooks, database schemas, and internal wikis — accumulates across dozens of disconnected systems as an organization grows. Each system has its own access model, its own search index (or none), and its own audience. The result is a workforce that spends a material fraction of every working day re-discovering facts the organization already knows, and a growing population of AI coding and support agents that cannot be trusted with access to that knowledge because no safe, unified, auditable retrieval layer exists.
 
-**EVIKAP** is proposed as an enterprise knowledge intelligence platform: a unified, secure, LLM-ready retrieval and reasoning layer that sits in front of an organization's code repositories, policy and process documentation, structured data sources, and internal wikis. Rather than replacing existing systems of record, EVIKAP indexes them, reasons over them with a governed multi-agent AI layer, and exposes a single, auditable, permission-aware interface that both human users and downstream AI agents can query with confidence in the answer's provenance.
+**VigilRAG** is proposed as an enterprise knowledge intelligence platform: a unified, secure, LLM-ready retrieval and reasoning layer that sits in front of an organization's code repositories, policy and process documentation, structured data sources, and internal wikis. Rather than replacing existing systems of record, VigilRAG indexes them, reasons over them with a governed multi-agent AI layer, and exposes a single, auditable, permission-aware interface that both human users and downstream AI agents can query with confidence in the answer's provenance.
 
-**Vision:** within 18 months of general availability, EVIKAP should be the default first place a knowledge worker or an AI coding/support agent looks for an authoritative answer inside a mid-to-large enterprise, measurably reducing time-to-answer, reducing duplicated work, and providing the trust and audit layer that lets the organization safely extend AI agents into higher-value, higher-risk workflows.
+**Vision:** within 18 months of general availability, VigilRAG should be the default first place a knowledge worker or an AI coding/support agent looks for an authoritative answer inside a mid-to-large enterprise, measurably reducing time-to-answer, reducing duplicated work, and providing the trust and audit layer that lets the organization safely extend AI agents into higher-value, higher-risk workflows.
 
 **Expected business impact:** a 30–50% reduction in time spent searching for internal information among target user populations, a measurable reduction in duplicated engineering and support effort caused by "unknown unknowns" (existing solutions/decisions that go unfound and get rebuilt), and a governed foundation that de-risks the organization's broader AI-agent adoption roadmap by giving every agent a single, permissioned, auditable knowledge interface instead of ad hoc, ungoverned access to raw systems.
 
@@ -66,7 +66,7 @@ These figures should be treated as **directional industry benchmarks to be valid
 - **Point AI chatbots bolted onto a single source** (e.g., "chat with our wiki") solve one silo at a time and reproduce the fragmentation problem one silo later — a user still needs to know which chatbot to ask.
 - **Ungoverned direct LLM access to raw systems** (an agent with a GitHub token and a database credential) is fast to prototype but fails governance, security, and audit review the moment it is proposed for production use in a regulated or security-conscious enterprise, because there is no policy enforcement point between the model and the data.
 
-None of these approaches provide the combination EVIKAP is scoped to deliver: **cross-source semantic retrieval, a single governed trust boundary between AI reasoning and data access, and an auditable answer with provenance** — synthesized for both human and machine consumers.
+None of these approaches provide the combination VigilRAG is scoped to deliver: **cross-source semantic retrieval, a single governed trust boundary between AI reasoning and data access, and an auditable answer with provenance** — synthesized for both human and machine consumers.
 
 ---
 
@@ -91,7 +91,7 @@ Today, an employee seeking an authoritative answer typically: (1) guesses which 
 
 - **LLM-native retrieval (RAG) has matured** from research technique to standard enterprise pattern, with mainstream vector database, embedding, and orchestration tooling now production-grade.
 - **Enterprise AI agent adoption is accelerating** (coding assistants, support copilots, internal operations agents), and every one of them needs a safe knowledge interface — creating platform-level, not point-solution-level, demand.
-- **Model Context Protocol (MCP) and similar standards are emerging** as the expected integration surface for exposing enterprise systems to AI agents, shifting the market away from bespoke point integrations toward a "knowledge platform with a standard interface" model — which is the category EVIKAP is positioned to serve.
+- **Model Context Protocol (MCP) and similar standards are emerging** as the expected integration surface for exposing enterprise systems to AI agents, shifting the market away from bespoke point integrations toward a "knowledge platform with a standard interface" model — which is the category VigilRAG is positioned to serve.
 - **Regulatory and governance scrutiny of AI systems is increasing** (EU AI Act, sector-specific guidance, internal enterprise AI governance boards), raising the bar for any AI system with access to internal data to demonstrate auditability, access control, and provenance — a bar most current internal AI prototypes do not meet.
 
 ---
@@ -340,8 +340,8 @@ This is fundamentally a problem of **unstructured, heterogeneous meaning at scal
 
 ## 13. High-Level Product Vision
 
-EVIKAP is envisioned as an **enterprise knowledge intelligence platform**, deployed as a governed layer between an organization's fragmented systems of record and the humans and AI agents that need to reason over them. It is not a search engine, and it is not a chatbot bolted onto a single wiki — it is the trust and reasoning layer an enterprise needs before it can safely and effectively extend AI agents into knowledge-intensive work at scale.
+VigilRAG is envisioned as an **enterprise knowledge intelligence platform**, deployed as a governed layer between an organization's fragmented systems of record and the humans and AI agents that need to reason over them. It is not a search engine, and it is not a chatbot bolted onto a single wiki — it is the trust and reasoning layer an enterprise needs before it can safely and effectively extend AI agents into knowledge-intensive work at scale.
 
-For enterprise customers, the product's value proposition is direct: **stop paying, in lost time and duplicated effort, for knowledge the organization already has, and stop choosing between AI agents that are useful because they're ungoverned and AI agents that are governed because they're useless.** EVIKAP is designed to remove that tradeoff — delivering cross-source semantic retrieval and multi-agent reasoning with the permission enforcement, audit trail, and provenance that make it safe to deploy broadly, and the evaluation and observability discipline that make it possible to operate and improve responsibly over time.
+For enterprise customers, the product's value proposition is direct: **stop paying, in lost time and duplicated effort, for knowledge the organization already has, and stop choosing between AI agents that are useful because they're ungoverned and AI agents that are governed because they're useless.** VigilRAG is designed to remove that tradeoff — delivering cross-source semantic retrieval and multi-agent reasoning with the permission enforcement, audit trail, and provenance that make it safe to deploy broadly, and the evaluation and observability discipline that make it possible to operate and improve responsibly over time.
 
 Success for this product is measured not by the sophistication of its AI architecture in isolation, but by whether it durably changes how a real organization finds and trusts its own knowledge — fewer interrupted colleagues, less rebuilt work, faster onboarding, and a defensible answer, at any time, to the question every AI-adopting enterprise now has to answer: *what can your AI agents see, and how do you know it's correct.*

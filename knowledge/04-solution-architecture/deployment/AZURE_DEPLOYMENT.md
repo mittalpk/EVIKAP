@@ -1,6 +1,6 @@
-# Azure Live Deployment Guide — EVIKAP TechStack
+# Azure Live Deployment Guide — VigilRAG TechStack
 
-This guide takes the `EVIKAP_TechStack` from zero to fully live on Azure, step by step.
+This guide takes the `VigilRAG_TechStack` from zero to fully live on Azure, step by step.
 
 ---
 
@@ -37,7 +37,7 @@ sudo apt install -y nodejs
 
 ```bash
 az login
-# A browser window opens. Sign in with your EVIKAP Azure account.
+# A browser window opens. Sign in with your VigilRAG Azure account.
 
 # List available subscriptions
 az account list --output table
@@ -71,7 +71,7 @@ This secures every API endpoint with real bearer tokens.
 ```bash
 # Create the App Registration
 APP=$(az ad app create \
-  --display-name "evikap-api" \
+  --display-name "vigilrag-api" \
   --sign-in-audience AzureADMyOrg \
   --query "{appId: appId, objectId: id}" \
   --output json)
@@ -92,10 +92,10 @@ az ad app update \
   --identifier-uris "api://$CLIENT_ID"
 
 # Add the user_impersonation scope via the portal (required for interactive users):
-# Azure Portal → Entra ID → App Registrations → evikap-api
+# Azure Portal → Entra ID → App Registrations → vigilrag-api
 # → Expose an API → Add a scope
 # Name: user_impersonation
-# Admin consent display name: "Access EVIKAP API"
+# Admin consent display name: "Access VigilRAG API"
 # State: Enabled
 ```
 
@@ -104,7 +104,7 @@ az ad app update \
 ```bash
 SECRET=$(az ad app credential reset \
   --id $CLIENT_ID \
-  --display-name "evikap-backend-secret" \
+  --display-name "vigilrag-backend-secret" \
   --years 1 \
   --query password \
   --output tsv)
@@ -133,7 +133,7 @@ export CLIENT_ID="<your-client-id>"
 ## Phase 3 — Provision Infrastructure with Terraform
 
 ```bash
-cd /path/to/Evikap/terraform
+cd /path/to/VigilRAG/terraform
 
 # Initialize Terraform providers
 terraform init
@@ -153,7 +153,7 @@ terraform apply \
   -auto-approve
 
 # 3.3 UPDATE SECRETS IN PORTAL
-# 1. log into Azure Portal -> Key Vault -> 'kv-evikap-*'
+# 1. log into Azure Portal -> Key Vault -> 'kv-vigilrag-*'
 # 2. Go to 'Objects' -> 'Secrets'
 # 3. Click 'gemini-api-key' -> 'New Version' -> Add your Gemini Key -> Create
 # 4. Click 'github-pat' -> 'New Version' -> Add your GitHub PAT -> Create
@@ -167,23 +167,23 @@ echo "Backend: $BACKEND_URL"
 **What gets created:**
 | Resource | Name | Purpose |
 |---|---|---|
-| Resource Group | `rg-evikap` | Container for all resources |
-| Key Vault | `kv-evikap-*` | **Secure secret storage (Zero-Input)** |
-| Virtual Network | `vnet-evikap` | Network isolation |
+| Resource Group | `rg-vigilrag` | Container for all resources |
+| Key Vault | `kv-vigilrag-*` | **Secure secret storage (Zero-Input)** |
+| Virtual Network | `vnet-vigilrag` | Network isolation |
 | ACI Subnet | `snet-aci` | Sandboxed execution |
 | Network Security Group | `nsg-aci-sandboxes` | Block internet egress |
 | Container Registry | **GHCR** | GitHub-hosted private images (Free) |
-| Container App Env | `cae-evikap` | Managed hosting |
-| Container App | `ca-evikap-backend` | Managed Identity + KV Access |
-| Container App | `ca-evikap-agent` | Managed Identity + KV Access |
-| Container App | `ca-evikap-frontend` | Managed Identity + KV Access |
+| Container App Env | `cae-vigilrag` | Managed hosting |
+| Container App | `ca-vigilrag-backend` | Managed Identity + KV Access |
+| Container App | `ca-vigilrag-agent` | Managed Identity + KV Access |
+| Container App | `ca-vigilrag-frontend` | Managed Identity + KV Access |
 
 ---
 
 ## Phase 4 — Build and Push to GitHub Container Registry (GHCR)
 
 ```bash
-cd /path/to/Evikap
+cd /path/to/VigilRAG
 
 # 4.1 Create a GitHub PAT (Classic recommended)
 # GitHub Fine-grained tokens currently have limited support for GHCR before the first push.
@@ -201,16 +201,16 @@ echo <your-github-pat> | docker login ghcr.io -u <your-github-username> --passwo
 # Replace <owner> with your GitHub username
 
 # --- Backend ---
-docker build -t ghcr.io/<owner>/evikap-backend:latest ./backend
-docker push ghcr.io/<owner>/evikap-backend:latest
+docker build -t ghcr.io/<owner>/vigilrag-backend:latest ./backend
+docker push ghcr.io/<owner>/vigilrag-backend:latest
 
 # --- Agent ---
-docker build -t ghcr.io/<owner>/evikap-agent:latest ./agent
-docker push ghcr.io/<owner>/evikap-agent:latest
+docker build -t ghcr.io/<owner>/vigilrag-agent:latest ./agent
+docker push ghcr.io/<owner>/vigilrag-agent:latest
 
 # --- Frontend ---
-docker build -t ghcr.io/<owner>/evikap-frontend:latest ./frontend
-docker push ghcr.io/<owner>/evikap-frontend:latest
+docker build -t ghcr.io/<owner>/vigilrag-frontend:latest ./frontend
+docker push ghcr.io/<owner>/vigilrag-frontend:latest
 ```
 
 ---
@@ -222,14 +222,14 @@ The agent container needs the OpenAI API key injected securely via Azure Contain
 ```bash
 # Add OpenAI API key as a secret to the agent Container App
 az containerapp secret set \
-  --name ca-evikap-agent \
-  --resource-group rg-evikap \
+  --name ca-vigilrag-agent \
+  --resource-group rg-vigilrag \
   --secrets "openai-api-key=<your-openai-api-key>"
 
 # Set Backend environment variables
 az containerapp update \
-  --name ca-evikap-backend \
-  --resource-group rg-evikap \
+  --name ca-vigilrag-backend \
+  --resource-group rg-vigilrag \
   --set-env-vars \
     AZURE_TENANT_ID=$TENANT_ID \
     AZURE_CLIENT_ID=$CLIENT_ID
@@ -239,31 +239,31 @@ az containerapp update \
 
 ## Phase 6 — Deploy Production Images via CI/CD
 
-Now that your infrastructure is up (running "Hello World"), you can deploy the real Evikap platform:
+Now that your infrastructure is up (running "Hello World"), you can deploy the real VigilRAG platform:
 
 1.  **Push your code** to the `main` branch.
 2.  The **GitHub Action** will build your real images and update the Container Apps.
-3.  Verification: `https://ca-evikap-backend.<location>.azurecontainerapps.io/health`
+3.  Verification: `https://ca-vigilrag-backend.<location>.azurecontainerapps.io/health`
 
 ## Phase 7 — Verify Live Deployment
 
 ```bash
 # Get the live backend URL
 BACKEND_URL=$(az containerapp show \
-  --name ca-evikap-backend \
-  --resource-group rg-evikap \
+  --name ca-vigilrag-backend \
+  --resource-group rg-vigilrag \
   --query properties.configuration.ingress.fqdn -o tsv)
 
 echo "Backend: https://$BACKEND_URL"
 
 # Health check
 curl https://$BACKEND_URL/health
-# Expected: {"status": "healthy", "service": "evikap-backend"}
+# Expected: {"status": "healthy", "service": "vigilrag-backend"}
 
 # Check running revision status
 az containerapp revision list \
-  --name ca-evikap-backend \
-  --resource-group rg-evikap \
+  --name ca-vigilrag-backend \
+  --resource-group rg-vigilrag \
   --output table
 ```
 
@@ -274,21 +274,21 @@ az containerapp revision list \
 ```bash
 # Add Application Insights
 az monitor app-insights component create \
-  --app evikap-insights \
+  --app vigilrag-insights \
   --location westeurope \
-  --resource-group rg-evikap \
-  --workspace law-evikap
+  --resource-group rg-vigilrag \
+  --workspace law-vigilrag
 
 # Get connection string
 APPINSIGHTS=$(az monitor app-insights component show \
-  --app evikap-insights \
-  --resource-group rg-evikap \
+  --app vigilrag-insights \
+  --resource-group rg-vigilrag \
   --query connectionString -o tsv)
 
 # Inject into backend container
 az containerapp update \
-  --name ca-evikap-backend \
-  --resource-group rg-evikap \
+  --name ca-vigilrag-backend \
+  --resource-group rg-vigilrag \
   --set-env-vars APPLICATIONINSIGHTS_CONNECTION_STRING=$APPINSIGHTS
 ```
 
@@ -302,11 +302,11 @@ Fill in your `.env` with all collected values:
 AZURE_TENANT_ID=<from Phase 2.1>
 AZURE_CLIENT_ID=<from Phase 2.1>
 AZURE_SUBSCRIPTION_ID=<from Phase 1.1>
-AZURE_RESOURCE_GROUP=rg-evikap
+AZURE_RESOURCE_GROUP=rg-vigilrag
 AZURE_LOCATION=westeurope
 OPENAI_API_KEY=sk-...
 USE_ACI=true
-DATABASE_URL=sqlite:///./evikap.db
+DATABASE_URL=sqlite:///./vigilrag.db
 ```
 
 ## Phase 7 — Troubleshooting State Sync Errors
@@ -318,9 +318,9 @@ If you see errors like **"already exists - to be managed via Terraform this reso
 SUB_ID="<your-azure-subscription-id>"
 
 # Import the existing apps into Terraform State
-terraform import azurerm_container_app.backend /subscriptions/$SUB_ID/resourceGroups/rg-evikap/providers/Microsoft.App/containerApps/ca-evikap-backend
-terraform import azurerm_container_app.agent /subscriptions/$SUB_ID/resourceGroups/rg-evikap/providers/Microsoft.App/containerApps/ca-evikap-agent
-terraform import azurerm_container_app.frontend /subscriptions/$SUB_ID/resourceGroups/rg-evikap/providers/Microsoft.App/containerApps/ca-evikap-frontend
+terraform import azurerm_container_app.backend /subscriptions/$SUB_ID/resourceGroups/rg-vigilrag/providers/Microsoft.App/containerApps/ca-vigilrag-backend
+terraform import azurerm_container_app.agent /subscriptions/$SUB_ID/resourceGroups/rg-vigilrag/providers/Microsoft.App/containerApps/ca-vigilrag-agent
+terraform import azurerm_container_app.frontend /subscriptions/$SUB_ID/resourceGroups/rg-vigilrag/providers/Microsoft.App/containerApps/ca-vigilrag-frontend
 ```
 
 Also, ensure **`TF_VAR_github_username`** is set in your terminal (Phase 2.1) to avoid registry configuration errors.
@@ -370,9 +370,9 @@ SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 # This grants 'Contributor' role on the Resource Group
 # IMPORTANT: Use --sdk-auth for compatibility with GitHub Actions
 az ad sp create-for-rbac \
-  --name "evikap-deployer" \
+  --name "vigilrag-deployer" \
   --role contributor \
-  --scopes /subscriptions/$SUBSCRIPTION_ID/resourceGroups/rg-evikap \
+  --scopes /subscriptions/$SUBSCRIPTION_ID/resourceGroups/rg-vigilrag \
   --sdk-auth
 ```
 
@@ -385,7 +385,7 @@ Go to your GitHub Repository → **Settings** → **Secrets and variables** → 
 | Secret Name | Value |
 |---|---|
 | `AZURE_CREDENTIALS` | The **FULL JSON** from Phase 9.1 |
-| `RG_NAME` | `rg-evikap` |
+| `RG_NAME` | `rg-vigilrag` |
 
 ### 9.3 Troubleshooting "Login failed" Errors
 

@@ -15,7 +15,7 @@ Each NFR is stated with a measurable target and a verification method, per the s
 ### NFR-001 — Scalability
 
 **Statement:** The retrieval and orchestration services shall scale horizontally and independently to support growth from pilot scale (≤10K documents, ≤500 users) to enterprise scale (≥250K documents, ≥10K users) without architectural rework.
-**Verification:** Load test at 5x and 25x pilot volume before enterprise rollout approval; no single-instance bottleneck identified in the [current audit](../EVIKAP_AUDIT.md) (e.g., the unbounded per-process cache) may persist into the scaled architecture.
+**Verification:** Load test at 5x and 25x pilot volume before enterprise rollout approval; no single-instance bottleneck identified in the [current audit](../VigilRAG_AUDIT.md) (e.g., the unbounded per-process cache) may persist into the scaled architecture.
 
 ### NFR-002 — Security
 
@@ -50,7 +50,7 @@ Each NFR is stated with a measurable target and a verification method, per the s
 ### NFR-008 — Availability
 
 **Statement:** The query path shall meet **99.5%** availability at MVP, progressing to **99.9%** as the platform becomes an enterprise-wide dependency.
-**Verification:** Uptime monitoring against the health-probe endpoints already established as a genuine strength in the [current audit](../EVIKAP_AUDIT.md); SLO dashboard reviewed monthly.
+**Verification:** Uptime monitoring against the health-probe endpoints already established as a genuine strength in the [current audit](../VigilRAG_AUDIT.md); SLO dashboard reviewed monthly.
 
 ### NFR-009 — Cost optimization
 
@@ -60,7 +60,7 @@ Each NFR is stated with a measurable target and a verification method, per the s
 ### NFR-010 — Maintainability
 
 **Statement:** Source connectors, retrieval logic, and agent orchestration shall be independently deployable and testable; prompt and retrieval-configuration changes shall be versioned and pass an automated evaluation gate before production rollout.
-**Verification:** CI pipeline demonstrably blocks a deploy on evaluation-harness regression (closes the "no CI test gate" finding in the [audit](../EVIKAP_AUDIT.md)).
+**Verification:** CI pipeline demonstrably blocks a deploy on evaluation-harness regression (closes the "no CI test gate" finding in the [audit](../VigilRAG_AUDIT.md)).
 
 ### NFR-011 — AI Quality Assurance (RAG evaluation)
 

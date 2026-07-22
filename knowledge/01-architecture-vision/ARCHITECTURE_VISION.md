@@ -3,21 +3,21 @@
 **TOGAF ADM Phase A — Architecture Vision**
 **Status:** Draft for architecture board review · **Version:** 1.0 · 2026-07-14
 **Owner:** Office of the AI Solutions Architect
-**Related:** [PRODUCT_PROBLEM_STATEMENT.md](../PRODUCT_PROBLEM_STATEMENT.md) · [EVIKAP_AUDIT.md](../EVIKAP_AUDIT.md)
+**Related:** [PRODUCT_PROBLEM_STATEMENT.md](../PRODUCT_PROBLEM_STATEMENT.md) · [VigilRAG_AUDIT.md](../VigilRAG_AUDIT.md)
 
 ---
 
 ## 1. Purpose
 
-This document establishes the scope, stakeholders, constraints, and desired end-state for the EVIKAP architecture engagement, per TOGAF ADM Phase A. It is the entry point that authorizes the subsequent business, data, application, and technology architecture work in this knowledge base.
+This document establishes the scope, stakeholders, constraints, and desired end-state for the VigilRAG architecture engagement, per TOGAF ADM Phase A. It is the entry point that authorizes the subsequent business, data, application, and technology architecture work in this knowledge base.
 
 ## 2. Architecture engagement context
 
 | Field | Value |
 |---|---|
 | Business driver | Enterprise knowledge fragmentation is costing measurable productivity and blocking safe AI-agent adoption (see [Problem Statement §2](../PRODUCT_PROBLEM_STATEMENT.md#2-problem-statement)) |
-| Scope | A single knowledge retrieval and reasoning platform (EVIKAP), covering business, data, application, and technology architecture through initial enterprise pilot |
-| Out of architecture scope | Redesign or replacement of source-of-record systems (code hosting, wikis, databases) — EVIKAP is a layer above them, not a replacement for them |
+| Scope | A single knowledge retrieval and reasoning platform (VigilRAG), covering business, data, application, and technology architecture through initial enterprise pilot |
+| Out of architecture scope | Redesign or replacement of source-of-record systems (code hosting, wikis, databases) — VigilRAG is a layer above them, not a replacement for them |
 | Sponsoring organization archetype | Mid-to-large technology-enabled enterprise, ≥500 employees, ≥100 engineers (see Problem Statement §3.1) |
 | Architecture framework | TOGAF ADM, tailored — Phases A–F are populated in this knowledge base; Phases G (Implementation Governance) and H (Change Management) are addressed operationally in [../07-governance-risk/ARCHITECTURE_GOVERNANCE.md](../07-governance-risk/ARCHITECTURE_GOVERNANCE.md) |
 
@@ -70,7 +70,7 @@ Full stakeholder detail: [02-business-architecture/STAKEHOLDER_ANALYSIS.md](../0
 | Evaluate before ship | No change to retrieval, prompts, or models reaches production without passing an automated evaluation gate | Converts "we tested it manually" into a repeatable quality guarantee |
 | Least-exposure retrieval | The platform never surfaces content the requester couldn't already access at the source | Prevents the platform from becoming a permission-escalation path |
 | Observability is not optional | Every request is traceable end-to-end, including cost | Cost and correctness must be debuggable in production, not inferred |
-| Augment, don't replace, systems of record | Source systems remain authoritative; EVIKAP indexes and reasons, it does not migrate | Keeps scope bounded and avoids re-litigating unrelated system migrations |
+| Augment, don't replace, systems of record | Source systems remain authoritative; VigilRAG indexes and reasons, it does not migrate | Keeps scope bounded and avoids re-litigating unrelated system migrations |
 
 ## 8. Constraints carried into subsequent phases
 

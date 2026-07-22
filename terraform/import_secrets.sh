@@ -6,7 +6,7 @@ set -e
 
 # Azure details
 SUBSCRIPTION_ID="${SUBSCRIPTION_ID:?Set SUBSCRIPTION_ID to your Azure subscription ID before running this script}"
-RG_NAME="rg-evikap"
+RG_NAME="rg-vigilrag"
 KV_NAME="${KV_NAME:?Set KV_NAME to your Key Vault name before running this script}"
 KV_URI="https://${KV_NAME}.vault.azure.net/"
 

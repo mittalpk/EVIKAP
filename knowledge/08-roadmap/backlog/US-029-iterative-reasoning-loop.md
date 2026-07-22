@@ -10,7 +10,7 @@
 
 ## Description
 
-In PI-1, the agent's `should_continue` node is hardcoded to `False` (single-pass). This PI-2 story replaces that stub with a real evaluate/re-plan loop: after the first evidence retrieval, the agent evaluates whether the evidence is sufficient to answer the query, and if not, generates follow-up sub-queries and retrieves additional evidence, bounded by `max_iterations`. This directly closes the "stub — evaluation node is a no-op" finding from the [EVIKAP audit](../../EVIKAP_AUDIT.md).
+In PI-1, the agent's `should_continue` node is hardcoded to `False` (single-pass). This PI-2 story replaces that stub with a real evaluate/re-plan loop: after the first evidence retrieval, the agent evaluates whether the evidence is sufficient to answer the query, and if not, generates follow-up sub-queries and retrieves additional evidence, bounded by `max_iterations`. This directly closes the "stub — evaluation node is a no-op" finding from the [VigilRAG audit](../../VigilRAG_AUDIT.md).
 
 ---
 

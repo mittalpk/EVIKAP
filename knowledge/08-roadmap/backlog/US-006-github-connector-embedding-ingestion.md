@@ -16,7 +16,7 @@ This story replaces `GitHubSearchSubsystem`, which currently performs substring/
 
 ## Business Value
 
-- Replaces the core weakness identified in the EVIKAP audit: keyword-only retrieval masquerading as semantic search.
+- Replaces the core weakness identified in the VigilRAG audit: keyword-only retrieval masquerading as semantic search.
 - Enables meaningful, meaning-based code search — the highest-value source type per the pilot problem validation.
 
 ---

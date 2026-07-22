@@ -46,11 +46,11 @@ async def benchmark_agent_query(client, query):
         print(f"Error: {e}")
 
 async def main():
-    test_query = "If we change the EvikapUser Pydantic model in evikap-auth, which services in our GitHub ecosystem will be affected? Trace all dependencies"
+    test_query = "If we change the VigilRAGUser Pydantic model in vigilrag-auth, which services in our GitHub ecosystem will be affected? Trace all dependencies"
     
     async with httpx.AsyncClient() as client:
         # 1. Warm-up / Simple query
-        await benchmark_knowledge_query(client, "What is evikap-auth?")
+        await benchmark_knowledge_query(client, "What is vigilrag-auth?")
         
         # 2. Complex query (Knowledge Layer)
         await benchmark_knowledge_query(client, test_query)

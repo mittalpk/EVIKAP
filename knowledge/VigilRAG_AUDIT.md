@@ -1,10 +1,10 @@
-# EVIKAP — Architecture & AI Engineering Audit
+# VigilRAG — Architecture & AI Engineering Audit
 
 **Independent technical audit — 2026-07-14**
 Scope: architecture, AI engineering, production readiness, team capability signal
 Perspective: Senior AI Solutions Architect / AI SME / Forward Deployed Engineer review
 
-> EVIKAP has real engineering discipline — a genuine trust boundary between agent and data, fail-closed secret handling, a documented remediation history. But the parts that would prove AI-engineering seniority — retrieval, iteration, evaluation, observability — are either absent or simulated. This report scores the gap and prices out what closing it would take.
+> VigilRAG has real engineering discipline — a genuine trust boundary between agent and data, fail-closed secret handling, a documented remediation history. But the parts that would prove AI-engineering seniority — retrieval, iteration, evaluation, observability — are either absent or simulated. This report scores the gap and prices out what closing it would take.
 
 **Snapshot:** 65 tracked files · ~2,585 LOC · FastAPI + LangGraph + Gemini · Azure Container Apps · 5-commit curated history
 

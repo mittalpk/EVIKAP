@@ -20,7 +20,7 @@ Each requirement is stated in testable form with an acceptance check. IDs are st
 ### FR-002 — Cross-source semantic retrieval
 
 **Statement:** The system shall retrieve relevant evidence using semantic (meaning-based) matching in addition to keyword matching, across all registered source types.
-**Acceptance check:** For a query phrased differently from the source document's wording but matching its meaning, the correct source is retrieved in the top-k results. (This directly closes the gap identified in the [audit](../EVIKAP_AUDIT.md): current retrieval is keyword/substring only.)
+**Acceptance check:** For a query phrased differently from the source document's wording but matching its meaning, the correct source is retrieved in the top-k results. (This directly closes the gap identified in the [audit](../VigilRAG_AUDIT.md): current retrieval is keyword/substring only.)
 
 ### FR-003 — Provenance and citation
 
@@ -60,7 +60,7 @@ Each requirement is stated in testable form with an acceptance check. IDs are st
 ### FR-010 — Standards-based machine (agent) interface
 
 **Statement:** The system shall expose its query capability as a tool conforming to a standard agent-tool protocol (e.g., Model Context Protocol), in addition to its human-facing UI, so external AI agents can integrate without bespoke per-agent adapters.
-**Acceptance check:** A reference external agent can discover and successfully invoke the tool using only the published standard interface contract, with no EVIKAP-specific client code.
+**Acceptance check:** A reference external agent can discover and successfully invoke the tool using only the published standard interface contract, with no VigilRAG-specific client code.
 
 ### FR-011 — Retrieval reranking
 

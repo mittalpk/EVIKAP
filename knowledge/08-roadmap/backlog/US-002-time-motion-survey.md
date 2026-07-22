@@ -101,6 +101,6 @@ The [Product Problem Statement §2.3](../../PRODUCT_PROBLEM_STATEMENT.md) curren
 
 ## Related Epics / Features
 
-- EPIC-01 (EVIKAP platform delivery)
+- EPIC-01 (VigilRAG platform delivery)
 - Execution Runbook §3.2
 - [Problem/Solution Fit §2](../../05-lean-product/PROBLEM_SOLUTION_FIT.md#2-problem-validation-is-the-problem-real-here-at-this-magnitude)

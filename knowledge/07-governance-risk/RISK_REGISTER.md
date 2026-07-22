@@ -31,7 +31,7 @@
 
 ## 3. Risks explicitly inherited from the current-state technical audit
 
-The following risks are carried forward from [`EVIKAP_AUDIT.md`](../EVIKAP_AUDIT.md) as known starting conditions, not new discoveries:
+The following risks are carried forward from [`VigilRAG_AUDIT.md`](../VigilRAG_AUDIT.md) as known starting conditions, not new discoveries:
 
 - No CI test gate before deploy → RISK-009.
 - Fictional database source (advertised, not implemented) → addressed structurally in [Data Architecture §3](../04-solution-architecture/DATA_ARCHITECTURE.md#3-current-state-gap-from-audit); tracked as a scope item (FEAT-12), not a standing risk, once resourced.

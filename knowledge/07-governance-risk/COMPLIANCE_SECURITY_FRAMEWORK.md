@@ -35,7 +35,7 @@ This framework's governance posture is mapped to **NIST AI Risk Management Frame
 
 The applicable regulatory framework depends on the sponsoring organization's industry and geography and must be confirmed during discovery (per [Problem Statement §9.3](../PRODUCT_PROBLEM_STATEMENT.md#93-regulatory-considerations)). This framework is designed to satisfy the common denominator across likely frameworks:
 
-- **Data residency** — source connectors and the retrieval index must respect any data-residency constraint already governing the underlying source system; EVIKAP does not introduce a new residency boundary.
+- **Data residency** — source connectors and the retrieval index must respect any data-residency constraint already governing the underlying source system; VigilRAG does not introduce a new residency boundary.
 - **Right to audit AI-mediated data access** — directly satisfied by FR-008 and the audit-trail control above; this is the specific capability increasingly expected under AI-governance frameworks (e.g., EU AI Act–aligned expectations referenced in [Problem Statement §3.4](../PRODUCT_PROBLEM_STATEMENT.md#34-market-trends-driving-the-need-for-ai)).
 - **Data minimization** — the retrieval index stores derived representations (embeddings, chunk metadata) of source content, not a parallel unrestricted copy; deletion propagation (see [Data Architecture §7](../04-solution-architecture/DATA_ARCHITECTURE.md#7-data-quality-and-lifecycle)) ensures the index does not outlive the source's own access controls.
 

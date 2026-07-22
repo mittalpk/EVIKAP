@@ -4,7 +4,7 @@
 
 **As a** Security Engineer,  
 **I want to** enforce per-source access controls at query time in the retrieval endpoint so that only chunks the requesting identity is permitted to access are ever returned, cited, or synthesised from,  
-**So that** EVIKAP never returns content to a user who couldn't access it directly in the source system.
+**So that** VigilRAG never returns content to a user who couldn't access it directly in the source system.
 
 ---
 
@@ -67,7 +67,7 @@ This is the implementation of FR-006 — the hardest security requirement and th
 
 ## Edge Cases
 
-- **All chunks filtered (requester has no access to any retrieved content):** Return `{"evidence": [], ...}` with `X-EVIKAP-Info: all-results-filtered-by-permission`; do not reveal that results exist.
+- **All chunks filtered (requester has no access to any retrieved content):** Return `{"evidence": [], ...}` with `X-VigilRAG-Info: all-results-filtered-by-permission`; do not reveal that results exist.
 - **PermissionCache expired and source IdP unreachable:** Fail-closed: treat as no access; return no results rather than serving potentially unauthorised content. Log the IdP unreachability.
 - **`permissions_ref` is null/missing on a chunk:** Treat as restricted (fail-closed); log a data quality warning.
 - **`requester_identity` is missing from the request:** Return HTTP 401 without processing the query at all.

@@ -1,5 +1,5 @@
 """
-EVIKAP Extensible Multi-Agent System Tools.
+VigilRAG Extensible Multi-Agent System Tools.
 These tools now call the internal Knowledge API to provide data-driven 
 search results from the simulated source systems.
 """

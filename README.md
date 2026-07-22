@@ -1,13 +1,13 @@
-# EVIKAP — Enterprise Vigilant Knowledge & Agentic Platform
+# VigilRAG — Governance-Gated Enterprise Agentic RAG Platform
 
 [![License: PolyForm Shield 1.0.0](https://img.shields.io/badge/License-PolyForm%20Shield%201.0.0-purple.svg)](LICENSE)
-[![CI](https://github.com/mittalpk/EVIKAP/actions/workflows/ci.yml/badge.svg)](https://github.com/mittalpk/EVIKAP/actions/workflows/ci.yml)
+[![CI](https://github.com/mittalpk/VigilRAG/actions/workflows/ci.yml/badge.svg)](https://github.com/mittalpk/VigilRAG/actions/workflows/ci.yml)
 
 A **cloud-native knowledge retrieval platform** that unifies enterprise data sources — code repositories, policy documents, databases, and wikis — into a single, traceable, LLM-ready API.
 
 ## Overview
 
-EVIKAP addresses a core enterprise challenge: **knowledge is scattered across disconnected systems**. Employees and AI agents alike waste time context-switching between GitHub, Confluence, databases, and documentation portals — or worse, AI agents get broad, ungoverned access to those systems because no safe unified interface exists. EVIKAP's target design provides a unified retrieval layer and a governed multi-agent reasoning engine on top of it, with a hard trust boundary between reasoning and data access.
+VigilRAG addresses a core enterprise challenge: **knowledge is scattered across disconnected systems**. Employees and AI agents alike waste time context-switching between GitHub, Confluence, databases, and documentation portals — or worse, AI agents get broad, ungoverned access to those systems because no safe unified interface exists. VigilRAG's target design provides a unified retrieval layer and a governed multi-agent reasoning engine on top of it, with a hard trust boundary between reasoning and data access.
 
 ## Project Status
 
@@ -20,7 +20,7 @@ EVIKAP addresses a core enterprise challenge: **knowledge is scattered across di
 | CI/CD | Test/build validation gate on push and PR (no auto-deploy) | Same, plus an automated LLM-evaluation quality gate |
 | Access control | Single hardcoded admin, JWT auth | RBAC, multi-user |
 
-This table is a summary — the full, unvarnished technical audit is in [`knowledge/EVIKAP_AUDIT.md`](knowledge/EVIKAP_AUDIT.md), and the plan to close every gap above is in [`knowledge/08-roadmap/`](knowledge/08-roadmap/).
+This table is a summary — the full, unvarnished technical audit is in [`knowledge/VigilRAG_AUDIT.md`](knowledge/VigilRAG_AUDIT.md), and the plan to close every gap above is in [`knowledge/08-roadmap/`](knowledge/08-roadmap/).
 
 ---
 
@@ -59,7 +59,7 @@ A **React 18 + TypeScript** dashboard served via **Nginx**, with direct API inte
 
 ## Documentation
 
-All project documentation lives in **[`knowledge/`](knowledge/)** — the enterprise solution-architecture knowledge base: problem statement, the honest [current-state audit](knowledge/EVIKAP_AUDIT.md), TOGAF architecture vision/business/data/application/technology views (including the [as-built system architecture](knowledge/04-solution-architecture/ARCHITECTURE.md) and the two deployment runbooks referenced below), BABOK requirements specs, Lean product-fit validation plan, SAFe epic/backlog/PI plan, governance/risk register, and a concrete execution runbook + issue log. Start at [`knowledge/README.md`](knowledge/README.md).
+All project documentation lives in **[`knowledge/`](knowledge/)** — the enterprise solution-architecture knowledge base: problem statement, the honest [current-state audit](knowledge/VigilRAG_AUDIT.md), TOGAF architecture vision/business/data/application/technology views (including the [as-built system architecture](knowledge/04-solution-architecture/ARCHITECTURE.md) and the two deployment runbooks referenced below), BABOK requirements specs, Lean product-fit validation plan, SAFe epic/backlog/PI plan, governance/risk register, and a concrete execution runbook + issue log. Start at [`knowledge/README.md`](knowledge/README.md).
 
 ---
 

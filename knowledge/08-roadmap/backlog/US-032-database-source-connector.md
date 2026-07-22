@@ -10,13 +10,13 @@
 
 ## Description
 
-This story closes the most prominent dishonesty in the original EVIKAP implementation: `DatabaseSubsystem.query_schemas()` performs a GitHub filename search and returns fake "schema" results. This story replaces it with a real database connector that: connects to a Postgres source (read-only), introspects schemas/tables/columns/comments, creates meaningful text representations of each table/column, and ingests them as `Chunk` records with embeddings — using the same ingestion pipeline as US-006/US-007.
+This story closes the most prominent dishonesty in the original VigilRAG implementation: `DatabaseSubsystem.query_schemas()` performs a GitHub filename search and returns fake "schema" results. This story replaces it with a real database connector that: connects to a Postgres source (read-only), introspects schemas/tables/columns/comments, creates meaningful text representations of each table/column, and ingests them as `Chunk` records with embeddings — using the same ingestion pipeline as US-006/US-007.
 
 ---
 
 ## Business Value
 
-- Closes the "fictional database layer" finding in the EVIKAP audit — the most damaging credibility gap.
+- Closes the "fictional database layer" finding in the VigilRAG audit — the most damaging credibility gap.
 - Enables a new class of questions (schema discovery, data lineage) that code + wiki retrieval cannot answer.
 
 ---
@@ -61,7 +61,7 @@ This story closes the most prominent dishonesty in the original EVIKAP implement
 
 ## Assumptions
 
-- The target database is Postgres (same as the EVIKAP data store or a separate source database).
+- The target database is Postgres (same as the VigilRAG data store or a separate source database).
 - Read-only access via a dedicated service account with `GRANT SELECT ON ALL TABLES IN SCHEMA information_schema`.
 - Schema introspection uses `SELECT table_name, column_name, data_type, is_nullable, column_default FROM information_schema.columns`.
 - Table/column comments are extracted via `pg_description` joined to `pg_class` / `pg_attribute`.

@@ -1,4 +1,4 @@
-"""Agent router — proxies task execution to the ca-evikap-agent service."""
+"""Agent router — proxies task execution to the ca-vigilrag-agent service."""
 import os
 import logging
 import httpx
@@ -19,7 +19,7 @@ AGENT_SERVICE_URL = os.environ.get(
 ) or os.environ.get(
     "AGENT_FQDN",
     None
-) or "http://ca-evikap-agent:8000"
+) or "http://ca-vigilrag-agent:8000"
 
 logger.info(f"Agent service configured at: {AGENT_SERVICE_URL}")
 

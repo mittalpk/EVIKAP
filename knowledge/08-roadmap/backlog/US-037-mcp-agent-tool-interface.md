@@ -3,21 +3,21 @@
 ## User Story
 
 **As an** AI Agent developer (e.g., a coding assistant or support copilot team),  
-**I want to** discover and invoke EVIKAP's knowledge query capability through a standard Model Context Protocol (MCP) tool interface,  
-**So that** I can integrate EVIKAP into my agent without writing any EVIKAP-specific client code — using only the published MCP standard.
+**I want to** discover and invoke VigilRAG's knowledge query capability through a standard Model Context Protocol (MCP) tool interface,  
+**So that** I can integrate VigilRAG into my agent without writing any VigilRAG-specific client code — using only the published MCP standard.
 
 ---
 
 ## Description
 
-This story implements FR-010: exposing EVIKAP's `/api/v1/query` capability as a standards-based MCP tool. The MCP gateway is a protocol adapter that wraps the existing internal query API — it does not implement a parallel query path. External AI agents discover the tool via the MCP tool manifest and invoke it using standard MCP request/response conventions. The gateway enforces the same authentication and permission controls as the human UI.
+This story implements FR-010: exposing VigilRAG's `/api/v1/query` capability as a standards-based MCP tool. The MCP gateway is a protocol adapter that wraps the existing internal query API — it does not implement a parallel query path. External AI agents discover the tool via the MCP tool manifest and invoke it using standard MCP request/response conventions. The gateway enforces the same authentication and permission controls as the human UI.
 
 ---
 
 ## Business Value
 
-- Opens EVIKAP to machine (agent) consumers — a distinct consumer segment from human knowledge workers.
-- Satisfies FR-010 acceptance check: "a reference external agent can discover and invoke the tool using only the published standard interface contract, with no EVIKAP-specific client code."
+- Opens VigilRAG to machine (agent) consumers — a distinct consumer segment from human knowledge workers.
+- Satisfies FR-010 acceptance check: "a reference external agent can discover and invoke the tool using only the published standard interface contract, with no VigilRAG-specific client code."
 - Sequenced to PI-3 deliberately (per [MVP Definition §4](../../05-lean-product/MVP_DEFINITION.md#4-explicitly-deferred-past-mvp)) so machine-consumer validation is not confounded with human-consumer validation in PI-1.
 
 ---
@@ -25,13 +25,13 @@ This story implements FR-010: exposing EVIKAP's `/api/v1/query` capability as a 
 ## Acceptance Criteria
 
 **Given** the MCP gateway is deployed and the tool manifest is published,  
-**When** a reference external MCP-compatible agent (e.g., Claude Desktop, a LangChain agent with MCP support) is pointed at the EVIKAP MCP endpoint,  
+**When** a reference external MCP-compatible agent (e.g., Claude Desktop, a LangChain agent with MCP support) is pointed at the VigilRAG MCP endpoint,  
 **Then:**
-- The agent discovers the `evikap_query` tool from the tool manifest without any EVIKAP-specific configuration beyond the MCP endpoint URL and an API key.
-- The agent can invoke `evikap_query(query: str, requester_identity: str) -> QueryResponse` successfully.
+- The agent discovers the `vigilrag_query` tool from the tool manifest without any VigilRAG-specific configuration beyond the MCP endpoint URL and an API key.
+- The agent can invoke `vigilrag_query(query: str, requester_identity: str) -> QueryResponse` successfully.
 - The response matches the same typed `QueryResponse` schema as the human-facing API.
 - The MCP gateway applies the same permission and guardrail controls as the internal API.
-- The acceptance check is documented: a reference agent integration test passes end-to-end without EVIKAP-specific client code.
+- The acceptance check is documented: a reference agent integration test passes end-to-end without VigilRAG-specific client code.
 
 ---
 
@@ -80,13 +80,13 @@ This story implements FR-010: exposing EVIKAP's `/api/v1/query` capability as a 
   ```json
   {
     "tools": [{
-      "name": "evikap_query",
-      "description": "Query EVIKAP's enterprise knowledge base with a natural language question. Returns a cited answer drawn from indexed sources.",
+      "name": "vigilrag_query",
+      "description": "Query VigilRAG's enterprise knowledge base with a natural language question. Returns a cited answer drawn from indexed sources.",
       "input_schema": {"type": "object", "properties": {"query": {"type": "string"}, "top_k": {"type": "integer", "default": 5}}, "required": ["query"]}
     }]
   }
   ```
-- **Tool invocation endpoint:** `POST /mcp/v1/tools/evikap_query` — translates MCP request to internal `POST /api/v1/query` call; translates response back to MCP format.
+- **Tool invocation endpoint:** `POST /mcp/v1/tools/vigilrag_query` — translates MCP request to internal `POST /api/v1/query` call; translates response back to MCP format.
 - **Auth:** `X-API-Key` header → looked up in a `service_api_keys` table; mapped to a `user_id` (service identity); the same JWT-based permission filter is applied using the service identity.
 - **Reference integration test:** A pytest test using a simple MCP client library; asserts the tool is discoverable and invocable end-to-end.
 
@@ -95,10 +95,10 @@ This story implements FR-010: exposing EVIKAP's `/api/v1/query` capability as a 
 ## Definition of Done
 
 - [ ] `GET /mcp/v1/tools` endpoint returns a valid tool manifest.
-- [ ] `POST /mcp/v1/tools/evikap_query` translates MCP invocations to internal query calls.
+- [ ] `POST /mcp/v1/tools/vigilrag_query` translates MCP invocations to internal query calls.
 - [ ] API key authentication and service identity permission filter applied.
 - [ ] Rate limiting applied at MCP gateway level.
-- [ ] Reference integration test passes end-to-end (no EVIKAP-specific client code).
+- [ ] Reference integration test passes end-to-end (no VigilRAG-specific client code).
 - [ ] MCP gateway adds ≤50ms median overhead confirmed.
 - [ ] OTel spans include `mcp.tool_name` attribute for gateway requests.
 - [ ] CI passes.

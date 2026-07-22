@@ -10,7 +10,7 @@
 
 ## Description
 
-`EvidenceItem` is the backbone of provenance in EVIKAP ([Data Architecture §5](../../04-solution-architecture/DATA_ARCHITECTURE.md#5-logical-data-entities-initial)). This story implements the persistence of `EvidenceItem` records after each query and computes the groundedness score (`Answer.groundedness_score`) by measuring what fraction of the synthesised answer's claims are traceable to returned chunks. This data is what FR-003's acceptance check ("≥90% of answer claims map to a cited source") is measured against.
+`EvidenceItem` is the backbone of provenance in VigilRAG ([Data Architecture §5](../../04-solution-architecture/DATA_ARCHITECTURE.md#5-logical-data-entities-initial)). This story implements the persistence of `EvidenceItem` records after each query and computes the groundedness score (`Answer.groundedness_score`) by measuring what fraction of the synthesised answer's claims are traceable to returned chunks. This data is what FR-003's acceptance check ("≥90% of answer claims map to a cited source") is measured against.
 
 ---
 

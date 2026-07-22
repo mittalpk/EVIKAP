@@ -8,11 +8,11 @@
 
 ## 1. Purpose
 
-Defines the smallest slice of EVIKAP that tests the riskiest remaining assumption (from [Problem/Solution Fit §5](PROBLEM_SOLUTION_FIT.md#5-what-fit-looks-like-exit-criteria-for-this-phase)) with real users and real production-adjacent conditions — deliberately smaller than the full functional requirements set.
+Defines the smallest slice of VigilRAG that tests the riskiest remaining assumption (from [Problem/Solution Fit §5](PROBLEM_SOLUTION_FIT.md#5-what-fit-looks-like-exit-criteria-for-this-phase)) with real users and real production-adjacent conditions — deliberately smaller than the full functional requirements set.
 
 ## 2. MVP hypothesis
 
-> If we give a defined pilot group real, cited, semantically-retrieved answers across their two highest-value knowledge sources (code + wiki), median time-to-answer for in-scope question types will drop measurably within the pilot window, and users will voluntarily choose EVIKAP over their current search habit at least half the time.
+> If we give a defined pilot group real, cited, semantically-retrieved answers across their two highest-value knowledge sources (code + wiki), median time-to-answer for in-scope question types will drop measurably within the pilot window, and users will voluntarily choose VigilRAG over their current search habit at least half the time.
 
 ## 3. In scope for MVP
 

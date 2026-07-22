@@ -7,7 +7,7 @@
 
 ## 1. Purpose
 
-Defines how business analysis work for EVIKAP will be planned, governed, and monitored — the approach, stakeholder engagement, deliverables, and governance BABOK expects to precede requirements elicitation.
+Defines how business analysis work for VigilRAG will be planned, governed, and monitored — the approach, stakeholder engagement, deliverables, and governance BABOK expects to precede requirements elicitation.
 
 ## 2. Business analysis approach
 

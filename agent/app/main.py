@@ -13,7 +13,7 @@ from .config import settings
 
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="EVIKAP Agent Service", version="1.0.0")
+app = FastAPI(title="VigilRAG Agent Service", version="1.0.0")
 
 @app.on_event("startup")
 async def startup_event():
@@ -60,7 +60,7 @@ class TaskRequest(BaseModel):
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "service": "evikap-agent"}
+    return {"status": "healthy", "service": "vigilrag-agent"}
 
 @app.post("/run")
 async def run_task(body: TaskRequest, credentials: str = Depends(verify_internal_key)):

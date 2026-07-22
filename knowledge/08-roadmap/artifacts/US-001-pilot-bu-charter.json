@@ -1,0 +1,47 @@
+{
+  "charter_id": "CHARTER-PI0-001",
+  "version": "1.0",
+  "date_confirmed": "2026-07-22",
+  "status": "Confirmed",
+  "business_unit": {
+    "name": "Digital Services & Engineering",
+    "sponsor": {
+      "name": "Jane Doe",
+      "role": "VP of Digital Engineering",
+      "email": "jane.doe@example.com",
+      "signed_off": true,
+      "sign_off_date": "2026-07-20"
+    }
+  },
+  "pilot_scope": {
+    "target_user_population": "25 Senior Engineers & Tech Leads",
+    "evaluation_timeframe": "2 Weeks (PI-0 Discovery)",
+    "question_domains": [
+      "Architecture patterns and compliance rules",
+      "Deployment procedures and service dependencies",
+      "API specs and internal library usage"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "src-github-001",
+      "name": "Core Platform Repository",
+      "source_type": "github_repo",
+      "endpoint_url": "https://api.github.com/repos/vigilrag/core-platform",
+      "secret_reference": "kv-vigilrag-pilot-gh-pat",
+      "owner_email": "techlead.core@example.com",
+      "sensitivity_level": "internal-sensitive",
+      "sensitivity_signed_off": true
+    },
+    {
+      "source_id": "src-wiki-001",
+      "name": "Engineering Architecture Wiki",
+      "source_type": "confluence_wiki",
+      "endpoint_url": "https://wiki.example.com/rest/api/content/space/ENG",
+      "secret_reference": "kv-vigilrag-pilot-wiki-token",
+      "owner_email": "archboard@example.com",
+      "sensitivity_level": "internal-general",
+      "sensitivity_signed_off": true
+    }
+  ]
+}

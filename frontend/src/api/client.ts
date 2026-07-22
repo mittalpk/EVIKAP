@@ -1,10 +1,10 @@
 /**
- * EVIKAP API Client — typed wrappers for backend and agent services.
+ * VigilRAG API Client — typed wrappers for backend and agent services.
  */
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? '/api'
 const AGENT_URL   = import.meta.env.VITE_AGENT_URL   ?? BACKEND_URL
 
-let authToken: string | null = localStorage.getItem('evikap_token')
+let authToken: string | null = localStorage.getItem('vigilrag_token')
 
 async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
   const headers = new Headers(options.headers || {})
@@ -21,7 +21,7 @@ async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
   })
   
   if (res.status === 401) {
-    localStorage.removeItem('evikap_token')
+    localStorage.removeItem('vigilrag_token')
     window.location.reload()
   }
 
@@ -52,8 +52,8 @@ export interface KnowledgeResponse {
 export const apiClient = {
   setToken: (token: string | null) => {
     authToken = token
-    if (token) localStorage.setItem('evikap_token', token)
-    else localStorage.removeItem('evikap_token')
+    if (token) localStorage.setItem('vigilrag_token', token)
+    else localStorage.removeItem('vigilrag_token')
   },
 
   isLoggedIn: () => !!authToken,

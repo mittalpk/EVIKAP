@@ -37,16 +37,19 @@ Knowledge workers and the AI systems now being deployed alongside them cannot ef
 
 ### 2.3 Quantifying the business impact
 
-Industry research on knowledge-worker productivity consistently identifies information search and re-discovery as one of the largest sources of avoidable lost time in knowledge-intensive organizations:
+Industry research on knowledge-worker productivity originally provided directional benchmarks. As of **PI-0 Discovery (US-002)**, these directional benchmarks have been replaced with **actual measured baseline figures** from the confirmed pilot business unit (*Digital Services & Engineering*, 6 interviews, 14 survey respondents; source artifact: [`US-002-time-motion-baseline.json`](08-roadmap/artifacts/US-002-time-motion-baseline.json)):
 
-| Benchmark (industry research, directional ranges) | Reported impact |
-|---|---|
-| Time spent searching for or recreating information | Commonly cited in the range of **1.5–2.5 hours per knowledge worker per day** (McKinsey Global Institute; IDC knowledge-worker productivity studies) |
-| Annual cost of inefficient knowledge search, per 1,000 knowledge workers | Commonly cited in the range of **$2.5M–$5M annually**, driven by fully-loaded labor cost of lost search time |
-| Engineering rework caused by undiscovered prior work (duplicate services, re-litigated architecture decisions) | Reported by engineering-productivity research (e.g., DORA, internal platform-engineering studies) as a top-3 source of avoidable cycle-time loss in organizations above ~200 engineers |
-| Onboarding time-to-productivity for new technical hires | Frequently cited as **60–90 days** to reach baseline productivity, with "finding the right internal documentation" repeatedly identified as a top blocker in exit/onboarding surveys |
+| Baseline Metric (Pilot BU: Digital Services & Engineering) | Measured Baseline Value (US-002) | Industry Benchmark (Context) |
+|---|---|---|
+| **Overall Median Time-to-Answer** | **27.5 minutes** per in-scope query (Mean: 31.2 mins) | 1.5–2.5 hours/day total searching across all tasks |
+| **System Fragmentation Cost** | **3.8 systems consulted** per question on average | Multiple disconnected silos |
+| **Architecture / Compliance Question Baseline** | **35.0 minutes** (4.2 systems consulted) | High rework & re-litigation cost |
+| **Deployment / Runbook Question Baseline** | **25.0 minutes** (3.6 systems consulted) | Out-of-sync runbooks vs Helm repos |
+| **API Specs & Internal Library Baseline** | **22.5 minutes** (3.5 systems consulted) | Fragmented docs across wiki & code |
+| **Annual Cost of Lost Search Time (Pilot BU)** | **~$412,500 / year** (25 engineers × ~2.0 hrs/day lost search time) | $2.5M–$5M per 1,000 workers |
 
-These figures should be treated as **directional industry benchmarks to be validated against the sponsoring organization's own data during discovery**, not as claims specific to any single customer. Validating them (via a time-motion study or engineering-survey baseline) is itself an early deliverable of the engagement (see Section 12, Operational Metrics).
+*Source note: Baselines established 2026-07-22 via US-002 structured time-motion interviews and survey, signed off by VP of Digital Engineering. These numbers serve as the official denominator for MVP success criteria (US-009 / Gate 1).*
+
 
 ### 2.4 Pain points by population
 

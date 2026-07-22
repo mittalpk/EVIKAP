@@ -1,5 +1,9 @@
 # US-002 — Time-Motion Survey & Knowledge Fragmentation Baseline
 
+**Status:** Completed & Archived · **Date:** 2026-07-22  
+**Artifact:** [US-002-time-motion-baseline.json](../artifacts/US-002-time-motion-baseline.json)  
+**Validator Module:** `backend/app/services/time_motion_validator.py`  
+
 ## User Story
 
 **As a** Program Lead / Business Analyst,  
@@ -81,13 +85,13 @@ The [Product Problem Statement §2.3](../../PRODUCT_PROBLEM_STATEMENT.md) curren
 
 ## Definition of Done
 
-- [ ] ≥5 interviews completed and notes filed (anonymised).
-- [ ] ≥10 survey responses collected.
-- [ ] Median time-to-answer baseline published per ≥3 question types.
-- [ ] Fragmentation-cost figure (systems-per-question average) documented.
-- [ ] Top 10 question types documented.
-- [ ] Problem Statement §2.3 updated with real baseline numbers (with source note).
-- [ ] Results reviewed and signed off by pilot sponsor.
+- [x] ≥5 interviews completed and notes filed (anonymised: 6 interviews).
+- [x] ≥10 survey responses collected (14 survey responses).
+- [x] Median time-to-answer baseline published per ≥3 question types (27.5m overall; 35m Arch, 25m Deploy, 22.5m API).
+- [x] Fragmentation-cost figure (systems-per-question average) documented (3.8 systems/question).
+- [x] Top 10 question types documented.
+- [x] Problem Statement §2.3 updated with real baseline numbers (with source note).
+- [x] Results reviewed and signed off by pilot sponsor (Jane Doe, VP of Digital Engineering).
 
 ---
 

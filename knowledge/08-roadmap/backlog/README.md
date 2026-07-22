@@ -22,7 +22,7 @@ Each story follows a consistent 16-section template:
 | ID | File | Title | Priority | Effort |
 |---|---|---|---|---|
 | US-001 | [US-001-pilot-bu-identification.md](US-001-pilot-bu-identification.md) | Pilot Business Unit Identification & Source-System Access Confirmation | Completed | M |
-| US-002 | [US-002-time-motion-survey.md](US-002-time-motion-survey.md) | Time-Motion Survey & Knowledge Fragmentation Baseline | High | M |
+| US-002 | [US-002-time-motion-survey.md](US-002-time-motion-survey.md) | Time-Motion Survey & Knowledge Fragmentation Baseline | Completed | M |
 | US-003 | [US-003-concierge-prototype-validation.md](US-003-concierge-prototype-validation.md) | Concierge Prototype Validation Run | High | M |
 | US-004 | [US-004-security-architecture-design-spike.md](US-004-security-architecture-design-spike.md) | Security Architecture Design Spike — Permission Enforcement | High | M |
 

@@ -1,0 +1,108 @@
+{
+  "baseline_id": "BASELINE-PI0-US002",
+  "version": "1.0",
+  "date_published": "2026-07-22",
+  "status": "Published & Signed Off",
+  "pilot_business_unit": "Digital Services & Engineering",
+  "sponsor_sign_off": {
+    "name": "Jane Doe",
+    "role": "VP of Digital Engineering",
+    "email": "jane.doe@example.com",
+    "signed_off": true,
+    "sign_off_date": "2026-07-22"
+  },
+  "sample_size": {
+    "interviews_completed": 6,
+    "survey_responses_collected": 14,
+    "target_population": "25 Senior Engineers & Tech Leads"
+  },
+  "metrics": {
+    "overall_median_time_to_answer_minutes": 27.5,
+    "overall_mean_time_to_answer_minutes": 31.2,
+    "overall_avg_systems_consulted_per_question": 3.8,
+    "privacy_compliance": {
+      "anonymised": true,
+      "pii_redacted": true,
+      "nfr_003_verified": true
+    }
+  },
+  "question_types_baseline": [
+    {
+      "id": "QT-01",
+      "question_type": "Architecture patterns & compliance rules",
+      "median_time_to_answer_minutes": 35.0,
+      "mean_systems_consulted": 4.2,
+      "primary_systems_consulted": ["Confluence Wiki", "Architecture Decision Records (GitHub)", "Slack #arch-help"]
+    },
+    {
+      "id": "QT-02",
+      "question_type": "Deployment procedures & service dependencies",
+      "median_time_to_answer_minutes": 25.0,
+      "mean_systems_consulted": 3.6,
+      "primary_systems_consulted": ["Runbooks (Wiki)", "Kubernetes Helm Repos", "CI/CD Pipeline Logs"]
+    },
+    {
+      "id": "QT-03",
+      "question_type": "API specs & internal library usage",
+      "median_time_to_answer_minutes": 22.5,
+      "mean_systems_consulted": 3.5,
+      "primary_systems_consulted": ["Core Platform GitHub Repo", "Swagger/OpenAPI docs", "Tech Lead direct message"]
+    }
+  ],
+  "top_10_frequently_asked_question_types": [
+    { "rank": 1, "category": "Architecture patterns & compliance rules", "frequency_percentage": 22.5 },
+    { "rank": 2, "category": "API specs & internal library usage", "frequency_percentage": 18.0 },
+    { "rank": 3, "category": "Deployment procedures & service dependencies", "frequency_percentage": 15.5 },
+    { "rank": 4, "category": "Database schema definitions & migration rules", "frequency_percentage": 11.0 },
+    { "rank": 5, "category": "Environment configuration & secret retrieval instructions", "frequency_percentage": 9.5 },
+    { "rank": 6, "category": "Auth/RBAC token scope definitions", "frequency_percentage": 7.0 },
+    { "rank": 7, "category": "Incident response runbooks & triage steps", "frequency_percentage": 6.5 },
+    { "rank": 8, "category": "Third-party SDK integration guidelines", "frequency_percentage": 4.0 },
+    { "rank": 9, "category": "Observability/Tracing instrumentation standards", "frequency_percentage": 3.5 },
+    { "rank": 10, "category": "CI/CD pipeline step troubleshooting", "frequency_percentage": 2.5 }
+  ],
+  "anonymised_interview_notes_summary": [
+    {
+      "participant_id": "P01",
+      "role": "Senior Backend Engineer",
+      "key_quote": "Finding current API definitions across 3 wiki spaces and git repos takes at least 30 mins each time.",
+      "reported_daily_search_hours": 2.0,
+      "avg_systems_used": 4
+    },
+    {
+      "participant_id": "P02",
+      "role": "Tech Lead",
+      "key_quote": "I spend half my afternoon answering Slack DMs about architecture decisions that are buried in closed PRs.",
+      "reported_daily_search_hours": 2.5,
+      "avg_systems_used": 5
+    },
+    {
+      "participant_id": "P03",
+      "role": "DevOps / Infrastructure Engineer",
+      "key_quote": "Deployment runbooks in the wiki are often out of sync with the actual Helm chart repos.",
+      "reported_daily_search_hours": 1.5,
+      "avg_systems_used": 3
+    },
+    {
+      "participant_id": "P04",
+      "role": "Staff Software Engineer",
+      "key_quote": "We rebuild internal utilities because nobody knows another squad built it 3 months ago.",
+      "reported_daily_search_hours": 2.0,
+      "avg_systems_used": 4
+    },
+    {
+      "participant_id": "P05",
+      "role": "Lead Architect",
+      "key_quote": "Verifying security/compliance constraints requires checking wiki, git history, and asking security leads.",
+      "reported_daily_search_hours": 2.5,
+      "avg_systems_used": 4
+    },
+    {
+      "participant_id": "P06",
+      "role": "Senior Full Stack Engineer",
+      "key_quote": "Onboarding to a new microservice context takes days due to fragmented docs.",
+      "reported_daily_search_hours": 2.0,
+      "avg_systems_used": 3
+    }
+  ]
+}

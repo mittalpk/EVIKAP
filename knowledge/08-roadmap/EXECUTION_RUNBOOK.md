@@ -38,8 +38,8 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 
 ### 4.2 Data layer (MVP scope: code + wiki sources only)
 
-- [ ] Provision managed Postgres + pgvector per [Technology Architecture §3](../04-solution-architecture/TECHNOLOGY_ARCHITECTURE.md#3-target-technology-stack-by-layer) (enterprise profile) or Supabase per the [demo profile](../04-solution-architecture/TECHNOLOGY_ARCHITECTURE.md#6-deployment-profiles), depending on which environment this build targets.
-- [ ] Add `sqlalchemy`/`asyncpg` (or the chosen driver) to `backend/requirements.txt` — currently absent, which is why `deployment/deployment_plan.md`'s assumption of a working DB connection doesn't hold yet. See [ISSUE-010](ISSUE_LOG.md#issue-010).
+- [x] Provision managed Postgres + pgvector per [Technology Architecture §3](../04-solution-architecture/TECHNOLOGY_ARCHITECTURE.md#3-target-technology-stack-by-layer) (enterprise profile) or Supabase per the [demo profile](../04-solution-architecture/TECHNOLOGY_ARCHITECTURE.md#6-deployment-profiles). Completed 2026-07-23 (US-005, ORM models: `backend/app/models.py`, Alembic migration `0001_initial_schema.py`, validator: `backend/app/services/postgres_provisioning_validator.py`).
+- [x] Add `sqlalchemy`/`asyncpg` (or the chosen driver) to `backend/requirements.txt` — completed 2026-07-23 (US-005). Resolves [ISSUE-010](ISSUE_LOG.md#issue-010).
 - [ ] Implement the `Source`, `Document`/`Chunk` entities from [Data Architecture §5](../04-solution-architecture/DATA_ARCHITECTURE.md#5-logical-data-entities-initial), ensuring the chunk schema is **Graph-Ready** (storing hierarchical parent IDs and explicit relationship/import links).
 - [ ] Replace `GitHubSearchSubsystem`/wiki keyword search with embedding + hybrid retrieval (FR-002), mapping and populating relational metadata fields during ingestion.
 - [ ] Done-check: retrieval quality measured against a small hand-built golden set before wider rollout (per [Problem/Solution Fit §3](../05-lean-product/PROBLEM_SOLUTION_FIT.md#3-solution-validation-does-this-specific-solution-fit-the-validated-problem)).

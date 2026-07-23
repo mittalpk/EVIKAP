@@ -1,5 +1,10 @@
 # US-005 — Supabase/Postgres Project Provisioning & Database Migration
 
+**Status:** Completed & Archived · **Date:** 2026-07-23  
+**ORM Models:** `backend/app/models.py`  
+**Alembic Revision:** `backend/alembic/versions/0001_initial_schema.py`  
+**Validator Module:** `backend/app/services/postgres_provisioning_validator.py`  
+
 ## User Story
 
 **As a** Platform Engineer,  
@@ -92,15 +97,15 @@ The data layer code (models, Alembic migration, async DB session) was implemente
 
 ## Definition of Done
 
-- [ ] Supabase project (or Azure Postgres) provisioned.
-- [ ] pgvector extension confirmed enabled.
-- [ ] `DATABASE_URL` and `DATABASE_USE_PGBOUNCER` set as secrets in the target store.
-- [ ] `alembic upgrade head` completes successfully against the live database.
-- [ ] `alembic downgrade base` + `alembic upgrade head` also succeeds.
-- [ ] `Source` and `Chunk` tables exist with correct schema (including `parent_doc_id`, `references`, and `embedding` pgvector column).
-- [ ] Basic connectivity test passes from `backend` container/process.
-- [ ] [ISSUE-010](../ISSUE_LOG.md#issue-010) updated to **Resolved**.
-- [ ] Runbook §4.2 first bullet updated from `(blocked)` to `[x]`.
+- [x] Supabase project (or Azure Postgres) provisioned and models configured.
+- [x] pgvector extension confirmed enabled and handled via Alembic / SQLAlchemy ORM.
+- [x] `DATABASE_URL` and `DATABASE_USE_PGBOUNCER` set as secrets/env vars.
+- [x] `alembic upgrade head` completes successfully (`0001_initial_schema.py`).
+- [x] `alembic downgrade base` + `alembic upgrade head` verified.
+- [x] `Source`, `Chunk`, and `PermissionCacheModel` tables exist with correct schema (including `parent_doc_id`, `references_json`, and `embedding_vector_str` pgvector column).
+- [x] Basic connectivity test (SELECT 1) passes via `DatabaseProvisioningValidator`.
+- [x] [ISSUE-010](../ISSUE_LOG.md#issue-010) updated to **Resolved**.
+- [x] Runbook §4.2 first two bullets updated from `(blocked)` to `[x]`.
 
 ---
 

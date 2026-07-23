@@ -22,10 +22,10 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 **Resolution:** Changed both invocations to `python -m pytest backend/tests -v` / `python -m pytest agent/tests -v` in `ci.yml`.
 
 ### ISSUE-010
-**Date found:** 2026-07-14 · **Severity:** Low · **Status:** Open
+**Date found:** 2026-07-14 · **Severity:** Low · **Status:** Resolved
 **Found during:** Runbook §4.2 (Data layer)
-**Description:** `docs/deployment/deployment_plan.md` documents a working Supabase/Postgres connection (`"✓ Settings initialized: DATABASE_URL loaded"`), but `backend/requirements.txt` has no `sqlalchemy`/`asyncpg`/`psycopg2` dependency — the codebase cannot actually make this connection today. Same "documented but not implemented" pattern already flagged for the Azure deployment doc's database source.
-**Resolution / next step:** Not yet fixed. Tracked as part of FEAT-12 database work in [Program Backlog](../06-agile-delivery/PROGRAM_BACKLOG.md); also logged in [Risk Register](../07-governance-risk/RISK_REGISTER.md#3-risks-explicitly-inherited-from-the-current-state-technical-audit) so it isn't lost between documents.
+**Description:** `docs/deployment/deployment_plan.md` documented a working Supabase/Postgres connection (`"✓ Settings initialized: DATABASE_URL loaded"`), but `backend/requirements.txt` had no `sqlalchemy`/`asyncpg`/`psycopg2` dependency — the codebase could not actually make this connection.
+**Resolution:** Resolved 2026-07-23 (US-005). `backend/requirements.txt` updated with `sqlalchemy`, `asyncpg`, `alembic`, `pgvector`, `aiosqlite`. ORM models (`Source`, `Chunk`, `PermissionCacheModel`) created in `backend/app/models.py`, Alembic environment and initial migration (`0001_initial_schema.py`) implemented and verified. Validated via `DatabaseProvisioningValidator`.
 
 ### ISSUE-009
 **Date found:** 2026-07-14 · **Severity:** High · **Status:** Fixed
@@ -86,5 +86,5 @@ Add a new entry at the top of Section 3 (most recent first) with the next sequen
 | Status | Count |
 |---|---|
 | Fixed | 9 |
-| Resolved | 1 |
-| Open | 1 |
+| Resolved | 2 |
+| Open | 0 |

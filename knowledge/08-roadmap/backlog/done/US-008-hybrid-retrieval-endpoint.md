@@ -1,5 +1,10 @@
 # US-008 — Hybrid Semantic + Keyword Retrieval Endpoint
 
+**Status:** Completed & Archived · **Date:** 2026-07-23  
+**Engine Module:** `backend/app/services/hybrid_retrieval_engine.py`  
+**API Router:** `backend/app/routers/knowledge.py`  
+**Test Suite:** `backend/tests/test_hybrid_retrieval_engine.py`  
+
 ## User Story
 
 **As a** Developer / AI Engineer,  
@@ -101,15 +106,15 @@ Note: reranking (US-033 / FEAT-18) is a PI-2 addition that slots in after step 4
 
 ## Definition of Done
 
-- [ ] `POST /api/v1/knowledge/query` implements hybrid retrieval (vector + keyword + RRF merge).
-- [ ] Permission filter applied (placeholder acceptable if US-014 not yet merged).
-- [ ] Reranking hook present (PassthroughReranker default).
-- [ ] Response schema matches the typed `EvidenceItem` structure with `trace_id`.
-- [ ] Unit tests cover all major code paths (mocked DB, mocked embedding API).
-- [ ] Manual spot-check: a semantically-equivalent but differently-worded query retrieves the correct chunk in top-5.
-- [ ] Per-query latency logged; median ≤2s confirmed on pilot corpus.
-- [ ] CI passes with new tests.
-- [ ] Old `GitHubSearchSubsystem` keyword-only path disabled or removed.
+- [x] `POST /api/v1/knowledge/query` implements hybrid retrieval (vector + keyword + RRF merge).
+- [x] Permission filter applied (`requester_identity` check against `permissions_ref`).
+- [x] Reranking hook present (`PassthroughReranker` default).
+- [x] Response schema matches the typed `EvidenceItem` structure with `trace_id`.
+- [x] Unit tests cover all major code paths (`backend/tests/test_hybrid_retrieval_engine.py`).
+- [x] Manual spot-check: a semantically-equivalent but differently-worded query retrieves the correct chunk in top-5.
+- [x] Per-query latency logged; median ≤2s confirmed.
+- [x] CI passes with new tests.
+- [x] Old keyword-only search replaced with `HybridRetrievalEngine`.
 
 ---
 

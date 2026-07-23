@@ -14,7 +14,9 @@ import re
 import asyncio
 from functools import lru_cache
 from fastapi import APIRouter, Body, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
+
 from typing import Any, List, Optional
 from azure.storage.blob.aio import BlobServiceClient
 
@@ -231,36 +233,44 @@ class KnowledgeAnswerJSON(BaseModel):
     metadata: List[Any]
     execution_time_ms: int
 
-# --- API ---
+# --- API & Hybrid Retrieval Endpoint (US-008) ---
 
-# --- Caching ---
-QUERY_CACHE = {}
-CACHE_TTL_SECONDS = 300
+from backend.app.models import AsyncSessionLocal
+from backend.app.schemas import EvidenceItem, HybridRetrievalResponse, KnowledgeQueryRequest
+from backend.app.services.hybrid_retrieval_engine import HybridRetrievalEngine
 
-@router.post("/query", response_model=KnowledgeAnswerJSON)
-async def query_knowledge(body: KnowledgeQuery):
+retrieval_engine = HybridRetrievalEngine()
+
+
+@router.post("/query", response_model=HybridRetrievalResponse)
+async def query_knowledge(
+    body: KnowledgeQueryRequest = Body(...),
+):
     start_time = datetime.datetime.now()
-    
-    # 1. Check Cache
-    cache_key = f"{body.query}:{sorted(body.target_systems or [])}"
-    if cache_key in QUERY_CACHE:
-        entry, expiry = QUERY_CACHE[cache_key]
-        if datetime.datetime.now() < expiry:
-            logger.info(f"Cache Hit for query: {body.query}")
-            return entry
+    trace_id = f"trc-{uuid.uuid4().hex[:12]}"
 
-    # 2. Execute Search
-    systems = body.target_systems or ["confluence", "code_repos"]
-    facts, metadata = await UnifiedSearchEngine.search(body.query, systems)
-    
-    response = KnowledgeAnswerJSON(
-        answer_synthesis=f"Consolidated {len(facts)} records from GitHub and Azure Storage.",
-        facts=facts,
-        metadata=metadata,
-        execution_time_ms=(datetime.datetime.now() - start_time).microseconds // 1000
+    # Execute Hybrid Search over SQLAlchemy database chunks
+    async with AsyncSessionLocal() as session:
+        evidence = await retrieval_engine.retrieve(
+            session=session,
+            query=body.query,
+            requester_identity=body.requester_identity or "user@example.com",
+            top_k=body.top_k,
+        )
+
+    exec_time_ms = (datetime.datetime.now() - start_time).microseconds // 1000
+
+    response = HybridRetrievalResponse(
+        evidence=evidence,
+        trace_id=trace_id,
+        execution_time_ms=exec_time_ms,
+        query=body.query,
+        total_retrieved=len(evidence),
     )
 
-    # 3. Store in Cache
-    QUERY_CACHE[cache_key] = (response, datetime.datetime.now() + datetime.timedelta(seconds=CACHE_TTL_SECONDS))
-    
-    return response
+    headers = {}
+    if len(evidence) == 0:
+        headers["X-VigilRAG-Warning"] = "corpus-empty-or-filtered"
+
+    return JSONResponse(content=response.model_dump(), headers=headers)
+

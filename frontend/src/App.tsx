@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { apiClient, KnowledgeResponse } from './api/client'
 import './App.css'
+
 
 const KnowledgeAnimation = () => (
   <svg viewBox="0 0 600 240" className="animated-diagram">
@@ -326,7 +328,10 @@ export default function App() {
                           <div className="fact-conf">
                             Score: {(ev.relevance_score * 100).toFixed(1)}% | Ref: {ev.permissions_ref || 'public'}
                           </div>
-                          <div style={{ whiteSpace: 'pre-wrap', marginTop: '6px' }}>{ev.content}</div>
+                          <div style={{ marginTop: '6px' }}>
+                            <ReactMarkdown>{ev.content}</ReactMarkdown>
+                          </div>
+
                           <div className="fact-sources" style={{ marginTop: '12px' }}>
                             <span className="code-badge" style={{ backgroundColor: ev.source_id?.includes('wiki') ? '#10b981' : '#3b82f6', color: '#fff' }}>
                               {ev.source_id?.includes('wiki') ? 'Wiki Source' : 'GitHub Source'}

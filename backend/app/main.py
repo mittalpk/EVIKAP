@@ -84,7 +84,10 @@ async def startup_event():
     if admin_pw in ("", "change-me-in-production") or admin_pw_hash == "0b48ee68f9de7a403027775ab3bf217e864de4ef1fee96e3c4b18974cc3df470":
         raise RuntimeError("ADMIN_PASSWORD is not configured or uses insecure default — refusing to start")
 
+    from .models import init_db
+    await init_db()
     await http_client.start()
+
 
 @app.on_event("shutdown")
 async def shutdown_event():

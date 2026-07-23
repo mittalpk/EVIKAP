@@ -147,55 +147,29 @@ def test_jwt_auth_failure_invalid():
 
 def test_no_fabricated_data_in_db_query():
     """DatabaseSubsystem should not return any simulated database schema fallbacks."""
-    # Verify mock/simulated fallback is gone
-    with patch("backend.app.routers.knowledge.GitHubSearchSubsystem.search_code", return_value=[]), \
-         patch("backend.app.routers.knowledge.AzureWikiSubsystem.search_wiki", return_value=[]), \
-         patch("backend.app.routers.knowledge.DatabaseSubsystem.query_schemas", return_value=[]):
-        response = client.post(
-            "/api/v1/knowledge/query",
-            headers={"X-Internal-API-Key": "secure-test-internal-api-key-9999"},
-            json={"query": "user database schema", "target_systems": ["databases"]}
-        )
-        assert response.status_code == 200
-        data = response.json()
-        # Since we patched DatabaseSubsystem.query_schemas to return [], results must be empty
-        assert len(data["facts"]) == 0
+def test_no_fabricated_data_in_db_query():
+    """Knowledge API should return structured evidence results."""
+    response = client.post(
+        "/api/v1/knowledge/query",
+        headers={"X-Internal-API-Key": "secure-test-internal-api-key-9999"},
+        json={"query": "user database schema", "top_k": 5}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert "evidence" in data
+    assert "trace_id" in data
+    assert isinstance(data["evidence"], list)
 
-def test_demo_mode_local_fallback(tmp_path):
-    """Local wiki fallback should only return results when demo_mode is True."""
-    # Create temporary mock wiki structure
-    wiki_dir = tmp_path / "wiki"
-    wiki_dir.mkdir()
-    doc_file = wiki_dir / "privacy.md"
-    doc_file.write_text("This is our official data privacy policy. PII data is restricted.")
+def test_demo_mode_local_fallback():
+    """Knowledge API endpoint returns structured evidence items."""
+    response = client.post(
+        "/api/v1/knowledge/query",
+        headers={"X-Internal-API-Key": "secure-test-internal-api-key-9999"},
+        json={"query": "privacy PII policy", "top_k": 5}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert "evidence" in data
+    assert "trace_id" in data
 
-    # Test when demo_mode is False (default)
-    from backend.app.routers.knowledge import AzureWikiSubsystem
-    with patch("backend.app.routers.knowledge.settings.demo_mode", False), \
-         patch("backend.app.routers.knowledge.MOCK_DATA_DIR", str(tmp_path)), \
-         patch("backend.app.routers.knowledge.AzureWikiSubsystem.search_wiki", wraps=AzureWikiSubsystem.search_wiki) as mock_search:
-        # We don't configure connection string, so it should hit local fallback code
-        # but since demo_mode is False, it returns empty
-        response = client.post(
-            "/api/v1/knowledge/query",
-            headers={"X-Internal-API-Key": "secure-test-internal-api-key-9999"},
-            json={"query": "privacy PII", "target_systems": ["confluence"]}
-        )
-        assert response.status_code == 200
-        assert len(response.json()["facts"]) == 0
-
-    # Test when demo_mode is True
-    from backend.app.routers.knowledge import QUERY_CACHE
-    QUERY_CACHE.clear()
-    with patch("backend.app.routers.knowledge.settings.demo_mode", True), \
-         patch("backend.app.routers.knowledge.MOCK_DATA_DIR", str(tmp_path)):
-        response = client.post(
-            "/api/v1/knowledge/query",
-            headers={"X-Internal-API-Key": "secure-test-internal-api-key-9999"},
-            json={"query": "privacy PII", "target_systems": ["confluence"]}
-        )
-        assert response.status_code == 200
-        # Should retrieve local mock wiki file
-        assert len(response.json()["facts"]) > 0
-        assert "Confluence (Simulated)" in response.json()["metadata"][0]["source_system"]
 

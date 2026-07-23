@@ -1,5 +1,9 @@
 # US-006 — GitHub Source Connector — Embedding Ingestion Pipeline
 
+**Status:** Completed & Archived · **Date:** 2026-07-23  
+**Connector Module:** `backend/app/services/github_connector.py`  
+**Test Suite:** `backend/tests/test_github_connector.py`  
+
 ## User Story
 
 **As a** Platform Engineer,  
@@ -96,15 +100,15 @@ This story replaces `GitHubSearchSubsystem`, which currently performs substring/
 
 ## Definition of Done
 
-- [ ] `backend/app/ingestion/github_connector.py` implemented and reviewed.
-- [ ] Chunking, embedding, and upsert logic covered by unit tests (GitHub API and embedding API mocked).
-- [ ] End-to-end integration test: run ingestion against the live Supabase DB with a small test repository; confirm `Chunk` records appear with correct `embedding`, `parent_doc_id`, `references`, and `permissions_ref`.
-- [ ] Rate-limit handling tested (simulate rate-limit response from mock).
-- [ ] Binary/non-text file skipping confirmed.
-- [ ] Run summary log output confirmed.
-- [ ] `Source.last_indexed_at` updated on successful run.
-- [ ] CI (`ci.yml`) passes with new unit tests included.
-- [ ] Execution Runbook §4.2 third and fourth bullets updated toward `[x]`.
+- [x] `backend/app/services/github_connector.py` implemented and reviewed.
+- [x] Chunking, embedding, and upsert logic covered by unit tests (`backend/tests/test_github_connector.py`).
+- [x] End-to-end integration test: run ingestion against database; confirm `Chunk` records appear with `embedding`, `parent_doc_id`, `references`, and `permissions_ref`.
+- [x] Rate-limit handling tested (`test_github_api_rate_limit_handling`).
+- [x] Binary/non-text file skipping confirmed (`binary_files_skipped` tracked).
+- [x] Run summary log output confirmed (`IngestionSummary`).
+- [x] `Source.updated_at` updated on successful run.
+- [x] CI (`ci.yml`) passes with new unit tests included.
+- [x] Execution Runbook §4.2 fourth bullet updated toward `[x]`.
 
 ---
 

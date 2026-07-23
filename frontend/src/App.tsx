@@ -352,20 +352,11 @@ export default function App() {
                     </div>
                   </>
                 ) : (
-                  knowData.facts && (
-                    <>
-                      <h4 className="section-heading">Extracted Facts</h4>
-                      <div className="facts-grid">
-                        {knowData.facts.map((f, i) => (
-                          <div key={i} className="fact-box">
-                            <div className="fact-conf">Confidence: {(f.confidence * 100).toFixed(0)}%</div>
-                            <div>{f.fact}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )
+                  <div className="empty-notice mt-16" style={{ padding: '12px', background: '#1e293b', border: '1px solid #f59e0b', borderRadius: '6px', color: '#fbbf24' }}>
+                    ⚠️ No sources found for this query. Answer may be ungrounded.
+                  </div>
                 )}
+
 
                 <details className="mt-16" style={{ cursor: 'pointer', opacity: 0.85 }}>
                   <summary style={{ fontWeight: 600, color: '#94a3b8' }}>Debug & Execution Trace</summary>

@@ -6,7 +6,10 @@ const AGENT_URL   = import.meta.env.VITE_AGENT_URL   ?? BACKEND_URL
 
 let authToken: string | null = localStorage.getItem('vigilrag_token')
 
-async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
+async function request<T>(url: string, options: RequestInit = {}, timeoutMs = 10000): Promise<T> {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+
   const headers = new Headers(options.headers || {})
   headers.set('Content-Type', 'application/json')
   
@@ -14,20 +17,31 @@ async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
     headers.set('Authorization', `Bearer ${authToken}`)
   }
 
-  const res = await fetch(url, {
-    ...options,
-    headers,
-    credentials: 'include',  // Include cookies and credentials for CORS
-  })
-  
-  if (res.status === 401) {
-    localStorage.removeItem('vigilrag_token')
-    window.location.reload()
-  }
+  try {
+    const res = await fetch(url, {
+      ...options,
+      headers,
+      signal: controller.signal,
+      credentials: 'include',  // Include cookies and credentials for CORS
+    })
+    clearTimeout(timeoutId)
 
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`)
-  return res.json() as Promise<T>
+    if (res.status === 401) {
+      localStorage.removeItem('vigilrag_token')
+      window.location.reload()
+    }
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+    return res.json() as Promise<T>
+  } catch (err: any) {
+    clearTimeout(timeoutId)
+    if (err.name === 'AbortError') {
+      throw new Error(`Request timed out after ${timeoutMs / 1000}s. Please check backend connectivity.`)
+    }
+    throw err
+  }
 }
+
 
 export interface UnifiedFact {
   fact: string;

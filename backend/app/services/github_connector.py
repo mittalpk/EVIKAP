@@ -104,25 +104,13 @@ class GitHubIngestionConnector:
 
         return refs[:10]  # Cap at top 10 references
 
-    def chunk_content(self, content: str, max_chars: int = 1500, overlap_chars: int = 150) -> List[str]:
-        """Splits file content into overlapping chunks."""
-        if not content or content.strip() == "":
-            return []
+    def chunk_content(self, content: str, max_tokens: int = 512, overlap_tokens: int = 50) -> List[str]:
+        """Splits file content into overlapping token-budget chunks."""
+        from backend.app.services.ingestion_utils import chunk_text
+        tokens_max = max_tokens or self.chunk_size_tokens
+        tokens_overlap = overlap_tokens or self.chunk_overlap_tokens
+        return chunk_text(content, max_tokens=tokens_max, overlap_tokens=tokens_overlap)
 
-        chunks: List[str] = []
-        start = 0
-        length = len(content)
-
-        while start < length:
-            end = min(start + max_chars, length)
-            chunk_str = content[start:end]
-            if chunk_str.strip():
-                chunks.append(chunk_str)
-            if end == length:
-                break
-            start += max_chars - overlap_chars
-
-        return chunks
 
     def generate_dummy_embedding(self, text: str) -> List[float]:
         """Generates 768-dim embedding vector via unified EmbeddingProvider."""

@@ -70,11 +70,12 @@ const utils = require('./utils');
 
 def test_chunking_with_overlap():
     connector = GitHubIngestionConnector()
-    text = "Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6\nLine 7\nLine 8\nLine 9\nLine 10"
+    text = " ".join([f"Word{i}" for i in range(100)])
 
-    chunks = connector.chunk_content(text, max_chars=30, overlap_chars=10)
+    chunks = connector.chunk_content(text, max_tokens=30, overlap_tokens=10)
     assert len(chunks) > 1
-    assert all(len(c) <= 30 for c in chunks)
+    assert all(len(c.split()) <= 30 for c in chunks)
+
 
 
 @pytest.mark.asyncio

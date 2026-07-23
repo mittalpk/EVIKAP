@@ -27,25 +27,34 @@ def strip_html_to_text(html_content: str) -> str:
     return "\n".join(lines)
 
 
-def chunk_text(content: str, max_chars: int = 1500, overlap_chars: int = 150) -> List[str]:
-    """Splits text content into overlapping character chunks."""
+def chunk_text(content: str, max_tokens: int = 512, overlap_tokens: int = 50) -> List[str]:
+    """Splits text content into overlapping token-budget chunks (default: 512 tokens, 50 overlap)."""
     if not content or not content.strip():
         return []
 
-    chunks: List[str] = []
-    start = 0
-    length = len(content)
+    # Token-budget word chunking (~1 word = ~1.3 tokens)
+    words = content.split()
+    if not words:
+        return []
 
-    while start < length:
-        end = min(start + max_chars, length)
-        chunk_str = content[start:end]
+    chunks: List[str] = []
+    # Target word budget: ~400 words ≈ 512 tokens
+    target_words = max(1, int(max_tokens / 1.3))
+    target_overlap = max(0, int(overlap_tokens / 1.3))
+    step = max(1, target_words - target_overlap)
+
+    i = 0
+    while i < len(words):
+        chunk_words = words[i : i + target_words]
+        chunk_str = " ".join(chunk_words)
         if chunk_str.strip():
             chunks.append(chunk_str)
-        if end == length:
+        if i + target_words >= len(words):
             break
-        start += max_chars - overlap_chars
+        i += step
 
     return chunks
+
 
 
 def compute_checksum(text: str) -> str:

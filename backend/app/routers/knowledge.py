@@ -57,6 +57,19 @@ async def query_knowledge(
 
     headers = {}
     if len(evidence) == 0:
-        headers["X-VigilRAG-Warning"] = "corpus-empty-or-filtered"
+        try:
+            async with AsyncSessionLocal() as session:
+                from sqlalchemy import func, select
+                from backend.app.models import Chunk
+                cnt_res = await session.execute(select(func.count()).select_from(Chunk).where(Chunk.deleted_at.is_(None)))
+                total_chunks = cnt_res.scalar() or 0
+                if total_chunks == 0:
+                    headers["X-VigilRAG-Warning"] = "corpus-empty"
+                else:
+                    headers["X-VigilRAG-Info"] = "all-results-filtered-by-permission"
+        except Exception:
+            headers["X-VigilRAG-Warning"] = "corpus-empty"
 
     return JSONResponse(content=response.model_dump(), headers=headers)
+
+

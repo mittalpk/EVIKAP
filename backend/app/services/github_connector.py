@@ -285,9 +285,11 @@ class GitHubIngestionConnector:
             if chk.id not in active_chunk_ids:
                 chk.deleted_at = datetime.now(timezone.utc)
 
-        # 4. Update Source.updated_at
+        # 4. Update Source.updated_at and last_indexed_at
         source.updated_at = datetime.now(timezone.utc)
+        source.last_indexed_at = datetime.now(timezone.utc)
         await session.commit()
+
 
 
         return summary

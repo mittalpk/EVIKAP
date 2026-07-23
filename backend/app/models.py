@@ -72,8 +72,10 @@ class Source(Base):
     refresh_cadence_minutes = Column(Integer, nullable=False, default=1440)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now(), nullable=False)
+    last_indexed_at = Column(DateTime(timezone=True), nullable=True)
 
     chunks = relationship("Chunk", back_populates="source", cascade="all, delete-orphan")
+
 
 
 class Chunk(Base):

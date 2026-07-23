@@ -188,7 +188,7 @@ class WikiIngestionConnector:
                 summary.mode = "confluence_api"
 
         summary.pages_fetched = len(pages)
-        permissions_ref = f"wiki:{source.name}:group-eng-staff"
+        permissions_ref = json.dumps({"source_type": "confluence_wiki", "space_key": "ENG", "access_restriction": "group-eng-staff"})
 
         # 2. Process pages
         for p in pages:
@@ -247,8 +247,10 @@ class WikiIngestionConnector:
                     session.add(new_chunk)
                     summary.chunks_created += 1
 
-        # 3. Update Source.updated_at
+        # 3. Update Source.updated_at and last_indexed_at
         source.updated_at = datetime.now(timezone.utc)
+        source.last_indexed_at = datetime.now(timezone.utc)
         await session.commit()
 
         return summary
+

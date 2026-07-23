@@ -69,20 +69,33 @@ class HybridRetrievalEngine:
         # 1. Generate query embedding
         query_vector = generate_embedding_vector(query)
 
-        # 2. Fetch candidate Chunks from DB
+        # 2. Extract query keywords for DB candidate pre-filtering
+        query_terms = [w.lower() for w in re.findall(r"\w+", query) if len(w) > 2][:10]
+
+        # 3. Fetch candidate Chunks from DB with SQL candidate bounds (top_k * 10)
         try:
-            stmt = select(Chunk)
-            result = await session.execute(stmt)
-            chunks: List[Chunk] = list(result.scalars().all())
+            from sqlalchemy import or_
+            if query_terms:
+                conditions = [Chunk.content.ilike(f"%{term}%") for term in query_terms[:5]]
+                stmt = select(Chunk).where(or_(*conditions)).limit(top_k * 10)
+                res = await session.execute(stmt)
+                chunks: List[Chunk] = list(res.scalars().all())
+            else:
+                chunks = []
+
+            # Fallback if keyword filter returns insufficient candidates
+            if len(chunks) < top_k * 2:
+                stmt_fallback = select(Chunk).limit(top_k * 10)
+                res_fb = await session.execute(stmt_fallback)
+                chunks = list(res_fb.scalars().all())
         except Exception as exc:
             logger.warning(f"DB query error (uninitialized DB or table missing): {exc}")
             return []
 
-
         if not chunks:
             return []
 
-        # 3. Vector Similarity Search (Cosine similarity)
+        # 4. Vector Similarity Search (Cosine similarity over candidate set)
         def cosine_similarity(v1: List[float], v2: List[float]) -> float:
             if not v1 or not v2 or len(v1) != len(v2):
                 return 0.0
@@ -108,15 +121,15 @@ class HybridRetrievalEngine:
         vector_scores.sort(key=lambda x: x[1], reverse=True)
         vector_ranked_ids = [c[0].id for c in vector_scores]
 
-        # 4. Keyword / Full-Text Search (Simple term overlap matching for SQLite/Postgres compatibility)
-        query_terms = set(re.findall(r"\w+", query.lower()))
+        # 5. Keyword / Full-Text Search Overlap Scoring
+        query_terms_set = set(query_terms)
 
         def keyword_score(content: str) -> float:
-            if not content or not query_terms:
+            if not content or not query_terms_set:
                 return 0.0
             words = set(re.findall(r"\w+", content.lower()))
-            matches = query_terms.intersection(words)
-            return len(matches) / float(len(query_terms))
+            matches = query_terms_set.intersection(words)
+            return len(matches) / float(len(query_terms_set))
 
         keyword_scores: List[tuple[Chunk, float]] = []
         for chk in chunks:
@@ -125,6 +138,7 @@ class HybridRetrievalEngine:
 
         keyword_scores.sort(key=lambda x: x[1], reverse=True)
         keyword_ranked_ids = [c[0].id for c in keyword_scores]
+
 
         # 5. Reciprocal Rank Fusion (RRF) Merge
         rrf_scores = compute_rrf_scores(vector_ranked_ids, keyword_ranked_ids, k=60)

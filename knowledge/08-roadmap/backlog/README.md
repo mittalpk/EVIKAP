@@ -58,7 +58,8 @@ Each story follows a consistent 16-section template:
 
 | ID | File | Title | Priority | Effort |
 |---|---|---|---|---|
-| US-014 | [US-014-permission-aware-retrieval.md](US-014-permission-aware-retrieval.md) | Permission-Aware Retrieval — Source ACL Enforcement | High | L |
+| US-014 | [US-014-permission-aware-retrieval.md](US-014-permission-aware-retrieval.md) | Permission-Aware Retrieval — Source ACL Enforcement | High | L | Completed |
+
 | US-015 | [US-015-permission-matrix-test-suite.md](US-015-permission-matrix-test-suite.md) | Permission Matrix Test Suite — Code & Wiki Sources | High | M |
 | US-016 | [US-016-rbac-foundation.md](US-016-rbac-foundation.md) | RBAC Foundation — Replace Single Hardcoded Admin | High | M |
 | US-017 | [US-017-jwt-authentication-multi-user.md](US-017-jwt-authentication-multi-user.md) | JWT Authentication — Multi-User Token Flow | High | M |

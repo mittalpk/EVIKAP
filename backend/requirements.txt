@@ -13,4 +13,6 @@ asyncpg>=0.29.0
 alembic>=1.13.0
 pgvector>=0.2.5
 aiosqlite>=0.20.0
+beautifulsoup4>=4.12.0
+
 

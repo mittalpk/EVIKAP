@@ -124,7 +124,22 @@ class PermissionCacheModel(Base):
     )
 
 
+class EvaluationCase(Base):
+    """EvaluationCase entity backing US-009, US-021, and Data Architecture §5."""
+
+    __tablename__ = "evaluation_cases"
+
+    id = Column(String(100), primary_key=True)
+    query = Column(Text, nullable=False)
+    expected_answer = Column(Text, nullable=False)
+    expected_chunk_ids_json = Column(Text, nullable=False, default="[]")
+    source_type = Column(String(50), nullable=False)  # github_repo, confluence_wiki, cross_source
+    tags_json = Column(Text, nullable=False, default="[]")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
 async def init_db():
+
     """Helper to initialize database tables."""
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)

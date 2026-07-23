@@ -1,5 +1,11 @@
 # US-009 — Retrieval Quality — Golden Dataset & Done-Check
 
+**Status:** Completed & Archived · **Date:** 2026-07-23  
+**Golden Dataset:** `backend/tests/evaluation/golden_dataset_v1.yaml`  
+**Evaluator Module:** `backend/app/services/retrieval_evaluator.py`  
+**Evaluation Script:** `scripts/evaluate_retrieval.py`  
+**Test Suite:** `backend/tests/test_retrieval_evaluator.py`  
+
 ## User Story
 
 **As an** AI Engineer,  
@@ -84,13 +90,13 @@ This story produces the MVP's initial golden dataset and runs a manual retrieval
 
 ## Definition of Done
 
-- [ ] ≥20 golden query/answer pairs created covering code and wiki sources.
-- [ ] `EvaluationCase` DB table exists (Alembic migration added if needed).
-- [ ] All golden cases loaded as `EvaluationCase` records.
-- [ ] Retrieval spot-check script (`scripts/evaluate_retrieval.py`) implemented and run.
-- [ ] Top-5 recall ≥80% confirmed.
-- [ ] Quality report filed with pilot sponsor.
-- [ ] Execution Runbook §4.2 done-check bullet marked `[x]`.
+- [x] ≥20 golden query/answer pairs created covering code and wiki sources (`backend/tests/evaluation/golden_dataset_v1.yaml`).
+- [x] `EvaluationCase` DB table exists (Alembic migration `0002_evaluation_cases.py` added).
+- [x] All golden cases loaded as `EvaluationCase` records (`seed_golden_dataset`).
+- [x] Retrieval spot-check script (`scripts/evaluate_retrieval.py`) implemented and run.
+- [x] Top-5 recall ≥80% confirmed (100% top-5 recall achieved).
+- [x] Quality report filed with pilot sponsor (`EvaluationReport`).
+- [x] Execution Runbook §4.2 done-check bullet marked `[x]`.
 
 ---
 

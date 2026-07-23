@@ -38,7 +38,7 @@ Each story follows a consistent 16-section template:
 | US-006 | [US-006-github-connector-embedding-ingestion.md](done/US-006-github-connector-embedding-ingestion.md) | GitHub Source Connector — Embedding Ingestion Pipeline | Completed | L |
 | US-007 | [US-007-wiki-connector-embedding-ingestion.md](done/US-007-wiki-connector-embedding-ingestion.md) | Wiki Source Connector — Embedding Ingestion Pipeline | Completed | M |
 | US-008 | [US-008-hybrid-retrieval-endpoint.md](done/US-008-hybrid-retrieval-endpoint.md) | Hybrid Semantic + Keyword Retrieval Endpoint | Completed | L |
-| US-009 | [US-009-retrieval-quality-golden-dataset.md](US-009-retrieval-quality-golden-dataset.md) | Retrieval Quality — Golden Dataset & Done-Check | High | M |
+| US-009 | [US-009-retrieval-quality-golden-dataset.md](done/US-009-retrieval-quality-golden-dataset.md) | Retrieval Quality — Golden Dataset & Done-Check | Completed | M |
 
 #### Unified Query Interface (FEAT-01)
 

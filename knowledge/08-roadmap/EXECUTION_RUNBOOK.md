@@ -42,7 +42,7 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 - [x] Add `sqlalchemy`/`asyncpg` (or the chosen driver) to `backend/requirements.txt` — completed 2026-07-23 (US-005). Resolves [ISSUE-010](ISSUE_LOG.md#issue-010).
 - [ ] Implement the `Source`, `Document`/`Chunk` entities from [Data Architecture §5](../04-solution-architecture/DATA_ARCHITECTURE.md#5-logical-data-entities-initial), ensuring the chunk schema is **Graph-Ready** (storing hierarchical parent IDs and explicit relationship/import links).
 - [x] Replace `GitHubSearchSubsystem`/wiki keyword search with embedding + hybrid retrieval (FR-002), mapping and populating relational metadata fields during ingestion. Hybrid retrieval engine (`POST /api/v1/knowledge/query`) implemented 2026-07-23 (US-008, `backend/app/services/hybrid_retrieval_engine.py`, tests: `backend/tests/test_hybrid_retrieval_engine.py`).
-- [ ] Done-check: retrieval quality measured against a small hand-built golden set before wider rollout (per [Problem/Solution Fit §3](../05-lean-product/PROBLEM_SOLUTION_FIT.md#3-solution-validation-does-this-specific-solution-fit-the-validated-problem)).
+- [x] Done-check: retrieval quality measured against a small hand-built golden set before wider rollout (per [Problem/Solution Fit §3](../05-lean-product/PROBLEM_SOLUTION_FIT.md#3-solution-validation-does-this-specific-solution-fit-the-validated-problem)). Golden dataset of 20 query/answer pairs created & evaluated with 100% top-5 recall accuracy 2026-07-23 (US-009, `scripts/evaluate_retrieval.py`).
 
 ### 4.3 Permission enforcement and citations
 

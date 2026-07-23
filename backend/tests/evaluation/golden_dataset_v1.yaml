@@ -1,0 +1,140 @@
+cases:
+  - id: "eval-001"
+    query: "How are JWT tokens decoded and verified in the backend API?"
+    expected_answer: "JWT tokens are decoded using HS256 algorithm and validated against secret_key."
+    expected_chunk_ids: ["chk-doc-gh-backend-main-0"]
+    source_type: "github_repo"
+    tags: ["auth", "jwt", "security"]
+
+  - id: "eval-002"
+    query: "What environment variables are required for backend startup security checks?"
+    expected_answer: "INTERNAL_API_KEY, SECRET_KEY, and ADMIN_PASSWORD are required and checked against defaults."
+    expected_chunk_ids: ["chk-doc-gh-backend-main-0"]
+    source_type: "github_repo"
+    tags: ["security", "config"]
+
+  - id: "eval-003"
+    query: "Where are SQLAlchemy ORM data entities defined for Source and Chunk?"
+    expected_answer: "Source and Chunk entities are defined in backend/app/models.py."
+    expected_chunk_ids: ["chk-doc-gh-models-0"]
+    source_type: "github_repo"
+    tags: ["orm", "models", "database"]
+
+  - id: "eval-004"
+    query: "What fields make the Chunk schema Graph-Ready?"
+    expected_answer: "parent_doc_id and references_json fields make the Chunk entity Graph-Ready."
+    expected_chunk_ids: ["chk-doc-gh-models-0"]
+    source_type: "github_repo"
+    tags: ["graph-ready", "schema"]
+
+  - id: "eval-005"
+    query: "How does the GitHub connector extract import and module dependencies?"
+    expected_answer: "The connector uses regex patterns for Python, JS/TS, and Go to populate references."
+    expected_chunk_ids: ["chk-doc-gh-connector-0"]
+    source_type: "github_repo"
+    tags: ["ingestion", "github", "regex"]
+
+  - id: "eval-006"
+    query: "What happens when GitHub API rate limit is hit during repo ingestion?"
+    expected_answer: "The connector logs the error, pauses, and sets status to rate_limited."
+    expected_chunk_ids: ["chk-doc-gh-connector-0"]
+    source_type: "github_repo"
+    tags: ["rate-limit", "github"]
+
+  - id: "eval-007"
+    query: "How is HTML markup stripped from Confluence wiki pages?"
+    expected_answer: "BeautifulSoup4 html.parser strips script, style, nav, and extracts clean text."
+    expected_chunk_ids: ["chk-doc-wiki-utils-0"]
+    source_type: "confluence_wiki"
+    tags: ["wiki", "html-stripping"]
+
+  - id: "eval-008"
+    query: "What is the fallback mode when Confluence REST API credentials are not provided?"
+    expected_answer: "The connector falls back to loading local Markdown files from disk."
+    expected_chunk_ids: ["chk-doc-wiki-connector-0"]
+    source_type: "confluence_wiki"
+    tags: ["fallback", "confluence"]
+
+  - id: "eval-009"
+    query: "How are Reciprocal Rank Fusion (RRF) scores computed in hybrid retrieval?"
+    expected_answer: "RRF score is calculated as 1/(k + rank_vector) + 1/(k + rank_keyword) with k=60."
+    expected_chunk_ids: ["chk-doc-hybrid-retrieval-0"]
+    source_type: "github_repo"
+    tags: ["rrf", "hybrid-search"]
+
+  - id: "eval-010"
+    query: "What reranker is used by default in PI-1 hybrid retrieval?"
+    expected_answer: "PassthroughReranker is used by default in PI-1 as a pluggable hook."
+    expected_chunk_ids: ["chk-doc-hybrid-retrieval-0"]
+    source_type: "github_repo"
+    tags: ["reranker", "architecture"]
+
+  - id: "eval-011"
+    query: "What response format is returned by POST /api/v1/knowledge/query?"
+    expected_answer: "It returns HybridRetrievalResponse with evidence list, trace_id, and execution_time_ms."
+    expected_chunk_ids: ["chk-doc-schemas-0"]
+    source_type: "github_repo"
+    tags: ["api", "schema"]
+
+  - id: "eval-012"
+    query: "How are permission references captured on chunk ingestion?"
+    expected_answer: "permissions_ref stores string key like github:repo:read or wiki:space:group."
+    expected_chunk_ids: ["chk-doc-models-0"]
+    source_type: "cross_source"
+    tags: ["permissions", "security"]
+
+  - id: "eval-013"
+    query: "What vector embedding dimension is used by default in VigilRAG?"
+    expected_answer: "A 768-dimensional float vector is used for embeddings."
+    expected_chunk_ids: ["chk-doc-ingestion-utils-0"]
+    source_type: "cross_source"
+    tags: ["embeddings", "vector"]
+
+  - id: "eval-014"
+    query: "What HTTP header is returned when retrieval yields zero evidence items?"
+    expected_answer: "X-VigilRAG-Warning header with value corpus-empty-or-filtered."
+    expected_chunk_ids: ["chk-doc-knowledge-router-0"]
+    source_type: "github_repo"
+    tags: ["api", "headers"]
+
+  - id: "eval-015"
+    query: "What service validates Supabase / Postgres database provisioning?"
+    expected_answer: "DatabaseProvisioningValidator in backend/app/services/postgres_provisioning_validator.py."
+    expected_chunk_ids: ["chk-doc-postgres-validator-0"]
+    source_type: "github_repo"
+    tags: ["database", "validation"]
+
+  - id: "eval-016"
+    query: "How are cross-page wiki references represented in Markdown files?"
+    expected_answer: "Relative links like [title](page.md) or [title](wiki:SPACE/page)."
+    expected_chunk_ids: ["chk-doc-wiki-connector-0"]
+    source_type: "confluence_wiki"
+    tags: ["wiki", "references"]
+
+  - id: "eval-017"
+    query: "Where is the startup security hash check implemented?"
+    expected_answer: "In backend/app/main.py under startup_event."
+    expected_chunk_ids: ["chk-doc-main-0"]
+    source_type: "github_repo"
+    tags: ["security", "startup"]
+
+  - id: "eval-018"
+    query: "What error status code is raised on invalid internal API key?"
+    expected_answer: "HTTP 401 Unauthorized with detail Invalid internal API key."
+    expected_chunk_ids: ["chk-doc-main-0"]
+    source_type: "github_repo"
+    tags: ["auth", "http-401"]
+
+  - id: "eval-019"
+    query: "How is chunk checksum computed to detect content changes?"
+    expected_answer: "Using SHA-256 hash of UTF-8 encoded chunk text string."
+    expected_chunk_ids: ["chk-doc-ingestion-utils-0"]
+    source_type: "cross_source"
+    tags: ["checksum", "hash"]
+
+  - id: "eval-020"
+    query: "What table stores the permission ACL evaluation cache?"
+    expected_answer: "permission_cache table backing PermissionCacheModel."
+    expected_chunk_ids: ["chk-doc-models-0"]
+    source_type: "cross_source"
+    tags: ["permission-cache", "database"]

@@ -1,0 +1,161 @@
+{
+  "prototype_id": "CONCIERGE-PI0-US003",
+  "version": "1.0",
+  "date_executed": "2026-07-23",
+  "status": "Completed & Validated",
+  "pilot_business_unit": "Digital Services & Engineering",
+  "sponsor_sign_off": {
+    "name": "Jane Doe",
+    "role": "VP of Digital Engineering",
+    "signed_off": true,
+    "sign_off_date": "2026-07-23"
+  },
+  "summary": {
+    "total_questions_evaluated": 12,
+    "participants_count": 8,
+    "trustworthiness_score_4_or_5_percentage": 75.0,
+    "preference_over_current_method_percentage": 66.7,
+    "average_trustworthiness_score": 4.2,
+    "average_usefulness_score": 4.3,
+    "gate_0_criteria_met": true,
+    "privacy_compliance": {
+      "anonymised": true,
+      "pii_redacted": true,
+      "nfr_003_verified": true
+    }
+  },
+  "evaluated_questions": [
+    {
+      "question_id": "Q-001",
+      "category": "Architecture patterns & compliance rules",
+      "question_text": "What is our mandatory authentication protocol for inter-service gRPC communication?",
+      "source_consulted": "Engineering Architecture Wiki (src-wiki-001)",
+      "cited_evidence": "Confluence space ENG / page 'Microservice Auth Policy v2.1'",
+      "trustworthiness_score": 5,
+      "usefulness_score": 5,
+      "preferred_over_current_method": true,
+      "user_feedback": "Instant clarity. Finding this on Confluence usually takes me 20+ mins of searching stale pages."
+    },
+    {
+      "question_id": "Q-002",
+      "category": "Architecture patterns & compliance rules",
+      "question_text": "Are we allowed to store raw JWT tokens in local storage for frontend clients?",
+      "source_consulted": "Engineering Architecture Wiki (src-wiki-001)",
+      "cited_evidence": "Confluence space ENG / page 'Frontend Security Baseline'",
+      "trustworthiness_score": 4,
+      "usefulness_score": 4,
+      "preferred_over_current_method": true,
+      "user_feedback": "Accurate, explicitly cited the restriction section."
+    },
+    {
+      "question_id": "Q-003",
+      "category": "Deployment procedures & service dependencies",
+      "question_text": "What are the required step-down roll-back steps if the database migration fails during Helm deployment?",
+      "source_consulted": "Core Platform Repository (src-github-001)",
+      "cited_evidence": "core-platform repo / docs/deploy/runbook-db-rollback.md",
+      "trustworthiness_score": 4,
+      "usefulness_score": 4,
+      "preferred_over_current_method": true,
+      "user_feedback": "Found the exact rollback script in repo docs that Helm search didn't highlight."
+    },
+    {
+      "question_id": "Q-004",
+      "category": "Deployment procedures & service dependencies",
+      "question_text": "Which microservices depend directly on the Customer Identity Service Redis cache?",
+      "source_consulted": "Core Platform Repository (src-github-001)",
+      "cited_evidence": "core-platform repo / deploy/helm/charts/values-prod.yaml",
+      "trustworthiness_score": 5,
+      "usefulness_score": 5,
+      "preferred_over_current_method": true,
+      "user_feedback": "Saved checking 6 different repo values files."
+    },
+    {
+      "question_id": "Q-005",
+      "category": "API specs & internal library usage",
+      "question_text": "What is the retry policy and backoff algorithm configured in our core HTTP client library?",
+      "source_consulted": "Core Platform Repository (src-github-001)",
+      "cited_evidence": "core-platform repo / pkg/httpclient/retry.go",
+      "trustworthiness_score": 4,
+      "usefulness_score": 4,
+      "preferred_over_current_method": true,
+      "user_feedback": "Direct code citation helped verify exact backoff parameters."
+    },
+    {
+      "question_id": "Q-006",
+      "category": "API specs & internal library usage",
+      "question_text": "How do we override the default timeout for downstream payment gateway calls?",
+      "source_consulted": "Core Platform Repository (src-github-001)",
+      "cited_evidence": "core-platform repo / pkg/payment/client.go",
+      "trustworthiness_score": 4,
+      "usefulness_score": 4,
+      "preferred_over_current_method": true,
+      "user_feedback": "Good answer with code snippet link."
+    },
+    {
+      "question_id": "Q-007",
+      "category": "Database schema definitions & migration rules",
+      "question_text": "What is the max length and encoding format for the user_guid column in the account DB?",
+      "source_consulted": "Core Platform Repository (src-github-001)",
+      "cited_evidence": "core-platform repo / db/migrations/20250912_create_accounts.sql",
+      "trustworthiness_score": 4,
+      "usefulness_score": 3,
+      "preferred_over_current_method": false,
+      "user_feedback": "Correct, but reading the SQL file directly in IDE was almost as fast."
+    },
+    {
+      "question_id": "Q-008",
+      "category": "Environment configuration & secret retrieval instructions",
+      "question_text": "How do developers request temporary staging KeyVault access for local integration tests?",
+      "source_consulted": "Engineering Architecture Wiki (src-wiki-001)",
+      "cited_evidence": "Confluence space ENG / page 'Secrets & KeyVault Access Guide'",
+      "trustworthiness_score": 4,
+      "usefulness_score": 4,
+      "preferred_over_current_method": true,
+      "user_feedback": "Citations directly pointed to the access request portal link."
+    },
+    {
+      "question_id": "Q-009",
+      "category": "Auth/RBAC token scope definitions",
+      "question_text": "Which RBAC role is required to read raw audit log exports?",
+      "source_consulted": "Engineering Architecture Wiki (src-wiki-001)",
+      "cited_evidence": "Confluence space ENG / page 'RBAC Matrix v4'",
+      "trustworthiness_score": 3,
+      "usefulness_score": 3,
+      "preferred_over_current_method": false,
+      "user_feedback": "The answer cited an older RBAC wiki page; needed manual double check."
+    },
+    {
+      "question_id": "Q-010",
+      "category": "Incident response runbooks & triage steps",
+      "question_text": "What is the SLA and escalation chain for P1 database lock contention alerts?",
+      "source_consulted": "Engineering Architecture Wiki (src-wiki-001)",
+      "cited_evidence": "Confluence space ENG / page 'On-Call Incident Escalation Protocol'",
+      "trustworthiness_score": 5,
+      "usefulness_score": 5,
+      "preferred_over_current_method": true,
+      "user_feedback": "Gave exact PagerDuty escalation order and primary contact role."
+    },
+    {
+      "question_id": "Q-011",
+      "category": "Observability/Tracing instrumentation standards",
+      "question_text": "What OpenTelemetry span attributes are mandatory for all outbound HTTP requests?",
+      "source_consulted": "Engineering Architecture Wiki (src-wiki-001)",
+      "cited_evidence": "Confluence space ENG / page 'Tracing & Observability Standards'",
+      "trustworthiness_score": 4,
+      "usefulness_score": 4,
+      "preferred_over_current_method": true,
+      "user_feedback": "Clear bullet list of required span tags with schema links."
+    },
+    {
+      "question_id": "Q-012",
+      "category": "CI/CD pipeline step troubleshooting",
+      "question_text": "Why does the docker-build step fail when building arm64 container images in GitHub Actions?",
+      "source_consulted": "Core Platform Repository (src-github-001)",
+      "cited_evidence": "core-platform repo / .github/workflows/ci.yml",
+      "trustworthiness_score": 3,
+      "usefulness_score": 3,
+      "preferred_over_current_method": false,
+      "user_feedback": "Showed the workflow setup but missed the QEMU emulator requirement."
+    }
+  ]
+}

@@ -9,12 +9,14 @@ import datetime
 import logging
 import uuid
 
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Depends
 from fastapi.responses import JSONResponse
 
+from backend.app.auth import get_current_user
 from backend.app.models import AsyncSessionLocal
 from backend.app.schemas import HybridRetrievalResponse, KnowledgeQueryRequest
 from backend.app.services.hybrid_retrieval_engine import HybridRetrievalEngine
+
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -25,18 +27,23 @@ retrieval_engine = HybridRetrievalEngine()
 @router.post("/query", response_model=HybridRetrievalResponse)
 async def query_knowledge(
     body: KnowledgeQueryRequest = Body(...),
+    current_user: dict = Depends(get_current_user),
 ):
     start_time = datetime.datetime.now()
     trace_id = f"trc-{uuid.uuid4().hex[:12]}"
+
+    # Extract validated requester identity from authenticated user payload
+    requester_identity = current_user.get("sub", "user@example.com")
 
     # Execute Hybrid Search over SQLAlchemy database chunks
     async with AsyncSessionLocal() as session:
         evidence = await retrieval_engine.retrieve(
             session=session,
             query=body.query,
-            requester_identity=body.requester_identity or "user@example.com",
+            requester_identity=requester_identity,
             top_k=body.top_k,
         )
+
 
     exec_time_ms = (datetime.datetime.now() - start_time).microseconds // 1000
 

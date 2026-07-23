@@ -13,51 +13,12 @@ from fastapi.responses import JSONResponse
 from .config import settings
 from .routers import health, knowledge, agent, auth
 from .client import http_client
+from .auth import get_current_user
 
 logger = logging.getLogger(__name__)
 
-# ── Auth ──────────────────────────────────────────────────────────────────────
-security = HTTPBearer(auto_error=False)
-
-async def get_current_user(
-    request: Request,
-    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
-):
-    # 1. Allow internal service-to-service calls via X-Internal-API-Key
-    internal_key = request.headers.get("X-Internal-API-Key")
-    expected_key = settings.internal_api_key.get_secret_value()
-    
-    logger.debug(f"Auth check - Path: {request.url.path}, Method: {request.method}")
-    logger.debug(f"Internal key present: {bool(internal_key)}, Expected key length: {len(expected_key)}")
-    
-    import hmac
-    if internal_key:
-        if hmac.compare_digest(internal_key, expected_key):
-            logger.info(f"Internal auth verified for {request.url.path}")
-            return {"sub": "internal-agent", "internal": True}
-        logger.warning(f"Internal auth failure: invalid key for {request.url.path}")
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid internal API key"
-        )
-
-    # 2. Otherwise expect a valid JWT
-    if not credentials:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authentication required"
-        )
-    
-    token = credentials.credentials
-    try:
-        payload = jwt.decode(token, settings.secret_key.get_secret_value(), algorithms=["HS256"])
-        return payload
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token expired")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
-
 # ── Application ───────────────────────────────────────────────────────────────
+
 app = FastAPI(
     title="VigilRAG Knowledge & Agent API",
     description="Unified knowledge API with LLM-enabled Q&A and multi-agent orchestration.",

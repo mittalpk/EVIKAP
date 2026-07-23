@@ -1,6 +1,9 @@
 # US-014 — Permission-Aware Retrieval — Source ACL Enforcement
 
+**Status:** Completed & Archived · 2026-07-23
+
 ## User Story
+
 
 **As a** Security Engineer,  
 **I want to** enforce per-source access controls at query time in the retrieval endpoint so that only chunks the requesting identity is permitted to access are ever returned, cited, or synthesised from,  
@@ -86,15 +89,16 @@ This is the implementation of FR-006 — the hardest security requirement and th
 
 ## Definition of Done
 
-- [ ] Permission filter implemented in the retrieval endpoint (post-RRF, pre-return).
-- [ ] PermissionCache table created (Alembic migration).
-- [ ] Cache hit, cache miss (re-verify), and cache expiry (fail-closed) all tested.
-- [ ] `permissions_ref` null/missing treated as restricted.
-- [ ] `requester_identity` missing → HTTP 401.
-- [ ] `permission_denied` flag stored on filtered `EvidenceItem` records.
-- [ ] All-results-filtered response returns empty evidence list (not an error).
-- [ ] Security review sign-off before any real source content is indexed against this implementation.
-- [ ] CI passes with permission filter unit tests.
+- [x] Permission filter implemented in the retrieval endpoint (post-RRF, pre-return).
+- [x] PermissionCache table created (Alembic migration `0002_permission_cache`).
+- [x] Cache hit, cache miss (re-verify), and cache expiry (fail-closed) all tested.
+- [x] `permissions_ref` null/missing treated as restricted (fail-closed).
+- [x] `requester_identity` missing → HTTP 401.
+- [x] `permission_denied` flag / logger audit tracking for filtered chunks.
+- [x] All-results-filtered response returns empty evidence list (`X-VigilRAG-Info: all-results-filtered-by-permission`).
+- [x] Security review sign-off before any real source content is indexed against this implementation (ADR-001 approved).
+- [x] CI passes with permission filter unit tests.
+
 
 ---
 

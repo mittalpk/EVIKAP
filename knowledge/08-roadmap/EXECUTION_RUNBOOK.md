@@ -48,7 +48,8 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 
 ### 4.3 Permission enforcement and citations
 
-- [ ] Implement permission-matrix test suite per source connector (FR-006); do not index real content until this passes security review.
+- [x] Implement permission-matrix test suite per source connector (FR-006); do not index real content until this passes security review. Completed 2026-07-23 (US-014, PermissionEvaluator, PermissionCache DB model, Alembic migration 0002_permission_cache, and test_permission_evaluator.py).
+
 - [ ] Implement citation rendering tying each answer claim to a retrieved chunk (FR-003).
 - [ ] Replace the single hardcoded admin auth path with the RBAC foundation (NFR-002 slice for PI-1).
 

@@ -52,11 +52,19 @@ def compute_rrf_scores(
     return scores
 
 
+from backend.app.services.permission_evaluator import PermissionEvaluator
+
+
 class HybridRetrievalEngine:
     """Executes hybrid vector + keyword search with RRF merge and permission filtering."""
 
-    def __init__(self, reranker: Optional[RerankerInterface] = None):
+    def __init__(
+        self,
+        reranker: Optional[RerankerInterface] = None,
+        permission_evaluator: Optional[PermissionEvaluator] = None,
+    ):
         self.reranker = reranker or PassthroughReranker()
+        self.permission_evaluator = permission_evaluator or PermissionEvaluator()
 
     async def retrieve(
         self,
@@ -65,6 +73,10 @@ class HybridRetrievalEngine:
         requester_identity: str,
         top_k: int = 5,
     ) -> List[EvidenceItem]:
+        # Require non-empty requester_identity
+        if not requester_identity:
+            return []
+
         """Performs hybrid vector + keyword search and RRF merge."""
         # 1. Generate query embedding
         query_vector = generate_embedding_vector(query)
@@ -153,16 +165,15 @@ class HybridRetrievalEngine:
         for cid in sorted_rrf_ids:
             chk = chunk_map[cid]
 
-            # Permission Filter (Placeholder check for US-014 alignment)
-            # Allowed if permissions_ref is public, or contains identity, or user is eng staff
-            allowed = (
-                chk.permissions_ref == "public"
-                or requester_identity in chk.permissions_ref
-                or "group-eng-staff" in chk.permissions_ref
-                or "internal-agent" in requester_identity
+            allowed = await self.permission_evaluator.evaluate_chunk_access(
+                session=session,
+                chunk=chk,
+                requester_identity=requester_identity,
             )
             if not allowed:
+                logger.info(f"Permission denied for requester '{requester_identity}' on chunk '{chk.id}' (source: '{chk.source_id}')")
                 continue
+
 
             try:
                 refs = json.loads(chk.references_json) if chk.references_json else []

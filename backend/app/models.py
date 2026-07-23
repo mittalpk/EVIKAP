@@ -88,7 +88,8 @@ class Chunk(Base):
     document_id = Column(String(255), nullable=False)
     parent_doc_id = Column(String(255), nullable=True)  # Graph-Ready: section/parent hierarchy
     content = Column(Text, nullable=False)
-    permissions_ref = Column(String(255), nullable=False, default="public")
+    permissions_ref = Column(String(255), nullable=True)
+
     checksum = Column(String(64), nullable=False)
     
     # Store references as JSON string or comma-separated string for multi-DB compatibility (SQLite + Postgres)

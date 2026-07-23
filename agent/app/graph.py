@@ -164,8 +164,10 @@ def build_graph() -> Any:
         return {}
 
     def should_continue(state: AgentState) -> str:
-        # After parallel execution, we jump to response synthesis
+        # Single-pass synthesis for PI-1 MVP (US-011)
+        # TODO US-029: Implement iterative re-planning loop evaluation when faithfulness threshold is not met
         return "respond"
+
 
     async def node_respond(state: AgentState) -> dict:
         logger.info("Composing final response (Pro)...")

@@ -45,7 +45,8 @@ Each story follows a consistent 16-section template:
 | ID | File | Title | Priority | Effort |
 |---|---|---|---|---|
 | US-010 | [US-010-query-submission-ui.md](done/US-010-query-submission-ui.md) | Query Submission UI — Basic Input & Response Display | Completed | M |
-| US-011 | [US-011-api-query-endpoint.md](US-011-api-query-endpoint.md) | API Query Endpoint (POST /api/v1/query) — Agent Orchestration Tier | High | L |
+| US-011 | [US-011-api-query-endpoint.md](done/US-011-api-query-endpoint.md) | API Query Endpoint (POST /api/v1/query) — Agent Orchestration Tier | Completed | L |
+
 
 #### Provenance & Citations (FEAT-03)
 

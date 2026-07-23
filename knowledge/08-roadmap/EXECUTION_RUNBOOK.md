@@ -36,6 +36,8 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 - [x] **Remove hardcoded real infrastructure identifiers from source-controlled files.** Real Azure subscription ID, tenant ID, a live Container App hostname, and a private local project path were hardcoded across `.github/workflows/`, `terraform/`, `deployment/AZURE_DEPLOYMENT.md`, and both services' `config.py` defaults. All parameterized via env vars/secrets or replaced with placeholders. See [ISSUE-004 through ISSUE-008](ISSUE_LOG.md).
 - [x] **Stand up a real CI test gate.** `.github/workflows/deploy.yml` (build-and-deploy-to-Azure-on-every-push, no test step) replaced with `.github/workflows/ci.yml` (path-filtered backend/agent pytest + frontend `tsc`+build validation, triggered on push and PR). This is the FEAT-11 "CI test gate blocks bad deploys" item from [PI-1 objectives](../06-agile-delivery/PI_PLANNING_OBJECTIVES.md#3-pi-1--mvp-trust--adoption-validation) — note it is a **build/test** gate only; the **evaluation-harness** gate (retrieval/prompt/model quality regression checks) is still open, see 4.4 below.
 - [x] **Complete the Web app front-end query interface (FR-001).** Query input, evidence citations, loading state, error handling, and trace ID debug section implemented 2026-07-23 (US-010).
+- [x] **Implement Agent Query Endpoint POST /api/v1/query (FR-001, FR-003).** Agent orchestration endpoint connecting retrieval evidence to LLM synthesis and citation assembly implemented 2026-07-23 (US-011).
+
 
 
 ### 4.2 Data layer (MVP scope: code + wiki sources only)

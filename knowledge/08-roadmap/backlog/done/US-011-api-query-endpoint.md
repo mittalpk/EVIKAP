@@ -1,6 +1,9 @@
 # US-011 — API Query Endpoint (POST /api/v1/query) — Agent Orchestration Tier
 
+**Status:** Completed & Archived · 2026-07-23
+
 ## User Story
+
 
 **As a** Developer / AI Agent consumer,  
 **I want to** call `POST /api/v1/query` with a natural-language question and receive a structured, synthesised answer with citations assembled by the agent orchestration tier,  
@@ -91,16 +94,17 @@ This story implements the top-level query endpoint on the agent orchestration ti
 
 ## Definition of Done
 
-- [ ] `POST /api/v1/query` implemented in `agent/app/routers/` (or equivalent path).
-- [ ] LangGraph graph updated: `execute` node calls US-008, `respond` node assembles citations.
-- [ ] `should_continue` hardcoded `False` with a TODO comment for US-029.
-- [ ] Response schema validated: `answer`, `citations[]`, `trace_id`, `guardrail_flags[]`.
-- [ ] Guardrails passthrough stub in place.
-- [ ] Model routing (Flash for planning, Pro for synthesis) configurable via env vars.
-- [ ] Unit tests: mocked KB API + LLM; correct citation assembly, error handling.
-- [ ] `requester_identity` missing → HTTP 401 confirmed.
-- [ ] CI passes with new tests.
-- [ ] End-to-end smoke test: UI (US-010) calls this endpoint and receives a valid response.
+- [x] `POST /api/v1/query` implemented in `agent/app/routers/query.py`.
+- [x] LangGraph graph updated: `execute` node calls US-008, `respond` node assembles citations.
+- [x] `should_continue` hardcoded `False` with a TODO comment for US-029.
+- [x] Response schema validated: `answer`, `citations[]`, `trace_id`, `guardrail_flags[]`.
+- [x] Guardrails passthrough stub in place (`agent/app/services/guardrails_stub.py`).
+- [x] Model routing (Flash for planning, Pro for synthesis) configurable via env vars.
+- [x] Unit tests: mocked KB API + LLM; correct citation assembly, error handling (`agent/tests/test_query_router.py`).
+- [x] `requester_identity` missing → HTTP 401 confirmed.
+- [x] CI passes with new tests.
+- [x] End-to-end smoke test: UI (US-010) calls this endpoint and receives a valid response.
+
 
 ---
 

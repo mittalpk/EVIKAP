@@ -37,6 +37,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from agent.app.routers import query as query_router
+app.include_router(query_router.router)
+
+
 # ── Security ──────────────────────────────────────────────────────────────────
 import hmac
 async def verify_internal_key(x_internal_api_key: str = Header(...)):

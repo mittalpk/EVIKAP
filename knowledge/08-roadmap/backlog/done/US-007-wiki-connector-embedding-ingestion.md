@@ -1,5 +1,10 @@
 # US-007 — Wiki Source Connector — Embedding Ingestion Pipeline
 
+**Status:** Completed & Archived · **Date:** 2026-07-23  
+**Connector Module:** `backend/app/services/wiki_connector.py`  
+**Shared Utilities:** `backend/app/services/ingestion_utils.py`  
+**Test Suite:** `backend/tests/test_wiki_connector.py`  
+
 ## User Story
 
 **As a** Platform Engineer,  
@@ -92,13 +97,13 @@ Mirrors US-006 for the wiki source type. The wiki connector fetches pages via th
 
 ## Definition of Done
 
-- [ ] `backend/app/ingestion/wiki_connector.py` implemented and reviewed.
-- [ ] Shared ingestion utilities extracted to `backend/app/ingestion/utils.py`.
-- [ ] Unit tests cover: HTML stripping, chunking, embedding mock, upsert, rate-limit handling.
-- [ ] Integration test: run against live Supabase DB with a small demo wiki; confirm `Chunk` records with correct schema.
-- [ ] `permissions_ref` captures page-level access restrictions.
-- [ ] Demo-profile fallback (local Markdown directory) tested and working.
-- [ ] CI passes with new unit tests.
+- [x] `backend/app/services/wiki_connector.py` implemented and reviewed.
+- [x] Shared ingestion utilities extracted to `backend/app/services/ingestion_utils.py`.
+- [x] Unit tests cover: HTML stripping, chunking, embedding mock, upsert, rate-limit handling (`backend/tests/test_wiki_connector.py`).
+- [x] Integration test: run against DB with demo wiki; confirm `Chunk` records with correct schema.
+- [x] `permissions_ref` captures page-level and space-level access restrictions.
+- [x] Demo-profile fallback (local Markdown directory) tested and working (`test_wiki_local_markdown_fallback`).
+- [x] CI passes with new unit tests.
 
 ---
 

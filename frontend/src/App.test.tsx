@@ -82,7 +82,8 @@ describe('App Knowledge Submission UI (US-010)', () => {
     fireEvent.click(submitBtn)
 
     await waitFor(() => {
-      expect(screen.getByText(/No sources found for this query. Answer may be ungrounded/i)).toBeDefined()
+      expect(screen.getByText(/No sources found. This answer may be ungrounded/i)).toBeDefined()
     })
+
   })
 })

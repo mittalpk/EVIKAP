@@ -52,7 +52,8 @@ Each story follows a consistent 16-section template:
 
 | ID | File | Title | Priority | Effort |
 |---|---|---|---|---|
-| US-012 | [US-012-citation-rendering.md](US-012-citation-rendering.md) | Citation Rendering — Inline Source Links per Answer Claim | High | S |
+| US-012 | [US-012-citation-rendering.md](done/US-012-citation-rendering.md) | Citation Rendering — Inline Source Links per Answer Claim | Completed | S |
+
 | US-013 | [US-013-evidence-item-groundedness-tracking.md](US-013-evidence-item-groundedness-tracking.md) | EvidenceItem Entity & Groundedness Score Tracking | High | M |
 
 #### Permissions & Auth (FEAT-06, FEAT-11)

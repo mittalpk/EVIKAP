@@ -1,6 +1,9 @@
 # US-012 — Citation Rendering — Inline Source Links per Answer Claim
 
+**Status:** Completed & Archived · 2026-07-24
+
 ## User Story
+
 
 **As a** Knowledge Worker,  
 **I want to** see which specific source document or code file each part of the answer comes from, displayed as numbered inline citations with clickable links,  
@@ -86,14 +89,15 @@ Note: this story focuses on the UI rendering. The citation data structure is ass
 
 ## Definition of Done
 
-- [ ] `CitationList` component implemented, rendering citation number, source type badge, file name, excerpt, and clickable URL.
-- [ ] Inline superscript markers supported (regex replacement in answer text).
-- [ ] Collapsible citation list with count toggle.
-- [ ] Empty citations warning rendered correctly.
-- [ ] `guardrail_flags` banner rendered for non-empty flag lists.
-- [ ] Broken/restricted URL handling confirmed.
-- [ ] Component unit tests (React Testing Library): normal case, empty citations, many citations, guardrail flag.
-- [ ] CI frontend validate job passes.
+- [x] `CitationList` component implemented, rendering citation number, source type badge, file name, excerpt, and clickable URL (`frontend/src/CitationList.tsx`).
+- [x] Inline superscript markers supported (regex replacement in answer text).
+- [x] Collapsible citation list with count toggle.
+- [x] Empty citations warning rendered correctly.
+- [x] `guardrail_flags` banner rendered for non-empty flag lists.
+- [x] Broken/restricted URL handling confirmed.
+- [x] Component unit tests (React Testing Library): normal case, empty citations, many citations, guardrail flag (`frontend/src/CitationList.test.tsx`).
+- [x] CI frontend validate job passes (`npm test` & `npm run build`).
+
 
 ---
 

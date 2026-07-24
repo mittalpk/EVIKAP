@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { apiClient, KnowledgeResponse } from './api/client'
+import CitationList, { formatAnswerWithInlineCitations } from './CitationList'
+
 import './App.css'
+
+
 
 
 const KnowledgeAnimation = () => (
@@ -317,45 +320,17 @@ export default function App() {
             {knowData && (
               <div className="results-container mt-24 fade-in">
                 <h4 className="section-heading">Response & Synthesis</h4>
-                <p className="synthesis-text">{knowData.answer_synthesis || `Retrieved ${knowData.evidence?.length || 0} evidence records from hybrid semantic search.`}</p>
+                <div className="synthesis-text">
+                  {formatAnswerWithInlineCitations(
+                    knowData.answer_synthesis || `Retrieved ${knowData.evidence?.length || 0} evidence records from hybrid semantic search.`
+                  )}
+                </div>
 
-                {knowData.evidence && knowData.evidence.length > 0 ? (
-                  <>
-                    <h4 className="section-heading">Source Evidence & Citations (US-010 / US-012)</h4>
-                    <div className="facts-grid">
-                      {knowData.evidence.map((ev, i) => (
-                        <div key={ev.chunk_id || i} className="fact-box">
-                          <div className="fact-conf">
-                            Score: {(ev.relevance_score * 100).toFixed(1)}% | Ref: {ev.permissions_ref || 'public'}
-                          </div>
-                          <div style={{ marginTop: '6px' }}>
-                            <ReactMarkdown>{ev.content}</ReactMarkdown>
-                          </div>
+                <CitationList
+                  citations={knowData.evidence}
+                  guardrailFlags={(knowData as any).guardrail_flags}
+                />
 
-                          <div className="fact-sources" style={{ marginTop: '12px' }}>
-                            <span className="code-badge" style={{ backgroundColor: ev.source_id?.includes('wiki') ? '#10b981' : '#3b82f6', color: '#fff' }}>
-                              {ev.source_id?.includes('wiki') ? 'Wiki Source' : 'GitHub Source'}
-                            </span>
-                            &nbsp;
-                            <a
-                              className="meta-link"
-                              href={ev.source_url}
-                              target="_blank"
-                              rel="noreferrer"
-                              style={{ color: '#60a5fa', textDecoration: 'underline' }}
-                            >
-                              {ev.parent_doc_id || ev.source_url}
-                            </a>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <div className="empty-notice mt-16" style={{ padding: '12px', background: '#1e293b', border: '1px solid #f59e0b', borderRadius: '6px', color: '#fbbf24' }}>
-                    ⚠️ No sources found for this query. Answer may be ungrounded.
-                  </div>
-                )}
 
 
                 <details className="mt-16" style={{ cursor: 'pointer', opacity: 0.85 }}>

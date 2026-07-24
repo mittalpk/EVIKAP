@@ -715,3 +715,200 @@
 .w-full {
   width: 100%;
 }
+
+/* ── US-012 CitationList & Guardrail Styles ── */
+.guardrail-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: #fbbf24;
+}
+
+.guardrail-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.guardrail-text {
+  font-size: 0.9rem;
+}
+
+.guardrail-flag-item {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #fde68a;
+}
+
+.empty-citations-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px dashed #f59e0b;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #fbbf24;
+  font-size: 0.9rem;
+}
+
+.citations-container {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.citations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.citations-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+}
+
+.toggle-expand-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-expand-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+}
+
+.citations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.citation-card {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: border-color 0.2s;
+}
+
+.citation-card:hover {
+  border-color: rgba(79, 142, 247, 0.4);
+}
+
+.citation-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.citation-number {
+  font-weight: 700;
+  color: #38bdf8;
+  font-size: 0.85rem;
+}
+
+.source-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.file-name {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.citation-excerpt {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #38bdf8;
+  margin-bottom: 8px;
+}
+
+.citation-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.citation-link {
+  color: #60a5fa;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.citation-link:hover {
+  color: #93c5fd;
+}
+
+.restricted-notice {
+  color: #fbbf24;
+  font-size: 0.8rem;
+}
+
+.relevance-score {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.show-more-citations-btn {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.show-more-citations-btn:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.inline-citation-sup {
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+.inline-citation-link {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.inline-citation-link:hover {
+  text-decoration: underline;
+}
+

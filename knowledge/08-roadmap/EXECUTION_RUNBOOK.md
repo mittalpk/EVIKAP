@@ -58,7 +58,8 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 - [x] Persist EvidenceItem records and compute groundedness score for every query (FR-004, FR-008). Completed 2026-07-24 (US-013, QueryRecord, EvidenceItemRecord, AnswerRecord DB models, Alembic migration 0003_evidence_item_groundedness, groundedness_service.py, and unit tests).
 
 
-- [ ] Replace the single hardcoded admin auth path with the RBAC foundation (NFR-002 slice for PI-1).
+- [x] Replace the single hardcoded admin auth path with the RBAC foundation (NFR-002 slice for PI-1). Completed 2026-07-24 (US-016, User, Role, UserRole DB models, Alembic migration 0004_rbac_foundation, rbac.py dependencies, scripts/seed_admin.py, and test_rbac_foundation.py).
+
 
 ### 4.4 RAG evaluation harness (FEAT-16, NFR-011)
 

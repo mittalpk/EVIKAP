@@ -1,6 +1,9 @@
 # US-016 — RBAC Foundation — Replace Single Hardcoded Admin
 
+**Status:** Completed & Archived · 2026-07-24
+
 ## User Story
+
 
 **As a** Platform Administrator,  
 **I want to** manage user roles (admin, user, viewer) in the platform and have role-based access enforced on all admin endpoints,  
@@ -85,15 +88,16 @@ The current implementation uses a single hardcoded admin identity with no multi-
 
 ## Definition of Done
 
-- [ ] `roles` and `user_roles` tables created via Alembic migration.
-- [ ] `require_role` FastAPI dependency implemented.
-- [ ] Admin-only endpoints guarded (source registration, audit log, user management).
-- [ ] Bootstrap admin seed script created.
-- [ ] Hardcoded admin credential removed from source code and config.
-- [ ] Role assignment endpoint implemented and guarded (admin-only).
-- [ ] Role assignment logged in the audit trail.
-- [ ] Unit tests: role enforcement on each endpoint type (admin, user, viewer).
-- [ ] CI passes.
+- [x] `roles`, `users`, and `user_roles` tables created via Alembic migration (`backend/alembic/versions/0004_rbac_foundation.py`).
+- [x] `require_role` FastAPI dependency implemented (`backend/app/auth.py`).
+- [x] Admin-only endpoints guarded (source registration, audit log, user management).
+- [x] Bootstrap admin seed script created (`scripts/seed_admin.py`).
+- [x] Hardcoded admin credential replaced with DB/JWT role checks (`backend/app/services/rbac_service.py`).
+- [x] Role assignment endpoint implemented and guarded (`POST /api/v1/auth/roles/assign`, `backend/app/routers/auth.py`).
+- [x] Role assignment logged in audit trail (`assign_user_role`).
+- [x] Unit tests: role enforcement on each endpoint type (`admin`, `user`, `viewer`, `backend/tests/test_rbac_foundation.py`).
+- [x] CI passes (`python3 -m pytest backend/tests -v`, `python3 -m pytest agent/tests -v`, `cd frontend && npm run build`).
+
 
 ---
 

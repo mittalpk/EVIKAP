@@ -187,6 +187,41 @@ class AnswerRecord(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
 
+class User(Base):
+    """User entity backing RBAC (US-016) and authentication."""
+
+    __tablename__ = "users"
+
+    id = Column(String(100), primary_key=True)
+    username = Column(String(100), unique=True, nullable=False, index=True)
+    hashed_password = Column(String(255), nullable=False)
+    is_active = Column(Boolean, nullable=False, default=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+class Role(Base):
+    """Role entity backing RBAC foundation (US-016)."""
+
+    __tablename__ = "roles"
+
+    id = Column(String(50), primary_key=True)
+    name = Column(String(50), unique=True, nullable=False)
+    description = Column(String(255), nullable=True)
+
+
+class UserRole(Base):
+    """UserRole association backing RBAC role assignment (US-016)."""
+
+    __tablename__ = "user_roles"
+
+    id = Column(String(100), primary_key=True)
+    user_id = Column(String(100), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    role_id = Column(String(50), ForeignKey("roles.id", ondelete="CASCADE"), nullable=False, index=True)
+    assigned_by = Column(String(100), nullable=False)
+    assigned_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+
 
 async def init_db():
 

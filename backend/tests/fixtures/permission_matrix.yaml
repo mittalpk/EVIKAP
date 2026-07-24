@@ -1,0 +1,159 @@
+# Permission Matrix Test Fixtures for US-015 (FR-006)
+# Defines 22 distinct permission scenarios covering GitHub and Confluence Wiki source types.
+
+scenarios:
+  # ── GitHub Source Scenarios (11 scenarios) ──
+  - id: "gh-001"
+    source_type: "github_repo"
+    description: "Public GitHub repository chunk is accessible to standard user"
+    permissions_ref: '{"visibility": "public", "allowed_identities": ["*"]}'
+    requester_identity: "developer@org.com"
+    expected_result: "included"
+
+  - id: "gh-002"
+    source_type: "github_repo"
+    description: "Public GitHub repository chunk is accessible to anonymous user"
+    permissions_ref: '{"visibility": "public"}'
+    requester_identity: "anonymous@external.com"
+    expected_result: "included"
+
+  - id: "gh-003"
+    source_type: "github_repo"
+    description: "Private GitHub chunk is excluded for non-member"
+    permissions_ref: '{"visibility": "private", "allowed_identities": ["admin@org.com", "lead@org.com"]}'
+    requester_identity: "contractor@external.com"
+    expected_result: "excluded"
+
+  - id: "gh-004"
+    source_type: "github_repo"
+    description: "Private GitHub chunk is included for explicit authorized member"
+    permissions_ref: '{"visibility": "private", "allowed_identities": ["admin@org.com", "lead@org.com"]}'
+    requester_identity: "lead@org.com"
+    expected_result: "included"
+
+  - id: "gh-005"
+    source_type: "github_repo"
+    description: "GitHub chunk with null permissions_ref fails closed"
+    permissions_ref: null
+    requester_identity: "admin@org.com"
+    expected_result: "excluded"
+
+  - id: "gh-006"
+    source_type: "github_repo"
+    description: "GitHub chunk with empty string permissions_ref fails closed"
+    permissions_ref: ""
+    requester_identity: "admin@org.com"
+    expected_result: "excluded"
+
+  - id: "gh-007"
+    source_type: "github_repo"
+    description: "GitHub chunk with corrupted JSON permissions_ref fails closed"
+    permissions_ref: "{invalid_json_string"
+    requester_identity: "admin@org.com"
+    expected_result: "excluded"
+
+  - id: "gh-008"
+    source_type: "github_repo"
+    description: "GitHub chunk restricted to specific team is included for team member identity"
+    permissions_ref: '{"visibility": "private", "allowed_identities": ["team-secops@org.com", "sec-lead@org.com"]}'
+    requester_identity: "team-secops@org.com"
+    expected_result: "included"
+
+  - id: "gh-009"
+    source_type: "github_repo"
+    description: "GitHub chunk restricted to team is excluded for non-team member"
+    permissions_ref: '{"visibility": "private", "allowed_identities": ["team-secops@org.com"]}'
+    requester_identity: "frontend-dev@org.com"
+    expected_result: "excluded"
+
+  - id: "gh-010"
+    source_type: "github_repo"
+    description: "Internal GitHub chunk accessible to employee domain identity"
+    permissions_ref: '{"visibility": "internal", "allowed_domains": ["org.com"]}'
+    requester_identity: "employee@org.com"
+    expected_result: "included"
+
+  - id: "gh-011"
+    source_type: "github_repo"
+    description: "Internal GitHub chunk excluded for external contractor domain"
+    permissions_ref: '{"visibility": "internal", "allowed_domains": ["org.com"]}'
+    requester_identity: "contractor@vendor.com"
+    expected_result: "excluded"
+
+  # ── Confluence Wiki Source Scenarios (11 scenarios) ──
+  - id: "wiki-001"
+    source_type: "confluence_wiki"
+    description: "Public wiki page chunk accessible to all internal staff"
+    permissions_ref: '{"visibility": "public", "space_key": "GLOBAL"}'
+    requester_identity: "staff@company.com"
+    expected_result: "included"
+
+  - id: "wiki-002"
+    source_type: "confluence_wiki"
+    description: "Restricted HR wiki page chunk excluded for general employee"
+    permissions_ref: '{"visibility": "restricted", "space_key": "HR", "allowed_identities": ["hr-lead@company.com"]}'
+    requester_identity: "engineer@company.com"
+    expected_result: "excluded"
+
+  - id: "wiki-003"
+    source_type: "confluence_wiki"
+    description: "Restricted HR wiki page chunk included for HR lead"
+    permissions_ref: '{"visibility": "restricted", "space_key": "HR", "allowed_identities": ["hr-lead@company.com"]}'
+    requester_identity: "hr-lead@company.com"
+    expected_result: "included"
+
+  - id: "wiki-004"
+    source_type: "confluence_wiki"
+    description: "Wiki chunk with null permissions_ref fails closed"
+    permissions_ref: null
+    requester_identity: "executive@company.com"
+    expected_result: "excluded"
+
+  - id: "wiki-005"
+    source_type: "confluence_wiki"
+    description: "Wiki chunk with empty string permissions_ref fails closed"
+    permissions_ref: ""
+    requester_identity: "executive@company.com"
+    expected_result: "excluded"
+
+  - id: "wiki-006"
+    source_type: "confluence_wiki"
+    description: "Wiki chunk with malformed permissions_ref fails closed"
+    permissions_ref: "NOT_VALID_JSON"
+    requester_identity: "executive@company.com"
+    expected_result: "excluded"
+
+  - id: "wiki-007"
+    source_type: "confluence_wiki"
+    description: "Confidential architecture wiki page included for arch board identity"
+    permissions_ref: '{"visibility": "restricted", "allowed_identities": ["arch-board@company.com", "cto@company.com"]}'
+    requester_identity: "cto@company.com"
+    expected_result: "included"
+
+  - id: "wiki-008"
+    source_type: "confluence_wiki"
+    description: "Confidential architecture wiki page excluded for intern identity"
+    permissions_ref: '{"visibility": "restricted", "allowed_identities": ["arch-board@company.com", "cto@company.com"]}'
+    requester_identity: "intern@company.com"
+    expected_result: "excluded"
+
+  - id: "wiki-009"
+    source_type: "confluence_wiki"
+    description: "Finance space wiki chunk included for finance team member"
+    permissions_ref: '{"visibility": "restricted", "allowed_identities": ["finance-team@company.com", "cfo@company.com"]}'
+    requester_identity: "finance-team@company.com"
+    expected_result: "included"
+
+  - id: "wiki-010"
+    source_type: "confluence_wiki"
+    description: "Finance space wiki chunk excluded for auditor without explicit space ACL"
+    permissions_ref: '{"visibility": "restricted", "allowed_identities": ["finance-team@company.com"]}'
+    requester_identity: "auditor@company.com"
+    expected_result: "excluded"
+
+  - id: "wiki-011"
+    source_type: "confluence_wiki"
+    description: "Wiki chunk with explicit deny list excludes blocked identity"
+    permissions_ref: '{"visibility": "public", "denied_identities": ["blocked-bot@company.com"]}'
+    requester_identity: "blocked-bot@company.com"
+    expected_result: "excluded"

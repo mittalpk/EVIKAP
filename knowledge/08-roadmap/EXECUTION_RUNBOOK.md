@@ -50,7 +50,8 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 
 ### 4.3 Permission enforcement and citations
 
-- [x] Implement permission-matrix test suite per source connector (FR-006); do not index real content until this passes security review. Completed 2026-07-23 (US-014, PermissionEvaluator, PermissionCache DB model, Alembic migration 0002_permission_cache, and test_permission_evaluator.py).
+- [x] Implement permission-matrix test suite per source connector (FR-006); do not index real content until this passes security review. Completed 2026-07-24 (US-014 & US-015, PermissionEvaluator, permission_matrix.yaml with 22 scenarios across GitHub and Wiki, test_permission_matrix.py).
+
 
 - [x] Implement citation rendering tying each answer claim to a retrieved chunk (FR-003). Completed 2026-07-24 (US-012, CitationList React component, inline superscript markers, collapsible source cards, guardrail warning banner, and unit tests).
 

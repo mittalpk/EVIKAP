@@ -48,6 +48,8 @@ class PermissionEvaluator:
                     "visibility": parsed.get("visibility", "private"),
                     "allowed_identities": parsed.get("allowed_identities", []),
                     "allowed_groups": parsed.get("allowed_groups", []),
+                    "allowed_domains": parsed.get("allowed_domains", []),
+                    "denied_identities": parsed.get("denied_identities", []),
                 }
         except (json.JSONDecodeError, TypeError):
             pass
@@ -57,7 +59,10 @@ class PermissionEvaluator:
             "visibility": "private",
             "allowed_identities": [],
             "allowed_groups": [pref_str],
+            "allowed_domains": [],
+            "denied_identities": [],
         }
+
 
     async def verify_source_access(
         self,
@@ -135,26 +140,45 @@ class PermissionEvaluator:
 
         acl = self.parse_permissions_ref(chunk.permissions_ref)
         if not acl:
-            # Missing or null permissions_ref -> Fail closed
+            # Missing, null, or unparseable permissions_ref -> Fail closed
             return False
 
-        if acl.get("visibility") == "public":
-            return True
+        # Check explicit denied_identities
+        denied_ids = acl.get("denied_identities", [])
+        if requester_identity in denied_ids:
+            return False
 
         if requester_identity in ("internal-agent", "admin@vigilrag.internal"):
             return True
 
-        # Check direct allowed_identities
-        allowed_ids = acl.get("allowed_identities", [])
-        if requester_identity in allowed_ids:
+        visibility = acl.get("visibility", "private")
+
+        if visibility == "public":
             return True
 
-        # Check allowed_groups
+        # For private / restricted chunks, requester MUST be explicitly allowed
+        allowed_ids = acl.get("allowed_identities", [])
+        if requester_identity in allowed_ids or "*" in allowed_ids:
+            return True
+
+        allowed_domains = acl.get("allowed_domains", [])
+        if allowed_domains and "@" in requester_identity:
+            req_domain = requester_identity.split("@")[-1]
+            if req_domain in allowed_domains:
+                return True
+
         allowed_groups = acl.get("allowed_groups", [])
         for grp in allowed_groups:
             if grp in ("public", "group-eng-staff") or grp in requester_identity:
                 return True
 
-        # Check source-level permission cache
+        if visibility in ("private", "restricted", "internal"):
+            # Requester is not in allowed identities/domains/groups for private/restricted/internal chunk -> Fail closed
+            return False
+
+
+        # Fall back to source-level permission cache for source_level visibility
         source_granted = await self.verify_source_access(session, requester_identity, chunk.source_id)
         return source_granted
+
+

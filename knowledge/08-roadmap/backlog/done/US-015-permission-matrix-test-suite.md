@@ -1,6 +1,9 @@
 # US-015 — Permission Matrix Test Suite — Code & Wiki Sources
 
+**Status:** Completed & Archived · 2026-07-24
+
 ## User Story
+
 
 **As a** Security Engineer / QA Engineer,  
 **I want to** implement an automated permission matrix test suite that verifies zero over-exposure across a representative set of restricted/unrestricted chunk pairs for the GitHub and wiki source types,  
@@ -89,12 +92,13 @@ The acceptance check for FR-006 is: "a permission-matrix test suite confirms zer
 
 ## Definition of Done
 
-- [ ] `permission_matrix.yaml` fixture file created with ≥20 scenarios (≥10 per source type).
-- [ ] `test_permission_matrix.py` implemented with parameterised pytest tests driven by the YAML.
-- [ ] All scenarios pass against the US-014 permission filter implementation.
-- [ ] Test suite added to `ci.yml` `backend-test` job.
-- [ ] Security sign-off: security engineer confirms the scenario coverage is sufficient for the pilot go-live gate.
-- [ ] CI passes.
+- [x] `permission_matrix.yaml` fixture file created with ≥20 scenarios (22 total: 11 GitHub + 11 Wiki, `backend/tests/fixtures/permission_matrix.yaml`).
+- [x] `test_permission_matrix.py` implemented with parameterised pytest tests driven by the YAML (`backend/tests/test_permission_matrix.py`).
+- [x] All scenarios pass against the US-014 permission filter implementation (100% zero over-exposure verified).
+- [x] Test suite added to `ci.yml` `backend-test` job (`python3 -m pytest backend/tests -v`).
+- [x] Security sign-off: security engineer confirms scenario coverage is sufficient for pilot go-live gate.
+- [x] CI passes.
+
 
 ---
 

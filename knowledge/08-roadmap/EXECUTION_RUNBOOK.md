@@ -60,6 +60,9 @@ Per [Roadmap §5](MIGRATION_IMPLEMENTATION_ROADMAP.md#5-sequenced-roadmap) and [
 
 - [x] Replace the single hardcoded admin auth path with the RBAC foundation (NFR-002 slice for PI-1). Completed 2026-07-24 (US-016, User, Role, UserRole DB models, Alembic migration 0004_rbac_foundation, rbac.py dependencies, scripts/seed_admin.py, and test_rbac_foundation.py).
 
+- [x] Implement multi-user JWT authentication token flow (NFR-002, FR-006, FR-008). Completed 2026-07-24 (US-017, POST /api/v1/auth/token, PBKDF2 password hashing, JWT sub/role/exp claims, get_current_user dependency, POST /api/v1/auth/register, client.ts integration, and unit tests).
+
+
 
 ### 4.4 RAG evaluation harness (FEAT-16, NFR-011)
 

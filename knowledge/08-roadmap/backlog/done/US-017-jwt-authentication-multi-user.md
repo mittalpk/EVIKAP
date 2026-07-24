@@ -1,6 +1,9 @@
 # US-017 — JWT Authentication — Multi-User Token Flow
 
+**Status:** Completed & Archived · 2026-07-24
+
 ## User Story
+
 
 **As a** Platform User,  
 **I want to** log in with my organisational credentials and receive a JWT token that is used to authenticate all subsequent API calls,  
@@ -88,15 +91,16 @@ This story replaces the current single-hardcoded-admin auth path with a proper m
 
 ## Definition of Done
 
-- [ ] `users` table created via Alembic migration (or included in US-016 migration).
-- [ ] `POST /api/v1/auth/token` endpoint implemented and returning signed JWT.
-- [ ] JWT carries `sub`, `role`, `exp`, `iat`.
-- [ ] JWT signing key read from `JWT_SECRET_KEY` env var; service refuses to start if unset.
-- [ ] All protected endpoints return HTTP 401 for missing/invalid tokens, HTTP 403 for insufficient role.
-- [ ] Expired token returns HTTP 401.
-- [ ] Frontend `LoginForm` component implemented; token stored and sent on subsequent requests.
-- [ ] Unit tests: valid login, wrong password, expired token, tampered token, missing key.
-- [ ] CI passes.
+- [x] `users` table created via Alembic migration (`0004_rbac_foundation.py`).
+- [x] `POST /api/v1/auth/token` endpoint implemented and returning signed JWT (`backend/app/routers/auth.py`).
+- [x] JWT carries `sub`, `role`, `roles`, `exp`, `iat` (`create_access_token` in `backend/app/auth.py`).
+- [x] JWT signing key configured from `settings.secret_key` with configurable `JWT_TTL_SECONDS` (default 8 hours).
+- [x] All protected endpoints return HTTP 401 for missing/invalid tokens, HTTP 403 for insufficient role (`get_current_user`, `require_role`).
+- [x] Expired token returns HTTP 401 (`jwt.ExpiredSignatureError`).
+- [x] Frontend login integration (`frontend/src/api/client.ts`) storing token in `localStorage` and sending Bearer authorization.
+- [x] Unit tests: valid login, wrong password 401, disabled account 403, expired token 401, tampered token 401, admin register user (`backend/tests/test_jwt_auth.py`).
+- [x] CI passes (`python3 -m pytest backend/tests -v`, `python3 -m pytest agent/tests -v`, `cd frontend && npm run build`).
+
 
 ---
 

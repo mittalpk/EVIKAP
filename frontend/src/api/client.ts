@@ -95,10 +95,11 @@ export const apiClient = {
   isLoggedIn: () => !!authToken,
 
   login: (credentials: { username: string; password: string }) =>
-    request<{ token: string }>(`${BACKEND_URL}/api/v1/auth/login`, {
+    request<{ token: string; access_token?: string; role?: string }>(`${BACKEND_URL}/api/v1/auth/token`, {
       method: 'POST',
       body: JSON.stringify(credentials)
     }),
+
 
   checkHealth: () =>
     request<{ status: string; service: string }>(`${BACKEND_URL}/health`),

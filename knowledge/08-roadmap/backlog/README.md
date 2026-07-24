@@ -68,7 +68,8 @@ Each story follows a consistent 16-section template:
 
 | US-016 | [US-016-rbac-foundation.md](done/US-016-rbac-foundation.md) | RBAC Foundation — Replace Single Hardcoded Admin | Completed | M |
 
-| US-017 | [US-017-jwt-authentication-multi-user.md](US-017-jwt-authentication-multi-user.md) | JWT Authentication — Multi-User Token Flow | High | M |
+| US-017 | [US-017-jwt-authentication-multi-user.md](done/US-017-jwt-authentication-multi-user.md) | JWT Authentication — Multi-User Token Flow | Completed | M |
+
 
 #### Audit Log (FEAT-08)
 
